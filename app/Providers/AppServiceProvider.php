@@ -13,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $socialite = $this->app->make('Laravel\Socialite\Contracts\Factory');
+
+        $socialite->extend('sch', function ($app) use ($socialite) {
+            return $socialite->buildProvider(SchProvider::class, $app['config']['services.sch']);
+        });
     }
 
     /**

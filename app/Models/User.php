@@ -12,4 +12,9 @@ class User extends Authenticatable
     protected $fillable = ['name', 'email'];
 
     protected $hidden   = ['remember_token', 'created_at', 'updated_at'];
+
+    public function accounts()
+    {
+        return $this->hasMany('App\Models\SocialAccount');
+    }
 }

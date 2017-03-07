@@ -30,9 +30,14 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
+        'model' => App\Models\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'sch' => [
+        'client_id'     => env('SCH_CLIENT_ID'),
+        'client_secret' => env('SCH_CLIENT_SECRET'),
+        'redirect'      => env('SCH_REDIRECT'),
+    ],
 ];

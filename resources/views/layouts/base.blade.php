@@ -11,7 +11,9 @@
         @stack('styles')
     </head>
     <body>
-    <h1>Hello, world!</h1>
+        <header>@include('layouts.navbar')</header>
+
+        @yield('body')
 
         <script src="{{ mix('js/app.js') }}"></script>
         @stack('scripts')
