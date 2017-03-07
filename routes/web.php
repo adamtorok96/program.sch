@@ -26,8 +26,20 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::group(['prefix' => 'programs', 'as' => 'programs.'], function()
     {
         Route::get('/', 'ProgramsController@index')->name('index');
+        Route::get('ajax', 'ProgramsController@ajax')->name('ajax');
         Route::get('edit/{program}', 'ProgramsController@edit')->name('edit');
         Route::post('update/{program}', 'ProgramsController@update')->name('update');
+        Route::get('accept/{program}', 'ProgramsController@accept')->name('accept');
+        Route::get('deny/{program}', 'ProgramsController@deny')->name('deny');
         Route::get('{program}', 'ProgramsController@show')->name('show');
+    });
+
+    Route::group(['prefix' => 'users', 'as' => 'users.'], function()
+    {
+        Route::get('/', 'UsersController@index')->name('index');
+        Route::get('ajax', 'UsersController@ajax')->name('ajax');
+        Route::get('edit/{users}', 'UsersController@edit')->name('edit');
+        Route::post('update/{users}', 'UsersController@update')->name('update');
+        Route::get('{users}', 'UsersController@show')->name('show');
     });
 });

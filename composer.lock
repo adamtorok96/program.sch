@@ -151,16 +151,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.1.7",
+            "version": "2.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "1a8192deae1f35aabc3a73aad19cd07c68091dd1"
+                "reference": "f2950be7da8b8d6c4e77821b6c9d486e36cdc4f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/1a8192deae1f35aabc3a73aad19cd07c68091dd1",
-                "reference": "1a8192deae1f35aabc3a73aad19cd07c68091dd1",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/f2950be7da8b8d6c4e77821b6c9d486e36cdc4f3",
+                "reference": "f2950be7da8b8d6c4e77821b6c9d486e36cdc4f3",
                 "shasum": ""
             },
             "require": {
@@ -208,7 +208,7 @@
                 "whoops",
                 "zf2"
             ],
-            "time": "2017-03-02 16:54:56"
+            "time": "2017-03-07 09:04:45"
         },
         {
             "name": "firebase/php-jwt",

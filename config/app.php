@@ -183,6 +183,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        \App\Providers\GoogleCalendarProvider::class,
     ],
 
     /*
@@ -235,9 +236,9 @@ return [
         /*
          * Custom
          */
-        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'GoogleCalendar' => Google_Service_Calendar::class
+        'Entrust'           => Zizaco\Entrust\EntrustFacade::class,
+        'Socialite'         => Laravel\Socialite\Facades\Socialite::class,
+        //'GoogleCalendar'    => GoogleCalendar::class
     ],
 
 ];

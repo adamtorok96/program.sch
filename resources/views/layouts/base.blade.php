@@ -12,8 +12,7 @@
     </head>
     <body>
         <header>@include('layouts.navbar')</header>
-
-        @yield('body')
+        <section>@yield('body')</section>
 
         <script src="{{ mix('js/app.js') }}"></script>
         @stack('scripts')

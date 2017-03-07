@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">Naptár</a>
+                    <a href="{{ route('index') }}">Naptár</a>
                 </li>
                 @if( Auth::check() )
                     <li>
