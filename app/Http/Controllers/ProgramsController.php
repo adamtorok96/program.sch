@@ -27,6 +27,7 @@ class ProgramsController extends Controller
 
         $program = Program::create([
             'user_id'       => Auth::user()->id,
+            'name'          => $request->name,
             'pr'            => $request->get('pr', null),
             'date'          => $request->date,
             'location'      => $request->location,
@@ -54,6 +55,7 @@ class ProgramsController extends Controller
     private function getValidations()
     {
         return [
+            'name'          => 'required|string|max:255',
             'pr'            => 'nullable|string|max:255',
             'date'          => 'required|datetime',
             'location'      => 'nullable|string',

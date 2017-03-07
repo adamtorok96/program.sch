@@ -1,8 +1,6 @@
 <?php
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+Route::get('/', 'CalendarController@index')->name('index');
 
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function()
 {
@@ -24,4 +22,12 @@ Route::group(['middleware' => 'auth'], function()
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth', 'role:admin']], function ()
 {
     Route::get('/', 'IndexController@index')->name('index');
+
+    Route::group(['prefix' => 'programs', 'as' => 'programs.'], function()
+    {
+        Route::get('/', 'ProgramsController@index')->name('index');
+        Route::get('edit/{program}', 'ProgramsController@edit')->name('edit');
+        Route::post('update/{program}', 'ProgramsController@update')->name('update');
+        Route::get('{program}', 'ProgramsController@show')->name('show');
+    });
 });

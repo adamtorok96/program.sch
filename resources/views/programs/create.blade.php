@@ -9,6 +9,11 @@
                 {{ csrf_field() }}
 
                 <div class="form-group">
+                    <label name="name">Program / Nyitás megnevezése:</label>
+                    <input type="text" name="name" id="name" class="form-control" required="required" value="{{ old('name') }}">
+                </div>
+
+                <div class="form-group">
                     <label name="pr">PR szöveg:</label>
                     <textarea name="pr" id="id" class="form-control" placeholder="PR szöveg">{{ old('pr') }}</textarea>
                 </div>

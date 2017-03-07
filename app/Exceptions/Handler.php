@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Symfony\Component\Debug\Exception\FlattenException;
 
 class Handler extends ExceptionHandler
 {
@@ -74,18 +76,20 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception using Whoops.
      *
-     * @param  \Exception $e
+     * @param  \Exception $exception
      * @return \Illuminate\Http\Response
      */
-    protected function renderExceptionWithWhoops(Exception $e)
+    protected function renderExceptionWithWhoops(Exception $exception)
     {
         $whoops = new \Whoops\Run;
         $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
 
-        return new \Illuminate\Http\Response(
-            $whoops->handleException($e),
-            $e->getStatusCode(),
-            $e->getHeaders()
+        $fe = FlattenException::create($exception);
+
+        return new Response(
+            $whoops->handleException($exception),
+            $fe->getStatusCode(),
+            $fe->getHeaders()
         );
     }
 }

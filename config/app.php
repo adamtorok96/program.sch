@@ -237,6 +237,7 @@ return [
          */
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'GoogleCalendar' => Google_Service_Calendar::class
     ],
 
 ];

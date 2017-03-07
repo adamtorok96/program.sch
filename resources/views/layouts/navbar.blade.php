@@ -22,15 +22,15 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if( Auth::check() )
-                    <li>
-                        <a href="{{ route('auth.logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Kijelentkezés</a>
-                    </li>
-                @else
                     @role('admin')
                         <li>
                             <a href="{{ route('admin.index') }}"><i class="fa fa-sign-gear" aria-hidden="true"></i> Adminisztráció</a>
                         </li>
                     @endrole
+                    <li>
+                        <a href="{{ route('auth.logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Kijelentkezés</a>
+                    </li>
+                @else
                     <li>
                         <a href="{{ route('auth.redirect', ['provider' => 'sch']) }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Bejelentkezés</a>
                     </li>
