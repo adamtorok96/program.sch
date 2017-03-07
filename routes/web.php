@@ -34,6 +34,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('{program}', 'ProgramsController@show')->name('show');
     });
 
+    Route::group(['prefix' => 'resorts', 'as' => 'resorts.'], function()
+    {
+        Route::get('/', 'ResortsController@index')->name('index');
+    });
+
+    Route::group(['prefix' => 'circles', 'as' => 'circles.'], function()
+    {
+        Route::get('/', 'CirclesController@index')->name('index');
+    });
+
     Route::group(['prefix' => 'users', 'as' => 'users.'], function()
     {
         Route::get('/', 'UsersController@index')->name('index');

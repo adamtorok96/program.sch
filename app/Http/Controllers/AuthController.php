@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Circle;
 use App\Models\SocialAccount;
 use App\Models\User;
 use Auth;
@@ -55,13 +56,33 @@ class AuthController extends Controller
                 'provider_id'   => $socialite_user->id
             ]);
 
+            $this->registerCircles($socialite_user->circles);
+
             Auth::login($user);
 
         } else {
-            if( !Auth::check() )
+            if( !Auth::check() ) {
+
+                $this->registerCircles($socialite_user->circles);
+
                 Auth::login($account->user);
+            }
         }
 
         return redirect()->intended('/');
+    }
+
+    private function registerCircles($circles)
+    {
+        //dd($circles);
+        foreach ($circles as $circle) {
+
+            if( !Circle::whereName($circle['name'])->exists() ) {
+                Circle::create([
+                    'name' => $circle['name']
+                ]);
+            }
+
+        }
     }
 }

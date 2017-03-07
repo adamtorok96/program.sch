@@ -15,12 +15,16 @@ class CreateProgramsTable extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
            $table->increments('id');
+           $table->unsignedInteger('user_id');
+           $table->unsignedInteger('circle_id');
            $table->string('name');
-           $table->dateTime('date');
+           $table->dateTime('from');
+           $table->dateTime('to');
            $table->string('location');
-           $table->string('pr')->nullable();
-           $table->text('description');
-           $table->boolean('display')->default(false);
+           $table->string('summary');
+           $table->text('description')->nullable();
+           $table->string('facebook_event_id')->nullable();
+           $table->string('webpage')->nullable();
            $table->timestamps();
         });
     }

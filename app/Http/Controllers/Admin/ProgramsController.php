@@ -19,7 +19,15 @@ class ProgramsController extends Controller
         $programs = Program::all();
 
         $programs->each(function(Program $program) {
-            //$program->date2      = $program->date->format('Y. m. d. H:i');
+            $program->date      = $program->from->format('Y. m. d. H:i') . ' - ';
+
+            if( $program->from->isSameDay($program->to) )
+                $program->date .= $program->to->format('H:i');
+            else if( $program->from->isSameMonth($program->to) )
+                $program->date .= $program->to->format('d. H:i');
+            else
+                $program->date .= $program->to->format('Y. m. d. H:i');
+
             $program->user_name = $program->user->name;
         });
 
