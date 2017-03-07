@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Program;
+use App\Models\Resort;
 use Illuminate\Http\Request;
 
 class ProgramsController extends Controller
@@ -36,6 +37,18 @@ class ProgramsController extends Controller
         ]);
 
         return response()->json($programs);
+    }
+
+    public function create()
+    {
+        return view('admin.programs.create', [
+            'resorts' => Resort::orderBy('name')->get()
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+
     }
 
     public function edit(Program $program)

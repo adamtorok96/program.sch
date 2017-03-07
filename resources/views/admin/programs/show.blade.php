@@ -16,20 +16,18 @@
                     </tr>
                     <tr>
                         <td>Időpont</td>
-                        <th class="text-right">{{ $program->date->format('Y. m. d. H:i') }}</th>
+                        <th class="text-right">{{ $program->from->format('Y. m. d. H:i') }}</th>
                     </tr>
                     <tr>
                         <td>Helyszín</td>
                         <th class="text-right">{{ $program->location }}</th>
                     </tr>
-                    <tr>
-                        <td>PR</td>
-                        <th class="text-right">{{ $program->pr }}</th>
-                    </tr>
-                    <tr>
-                        <td>Program részletei</td>
-                        <th class="text-right">{{ $program->description }}</th>
-                    </tr>
+                    @if( isset($program->website) )
+                        <tr>
+                            <td>Weboldal</td>
+                            <th><a href="{{ $program->webstie }}" target="_blank">{{ $program->website }}</a></th>
+                        </tr>
+                    @endif
                     <tr>
                         <td>Beküldő</td>
                         <th class="text-right">
@@ -41,6 +39,12 @@
                     <tr>
                         <td>Beküldés időpontja</td>
                         <th class="text-right">{{ $program->created_at->format('Y. m. d. H:i') }}</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-justify">{{ $program->summary }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-justify">{{ $program->description }}</td>
                     </tr>
                 </table>
             </div>

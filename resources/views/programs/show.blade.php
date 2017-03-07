@@ -43,10 +43,14 @@
                             </th>
                         </tr>
                     @endif
-                    @if(isset($program->webpage))
+                    @if(isset($program->website))
                         <tr>
                             <td>Weboldal</td>
-                            <th class="text-right">{{ $program->webpage }}</th>
+                            <th class="text-right">
+                                <a href="{{ $program->website }}" target="_blank">
+                                    {{ $program->website }}
+                                </a>
+                            </th>
                         </tr>
                     @endif
                         <tr>

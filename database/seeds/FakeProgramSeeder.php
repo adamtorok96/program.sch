@@ -12,6 +12,6 @@ class FakeProgramSeeder extends Seeder
      */
     public function run()
     {
-        factory(Program::class, random_int(100, 200))->create();
+        factory(Program::class, random_int(10, 30))->create();
     }
 }

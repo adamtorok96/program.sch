@@ -24,7 +24,7 @@ class CreateProgramsTable extends Migration
            $table->string('summary');
            $table->text('description')->nullable();
            $table->string('facebook_event_id')->nullable();
-           $table->string('webpage')->nullable();
+           $table->string('website')->nullable();
            $table->timestamps();
         });
     }

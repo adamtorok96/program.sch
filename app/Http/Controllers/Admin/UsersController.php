@@ -16,7 +16,7 @@ class UsersController extends Controller
 
     public function ajax()
     {
-        $users = User::all();
+        $users = User::orderBy('name')->get();
 
         return response()->json($users);
     }

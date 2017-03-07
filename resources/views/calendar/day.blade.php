@@ -8,7 +8,7 @@
         </div>
         <table class="table table-hover">
             @foreach(\App\Models\Program::OnThisDay($day)->orderBy('from')->get() as $program)
-                <tr>
+                <tr data-toggle="tooltip" data-placement="top" title="{{ $program->summary }}">
                     <td>
                         <small>{{ $program->from->format('H:i') }}</small><br>
                         <b>

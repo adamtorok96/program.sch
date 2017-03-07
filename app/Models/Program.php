@@ -11,7 +11,7 @@ class Program extends Model
 {
     protected $table    = 'programs';
 
-    protected $fillable = ['user_id', 'name', 'pr', 'date', 'location', 'description', 'display'];
+    protected $fillable = ['user_id', 'name', 'from', 'to', 'location', 'website', 'summary', 'description'];
 
     protected $hidden   = ['created_at', 'updated_at'];
 
