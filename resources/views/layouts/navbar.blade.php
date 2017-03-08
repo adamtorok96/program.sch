@@ -15,8 +15,20 @@
                     <a href="{{ route('index') }}">Naptár</a>
                 </li>
                 @if( Auth::check() )
-                    <li>
+                   {{--<li>
                         <a href="{{ route('programs.create') }}">Új program</a>
+                    </li>--}}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Új program <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach(Auth::user()->circles as $circle)
+                                <li>
+                                    <a href="{{ route('programs.create', ['circle' => $circle]) }}">{{ $circle->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </li>
                 @endif
             </ul>

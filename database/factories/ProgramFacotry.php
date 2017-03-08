@@ -21,7 +21,7 @@ $factory->define(Program::class, function (Faker\Generator $faker) {
         'location'          => $locations[array_rand($locations)],
         'website'           => $faker->boolean ? $faker->url : null,
         'summary'           => $faker->text(random_int(50, 200)),
-        'description'       => $faker->words(random_int(5, 40), true),
+        'description'       => $faker->text(random_int(50, 1000)),
         'uuid'              => \Webpatser\Uuid\Uuid::generate()
     ];
 });

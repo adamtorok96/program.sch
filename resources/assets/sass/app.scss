@@ -20,3 +20,10 @@ $fa-font-path: "~font-awesome/fonts";
     width: calc(100% / 7);
   }
 }
+
+.calendar {
+  [class*='col-'] {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Circle;
 use App\Models\Program;
 use Auth;
 use Illuminate\Http\Request;
@@ -10,12 +11,14 @@ use Validator;
 
 class ProgramsController extends Controller
 {
-    public function create()
+    public function create(Circle $circle)
     {
-        return view('programs.create');
+        return view('programs.create', [
+            'circle' => $circle
+        ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Circle $circle)
     {
         $validator = $this->getValidator($request);
 
@@ -27,6 +30,7 @@ class ProgramsController extends Controller
 
         $program = Program::create([
             'user_id'       => Auth::user()->id,
+            'circle_id'     => $circle->id,
             'name'          => $request->name,
             'pr'            => $request->get('pr', null),
             'date'          => $request->date,
@@ -56,10 +60,11 @@ class ProgramsController extends Controller
     {
         return [
             'name'          => 'required|string|max:255',
-            'pr'            => 'nullable|string|max:255',
-            'date'          => 'required|datetime',
+            'from'          => 'required|datetime',
+            'to'            => 'datetime',
             'location'      => 'nullable|string',
-            'description'   => 'required|string',
+            'summary'       => 'required|string|max:255',
+            'description'   => 'nullable|string',
             'display'       => 'nullable|boolean'
         ];
     }

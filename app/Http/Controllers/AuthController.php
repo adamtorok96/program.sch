@@ -63,7 +63,7 @@ class AuthController extends Controller
         } else {
             if( !Auth::check() ) {
 
-                $this->registerCircles(Auth::user(), $socialite_user->circles);
+                $this->registerCircles($account->user, $socialite_user->circles);
 
                 Auth::login($account->user);
             }
@@ -78,9 +78,9 @@ class AuthController extends Controller
 
         foreach ($circles as $circ) {
 
-            $circle = Circle::whereName($circ['name']);
+            $circle = Circle::whereName($circ['name'])->first();
 
-            if( !$circle->exists() ) {
+            if( $circle == null ) {
                 $circle = Circle::create([
                     'name' => $circ['name']
                 ]);

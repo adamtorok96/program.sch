@@ -31,6 +31,11 @@ class Program extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function poster()
+    {
+        return $this->hasOne('App\Models\Poster');
+    }
+
     public function fullDate()
     {
         $format = 'Y. m. d. H:i';
