@@ -23,8 +23,10 @@ class CreateProgramsTable extends Migration
            $table->string('location');
            $table->string('summary');
            $table->text('description')->nullable();
+           $table->uuid('uuid')->unique();
            $table->string('facebook_event_id')->nullable();
            $table->string('website')->nullable();
+           $table->unsignedInteger('sequence')->default(0);
            $table->timestamps();
         });
     }

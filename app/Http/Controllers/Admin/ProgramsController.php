@@ -15,30 +15,6 @@ class ProgramsController extends Controller
         return view('admin.programs.index');
     }
 
-    public function ajax()
-    {
-        $programs = Program::all();
-
-        $programs->each(function(Program $program) {
-            $program->date      = $program->from->format('Y. m. d. H:i') . ' - ';
-
-            if( $program->from->isSameDay($program->to) )
-                $program->date .= $program->to->format('H:i');
-            else if( $program->from->isSameMonth($program->to) )
-                $program->date .= $program->to->format('d. H:i');
-            else
-                $program->date .= $program->to->format('Y. m. d. H:i');
-
-            $program->user_name = $program->user->name;
-        });
-
-        $programs->makeHidden([
-            'user'
-        ]);
-
-        return response()->json($programs);
-    }
-
     public function create()
     {
         return view('admin.programs.create', [
@@ -53,12 +29,24 @@ class ProgramsController extends Controller
 
     public function edit(Program $program)
     {
-
+        return view('admin.programs.edit', [
+            'program' => $program,
+            'resorts' => Resort::orderBy('name')->get()
+        ]);
     }
 
     public function update(Request $request, Program $program)
     {
+        $program->update([
+            'name' => $request->name
+        ]);
+        /*
+         * TODO: finish it
+         */
 
+        return redirect()->route('admin.programs.show', [
+            'program' => $program
+        ]);
     }
 
     public function show(Program $program)

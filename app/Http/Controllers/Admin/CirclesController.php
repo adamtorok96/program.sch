@@ -16,18 +16,6 @@ class CirclesController extends Controller
         return view('admin.circles.index');
     }
 
-    public function ajax()
-    {
-        $circles = Circle::orderBy('name')->get();
-
-        $circles->each(function (Circle $circle) {
-            $circle->resort_id      = $circle->resort == null ? null : $circle->resort->id;
-            $circle->resort_name    = $circle->resort == null ? null : $circle->resort->name;
-        });
-
-        return response()->json($circles);
-    }
-
     public function create()
     {
         return view('admin.circles.create');
@@ -78,6 +66,28 @@ class CirclesController extends Controller
         $circle->delete();
 
         return redirect()->route('admin.circles.index');
+    }
+
+    public function activate(Circle $circle)
+    {
+        $circle->update([
+            'active' => true
+        ]);
+
+        return redirect()->route('admin.circles.show', [
+            'circle' => $circle
+        ]);
+    }
+
+    public function deactivate(Circle $circle)
+    {
+        $circle->update([
+            'active' => false
+        ]);
+
+        return redirect()->route('admin.circles.show', [
+            'circle' => $circle
+        ]);
     }
 
     private function getValidator($request)

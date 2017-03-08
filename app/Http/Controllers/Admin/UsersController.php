@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,13 +13,6 @@ class UsersController extends Controller
     public function index()
     {
         return view('admin.users.index');
-    }
-
-    public function ajax()
-    {
-        $users = User::orderBy('name')->get();
-
-        return response()->json($users);
     }
 
     public function edit(User $user)
@@ -36,6 +30,30 @@ class UsersController extends Controller
     public function show(User $user)
     {
         return view('admin.users.show', [
+            'user' => $user
+        ]);
+    }
+
+    public function promoteAdmin(User $user)
+    {
+        if( $user->isAdmin() )
+            abort(404);
+
+        $user->attachRole(Role::whereName('admin')->firstOrFail());
+
+        return redirect()->route('admin.users.show', [
+            'user' => $user
+        ]);
+    }
+
+    public function demoteAdmin(User $user)
+    {
+        if( !$user->isAdmin() )
+            abort(404);
+
+        $user->detachRole(Role::whereName('admin')->firstOrFail());
+
+        return redirect()->route('admin.users.show', [
             'user' => $user
         ]);
     }

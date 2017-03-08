@@ -9,13 +9,13 @@
     </div>
     <table  class="table"
             data-toggle="table"
-            data-url="{{ route('admin.circles.ajax') }}"
+            data-url="{{ route('admin.ajax.circles') }}"
             data-toolbar="#toolbar">
         <thead>
-        <tr>
-            <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Kör neve</th>
-            <th data-field="resort_name" data-sortable="true" data-formatter="resortFormatter">Reszort neve</th>
-        </tr>
+            <tr>
+                <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Kör neve</th>
+                <th data-field="resort_name" data-sortable="true" data-formatter="resortFormatter">Reszort neve</th>
+            </tr>
         </thead>
     </table>
 @endsection

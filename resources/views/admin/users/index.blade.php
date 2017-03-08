@@ -7,7 +7,7 @@
             data-pagination="true"
             data-search="true"
             data-toolbar="#toolbar"
-            data-url="{{ route('admin.users.ajax') }}">
+            data-url="{{ route('admin.ajax.users') }}">
         <thead>
         <tr>
             <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Név</th>

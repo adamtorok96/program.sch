@@ -28,6 +28,9 @@
                         </li>
                     @endrole
                     <li>
+                        <a href="{{ route('profile.index') }}"><i class="fa fa-user" aria-hidden="true"></i> Profil</a>
+                    </li>
+                    <li>
                         <a href="{{ route('auth.logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Kijelentkezés</a>
                     </li>
                 @else

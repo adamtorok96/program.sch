@@ -238,6 +238,7 @@ return [
          */
         'Entrust'           => Zizaco\Entrust\EntrustFacade::class,
         'Socialite'         => Laravel\Socialite\Facades\Socialite::class,
+        'Uuid'              => Webpatser\Uuid\Uuid::class,
         //'GoogleCalendar'    => GoogleCalendar::class
     ],
 

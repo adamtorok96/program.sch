@@ -9,7 +9,7 @@
     </div>
     <table  class="table"
             data-toggle="table"
-            data-url="{{ route('admin.resorts.ajax') }}"
+            data-url="{{ route('admin.ajax.resorts') }}"
             data-toolbar="#toolbar">
         <thead>
         <tr>

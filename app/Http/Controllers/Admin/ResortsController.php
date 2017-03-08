@@ -15,11 +15,6 @@ class ResortsController extends Controller
         return view('admin.resorts.index');
     }
 
-    public function ajax()
-    {
-        return response()->json(Resort::orderBy('name')->get());
-    }
-
     public function create()
     {
         return view('admin.resorts.create');

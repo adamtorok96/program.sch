@@ -15,12 +15,13 @@ $factory->define(Program::class, function (Faker\Generator $faker) {
     return [
         'user_id'           => User::inRandomOrder()->firstOrFail()->id,
         'circle_id'         => Circle::inRandomOrder()->firstOrFail()->id,
-        'name'              => $faker->words(random_int(1, 3), true),
+        'name'              => $faker->firstName .' '. $faker->words(random_int(1, 2), true),
         'from'              => $date,
         'to'                => $to,
         'location'          => $locations[array_rand($locations)],
         'website'           => $faker->boolean ? $faker->url : null,
         'summary'           => $faker->text(random_int(50, 200)),
-        'description'       => $faker->words(random_int(5, 40), true)
+        'description'       => $faker->words(random_int(5, 40), true),
+        'uuid'              => \Webpatser\Uuid\Uuid::generate()
     ];
 });

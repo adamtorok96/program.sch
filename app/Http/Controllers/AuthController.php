@@ -56,14 +56,14 @@ class AuthController extends Controller
                 'provider_id'   => $socialite_user->id
             ]);
 
-            $this->registerCircles($socialite_user->circles);
+            $this->registerCircles($user, $socialite_user->circles);
 
             Auth::login($user);
 
         } else {
             if( !Auth::check() ) {
 
-                $this->registerCircles($socialite_user->circles);
+                $this->registerCircles(Auth::user(), $socialite_user->circles);
 
                 Auth::login($account->user);
             }
@@ -72,17 +72,21 @@ class AuthController extends Controller
         return redirect()->intended('/');
     }
 
-    private function registerCircles($circles)
+    private function registerCircles(User $user, array $circles)
     {
-        //dd($circles);
-        foreach ($circles as $circle) {
+        $user->detachCircles();
 
-            if( !Circle::whereName($circle['name'])->exists() ) {
-                Circle::create([
-                    'name' => $circle['name']
+        foreach ($circles as $circ) {
+
+            $circle = Circle::whereName($circ['name']);
+
+            if( !$circle->exists() ) {
+                $circle = Circle::create([
+                    'name' => $circ['name']
                 ]);
             }
 
+            $user->circles()->attach($circle->id);
         }
     }
 }

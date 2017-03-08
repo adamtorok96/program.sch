@@ -12,7 +12,7 @@
             data-pagination="true"
             data-search="true"
             data-toolbar="#toolbar"
-            data-url="{{ route('admin.programs.ajax') }}">
+            data-url="{{ route('admin.ajax.programs') }}">
         <thead>
             <tr>
                 <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Program megnevezése</th>

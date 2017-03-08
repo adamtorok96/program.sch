@@ -17,4 +17,9 @@ class Circle extends Model
     {
         return $this->belongsTo('App\Models\Resort');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User');
+    }
 }

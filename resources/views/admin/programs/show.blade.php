@@ -14,9 +14,15 @@
                         <td>Program megnevezése</td>
                         <th class="text-right">{{ $program->name }}</th>
                     </tr>
+                    @if( isset($program->circle) )
+                        <tr>
+                            <td>Kör</td>
+                            <th class="text-right">{{ $program->circle->name }}</th>
+                        </tr>
+                    @endif
                     <tr>
                         <td>Időpont</td>
-                        <th class="text-right">{{ $program->from->format('Y. m. d. H:i') }}</th>
+                        <th class="text-right">{{ $program->fullDate() }}</th>
                     </tr>
                     <tr>
                         <td>Helyszín</td>
@@ -25,7 +31,7 @@
                     @if( isset($program->website) )
                         <tr>
                             <td>Weboldal</td>
-                            <th><a href="{{ $program->webstie }}" target="_blank">{{ $program->website }}</a></th>
+                            <th class="text-right"><a href="{{ $program->website }}" target="_blank">Link</a></th>
                         </tr>
                     @endif
                     <tr>
