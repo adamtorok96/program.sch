@@ -49,5 +49,17 @@
                 </table>
             </div>
         </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Műveletek</h3>
+                </div>
+                <div class="panel-body">
+                    <a href="{{ route('admin.programs.edit', ['program' => $program]) }}" class="btn btn-block btn-primary">Szerkesztés</a>
+                    <button class="btn btn-block btn-danger">Törlés</button>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

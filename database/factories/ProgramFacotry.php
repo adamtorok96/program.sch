@@ -1,16 +1,16 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\Models\Circle;
 use App\Models\Program;
 use App\Models\User;
 use Carbon\Carbon;
 
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Program::class, function (Faker\Generator $faker) {
-    $date = Carbon::now()->addDays(random_int(-5, 10));
-    $to = (new Carbon($date))->addHour(random_int(1, 12));
+    $date   = Carbon::now()->addDays(random_int(-5, 10))->addHours(random_int(0, 23))->addMinutes(random_int(0, 59));
+    $to     = (new Carbon($date))->addHour(random_int(1, 12));
 
-    $locations = ['ENT', 'FNT', '102', '103'];
+    $locations = ['ENT', 'FNT', '102', '103', 'Nagykonyha'];
 
     return [
         'user_id'           => User::inRandomOrder()->firstOrFail()->id,
