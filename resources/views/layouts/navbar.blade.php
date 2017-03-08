@@ -6,7 +6,7 @@
                 <span class="sr-only">Toggle navigation</span>
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
-            <a class="navbar-brand" href="#">Porgram.sch</a>
+            <a class="navbar-brand" href="#">Program.sch</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar">
@@ -24,7 +24,7 @@
                 @if( Auth::check() )
                     @role('admin')
                         <li>
-                            <a href="{{ route('admin.index') }}"><i class="fa fa-sign-gear" aria-hidden="true"></i> Adminisztráció</a>
+                            <a href="{{ route('admin.index') }}"><i class="fa fa-gear" aria-hidden="true"></i> Adminisztráció</a>
                         </li>
                     @endrole
                     <li>

@@ -5,6 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+            @include('layouts.errors')
 
             <form method="post" action="{{ route('admin.programs.store') }}">
                 {{ csrf_field() }}

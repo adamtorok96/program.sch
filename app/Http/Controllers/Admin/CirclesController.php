@@ -49,6 +49,21 @@ class CirclesController extends Controller
     public function update(Request $request, Circle $circle)
     {
         $validator = $this->getValidator($request);
+
+        if( $validator->fails() ) {
+            return redirect()->route('admin.circles.edit', [
+                'circle' => $circle
+            ])->withErrors($validator)->withInput($request->all());
+        }
+
+        $circle->update([
+            'name'      => $request->name,
+            'resort_id' => $request->get('resort', null)
+        ]);
+
+        return redirect()->route('admin.circles.show', [
+            'circle' => $circle
+        ]);
     }
 
     public function show(Circle $circle)
@@ -73,7 +88,8 @@ class CirclesController extends Controller
     private function getValidations()
     {
         return [
-
+            'name'      => 'required|string|max:255',
+            'resort'    => 'nullable|numeric|exists:resorts,id'
         ];
     }
 

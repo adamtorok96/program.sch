@@ -6,7 +6,7 @@
                 @include('admin.layouts.navbar')
             </div>
             <div class="col-md-9">
-                @include('admin.layouts.title')
+                @include('layouts.title')
                 @yield('content')
             </div>
         </div>
