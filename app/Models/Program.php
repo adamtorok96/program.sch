@@ -6,12 +6,13 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Webpatser\Uuid\Uuid;
 
 class Program extends Model
 {
     protected $table    = 'programs';
 
-    protected $fillable = ['user_id', 'name', 'from', 'to', 'location', 'website', 'summary', 'description'];
+    protected $fillable = ['circle_id', 'user_id', 'name', 'from', 'to', 'location', 'website', 'summary', 'description', 'uuid'];
 
     protected $hidden   = ['created_at', 'updated_at'];
 
@@ -20,6 +21,10 @@ class Program extends Model
     public static function boot()
     {
         parent::boot();
+
+        static::creating(function(Program $program) {
+            $program->uuid = Uuid::generate();
+        });
 
         static::updating(function(Program $program) {
             $program->sequence++;

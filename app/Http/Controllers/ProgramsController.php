@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Circle;
 use App\Models\Program;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -28,16 +29,19 @@ class ProgramsController extends Controller
                 ->withInput($request->all());
         }
 
+       // dd($request->all());
         $program = Program::create([
             'user_id'       => Auth::user()->id,
             'circle_id'     => $circle->id,
             'name'          => $request->name,
-            'pr'            => $request->get('pr', null),
-            'date'          => $request->date,
-            'location'      => $request->location,
+            'from'          => new Carbon($request->from),
+            'to'            => new Carbon($request->to),
+            'summary'       => $request->summary,
             'description'   => $request->description,
-            'display'       => $request->display
+            'location'      => $request->location
         ]);
+
+        resolve('App\Services\GoogleService')->newEvent($program);
 
         return redirect()->route('programs.show', [
             'program' => $program
@@ -60,8 +64,8 @@ class ProgramsController extends Controller
     {
         return [
             'name'          => 'required|string|max:255',
-            'from'          => 'required|datetime',
-            'to'            => 'datetime',
+            'from'          => 'required|date',
+            'to'            => 'date',
             'location'      => 'nullable|string',
             'summary'       => 'required|string|max:255',
             'description'   => 'nullable|string',
