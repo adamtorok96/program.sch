@@ -18,6 +18,14 @@ $fa-font-path: "~font-awesome/fonts";
 // JQuery ui
 @import "~jquery-ui/themes/base/all.css";
 
+body {
+  padding-top: 50px;
+}
+
+section {
+  margin-top: 1em;
+}
+
 @media(min-width: $screen-md-min) {
   .col-md-1-7 {
     width: calc(100% / 7);

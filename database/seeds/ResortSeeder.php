@@ -20,8 +20,7 @@ class ResortSeeder extends Seeder
             'Simonyi Károly Szakkolégium',
             'Sport Reszort',
             'Kultúr Reszort',
-            'Kollégiumi Számítástechnikai Kör',
-            ''
+            'Kollégiumi Számítástechnikai Kör'
         ];
 
         foreach ($resorts as $resort) {

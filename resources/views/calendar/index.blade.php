@@ -7,10 +7,10 @@
     <nav>
         <ul class="pager">
             <li>
-                <a href="{{ route('index', ['week' => $prev]) }}"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Előző hét</a>
+                <a href="{{ route('calendar.index', ['week' => $prev]) }}"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Előző hét</a>
             </li>
             <li>
-                <a href="{{ route('index', ['week' => $next]) }}">Következő hét <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                <a href="{{ route('calendar.index', ['week' => $next]) }}">Következő hét <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
             </li>
         </ul>
     </nav>
