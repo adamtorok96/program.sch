@@ -15,6 +15,7 @@ class CreateProgramsTable extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
            $table->increments('id');
+           $table->uuid('uuid')->unique();
            $table->unsignedInteger('user_id');
            $table->unsignedInteger('circle_id');
            $table->string('name');
@@ -23,9 +24,10 @@ class CreateProgramsTable extends Migration
            $table->string('location');
            $table->string('summary');
            $table->text('description')->nullable();
-           $table->uuid('uuid')->unique();
            $table->string('facebook_event_id')->nullable();
            $table->string('website')->nullable();
+           $table->boolean('display_poster')->default(false);
+           $table->boolean('display_site')->default(false);
            $table->unsignedInteger('sequence')->default(0);
            $table->timestamps();
         });

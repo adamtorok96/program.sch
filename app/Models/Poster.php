@@ -1,9 +1,10 @@
 <?php
 
-namespace app\Models;
+namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Storage;
 
 class Poster extends Model
 {
@@ -16,6 +17,11 @@ class Poster extends Model
     public function program()
     {
         return $this->belongsTo('App\Models\Program');
+    }
+
+    public function getUrl()
+    {
+        return Storage::url('posters/' . $this->file);
     }
 
     public function delete()

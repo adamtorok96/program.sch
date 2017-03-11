@@ -12,7 +12,20 @@ class Program extends Model
 {
     protected $table    = 'programs';
 
-    protected $fillable = ['circle_id', 'user_id', 'name', 'from', 'to', 'location', 'website', 'summary', 'description', 'uuid'];
+    protected $fillable = [
+        'uuid',
+        'circle_id',
+        'user_id',
+        'name',
+        'from',
+        'to',
+        'location',
+        'website',
+        'summary',
+        'description',
+        'display_poster',
+        'display_site'
+    ];
 
     protected $hidden   = ['created_at', 'updated_at'];
 
@@ -36,9 +49,19 @@ class Program extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function circle()
+    {
+        return $this->belongsTo('App\Models\Circle');
+    }
+
     public function poster()
     {
         return $this->hasOne('App\Models\Poster');
+    }
+
+    public function hasPoster()
+    {
+        return $this->poster()->exists();
     }
 
     public function fullDate()

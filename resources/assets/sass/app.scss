@@ -15,6 +15,9 @@ $fa-font-path: "~font-awesome/fonts";
 // Bootstrap table
 @import "~bootstrap-table/src/bootstrap-table.css";
 
+// JQuery ui
+@import "~jquery-ui/themes/base/all.css";
+
 @media(min-width: $screen-md-min) {
   .col-md-1-7 {
     width: calc(100% / 7);

@@ -18,6 +18,7 @@
     "lodash": "^4.17.4",
     "vue": "^2.1.10",
     "font-awesome": "4.7.*",
-    "bootstrap-table": "1.11.*"
+    "bootstrap-table": "1.11.*",
+    "jquery-ui": "1.12.*"
   }
 }

@@ -6,9 +6,9 @@
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            {{ csrf_field() }}
+            @include('layouts.errors')
 
-            <form method="post" action="{{ route('programs.store', ['circle' => $circle]) }}">
+            <form method="post" action="{{ route('programs.store', ['circle' => $circle]) }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 <div class="form-group">
@@ -61,7 +61,7 @@
 
                 <div class="form-group">
                     <label for="poster">Plakát:</label>
-                    <input type="file" name="poster" id="poster" class="form-control">
+                    <input type="file" name="poster" id="poster" accept="image/*" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -95,6 +95,12 @@
             var str = from.toISOString();
 
             $("#to").val(str.substr(0, str.length - 1));
+        });
+
+        $( "#location" ).autocomplete({
+            source: [
+                @foreach($locations as $location)'{{ $location->name }}'@if( !$loop->last ),@endif @endforeach
+            ]
         });
     });
 </script>

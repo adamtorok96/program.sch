@@ -6,7 +6,7 @@
     @include('layouts.title')
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 {{ $program->hasPoster() ? '' : 'col-md-offset-3' }}">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Információk</h3>
@@ -15,6 +15,10 @@
                     <tr>
                         <td>Program megnevezése</td>
                         <th class="text-right">{{ $program->name }}</th>
+                    </tr>
+                    <tr>
+                        <td>Kör</td>
+                        <th class="text-right">{{ $program->circle->name }}</th>
                     </tr>
                     <tr>
                         <td>Időpont</td>
@@ -64,5 +68,11 @@
                 </table>
             </div>
         </div>
+
+        @if( $program->hasPoster() )
+            <div class="col-md-6">
+                <img src="{{ asset($program->poster->getUrl()) }}">
+            </div>
+        @endif
     </div>
 @endsection

@@ -10,11 +10,14 @@ use Webpatser\Uuid\Uuid;
 
 class CalendarController extends Controller
 {
-    public function index()
+    public function index($week = 0)
     {
+        if( $week < -1000 || $week > 1000 )
+            $week = 0;
+
         $days = [];
 
-        $first  = Carbon::now()->startOfWeek();
+        $first  = Carbon::now()->startOfWeek()->addWeek($week);
         $last   = (new Carbon($first))->addDays(7 * 2);
 
         for($day = $first; $day->lt($last); $day->addDay()) {
@@ -22,7 +25,9 @@ class CalendarController extends Controller
         }
 
         return view('calendar.index', [
-            'days' => $days
+            'days'  => $days,
+            'next'  => $week + 1,
+            'prev'  => $week - 1
         ]);
     }
 

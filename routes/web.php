@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'CalendarController@index')->name('index');
+Route::get('/{week?}', 'CalendarController@index')->name('index');
 Route::get('calendar/{uuid}.ics', 'CalendarController@calendar')->name('calendar');
 
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function()

@@ -38,6 +38,10 @@ class Handler extends ExceptionHandler
             return $this->renderHttpException($exception);
         }
 
+        if( $exception instanceof AuthenticationException ) {
+            return parent::report($exception);
+        }
+
         if ( config('app.debug') ) {
             return $this->renderExceptionWithWhoops($exception);
         }
