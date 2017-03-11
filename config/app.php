@@ -120,7 +120,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'errorlog'), // errorlog for heroku | default: single
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
