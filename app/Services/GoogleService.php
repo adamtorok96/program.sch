@@ -26,12 +26,12 @@ class GoogleService
 
     public function events()
     {
-        return $this->calendar->events->listEvents(env('GOOGLE_CALENDAR_ID'))->getItems();
+        return $this->calendar->events->listEvents($this->getCalendarId())->getItems();
     }
 
     public function newEvent(Program $program)
     {
-        $this->calendar->events->insert(env('GOOGLE_CALENDAR_ID'), new Google_Service_Calendar_Event([
+        $this->calendar->events->insert($this->getCalendarId(), new Google_Service_Calendar_Event([
             'id'            => $program->uuid,
             'summary'       => $program->name,
             'location'      => $program->location,
@@ -48,5 +48,15 @@ class GoogleService
                 'timeZone' => config('app.timezone'),
             ],
         ]));
+    }
+
+    public function deleteEvent(Program $program)
+    {
+        $this->calendar->events->delete($this->getCalendarId(), $program->uuid);
+    }
+
+    private function getCalendarId()
+    {
+        return env('GOOGLE_CALENDAR_ID');
     }
 }

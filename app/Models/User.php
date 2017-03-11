@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public function detachCircles()
     {
-        foreach ($this->circles() as $circle) {
+        foreach ($this->circles as $circle) {
             $this->circles()->detach($circle);
         }
     }
