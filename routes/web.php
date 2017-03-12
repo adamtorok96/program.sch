@@ -2,12 +2,16 @@
 
 Route::get('/', 'CalendarController@index')->name('index');
 
+Route::group(['prefix' => 'test', 'as' => 'test.'], function ()
+{
+   Route::get('login', 'TestController@login')->name('login');
+});
+
 Route::group(['prefix' => 'calendar', 'as' => 'calendar.'], function()
 {
     Route::get('calendar/{uuid}.ics', 'CalendarController@calendar')->name('calendar');
     Route::get('{week?}', 'CalendarController@index')->name('index');
 });
-
 
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function()
 {
@@ -43,8 +47,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::post('store', 'ProgramsController@store')->name('store');
         Route::get('edit/{program}', 'ProgramsController@edit')->name('edit');
         Route::post('update/{program}', 'ProgramsController@update')->name('update');
-        Route::get('accept/{program}', 'ProgramsController@accept')->name('accept');
-        Route::get('deny/{program}', 'ProgramsController@deny')->name('deny');
+        Route::get('destroy/{program}', 'ProgramsController@destroy')->name('destroy');
         Route::get('{program}', 'ProgramsController@show')->name('show');
     });
 

@@ -20,12 +20,14 @@ class CalendarController extends Controller
         $first  = Carbon::now()->startOfWeek()->addWeek($week);
         $last   = (new Carbon($first))->addDays(7 * 2);
 
-        for($day = $first; $day->lt($last); $day->addDay()) {
+        for($day = new Carbon($first); $day->lt($last); $day->addDay()) {
             $days[] = new Carbon($day);
         }
 
         return view('calendar.index', [
             'days'  => $days,
+            'from'  => $first,
+            'to'    => $last,
             'next'  => $week + 1,
             'prev'  => $week - 1
         ]);

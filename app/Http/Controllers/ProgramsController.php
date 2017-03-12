@@ -48,8 +48,6 @@ class ProgramsController extends Controller
             'facebook_event_id'     => $request->facebook_event_id
         ]);
 
-        resolve('App\Services\GoogleService')->newEvent($program);
-
         if( $request->hasFile('poster') ) {
             $name = $program->id .'_' . sha1(str_random()) . '.' . $request->file('poster')->extension();
 

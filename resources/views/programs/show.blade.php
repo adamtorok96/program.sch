@@ -66,6 +66,19 @@
                         </tr>
                     @endif
                 </table>
+                <div class="panel-footer text-right">
+                    <button type="button" class="btn btn-sm btn-primary">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-sm btn-primary">
+                        <i class="fa fa-google" aria-hidden="true"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-sm btn-primary">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
         </div>
 

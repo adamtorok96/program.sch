@@ -19,6 +19,10 @@
                         <td>E-mail cím</td>
                         <th class="text-right">{{ $user->email }}</th>
                     </tr>
+                    <tr>
+                        <td>Regisztráció időpontja</td>
+                        <th class="text-right">{{ $user->created_at->format('Y. m. d. H:i') }}</th>
+                    </tr>
                 </table>
             </div>
         </div>

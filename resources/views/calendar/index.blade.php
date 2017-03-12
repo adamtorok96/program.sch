@@ -4,6 +4,9 @@
     <div class="row calendar">
         @each('calendar.day', $days, 'day')
     </div>
+
+    <p class="text-center">{{ $from->format('Y. m. d.') }} - {{ $to->format('Y. m. d.') }}</p>
+
     <nav>
         <ul class="pager">
             <li>

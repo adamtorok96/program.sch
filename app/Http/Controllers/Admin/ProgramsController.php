@@ -56,18 +56,10 @@ class ProgramsController extends Controller
         ]);
     }
 
-    public function accept(Program $program)
+    public function destroy(Program $program)
     {
-        $c = app('Google_Client');
-        $service = new \Google_Service_Calendar($c);
+        $program->delete();
 
-        $events = $service->events->listEvents('d5sc47eh6sq2jl803qh68ej7bk@group.calendar.google.com');
-
-        dd($events, $events->getItems());
-    }
-
-    public function deny(Program $program)
-    {
-
+        return redirect()->route('admin.programs.index');
     }
 }

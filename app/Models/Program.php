@@ -4,12 +4,15 @@ namespace App\Models;
 
 
 use Carbon\Carbon;
+use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
 class Program extends Model
 {
+    private static $google;
+
     protected $table    = 'programs';
 
     protected $fillable = [
@@ -35,12 +38,30 @@ class Program extends Model
     {
         parent::boot();
 
+        static::$google = resolve('App\Services\GoogleService');
+
         static::creating(function(Program $program) {
             $program->uuid = Uuid::generate();
         });
 
+        static::created(function(Program $program) {
+            try {
+                static::$google->newEvent($program);
+            } catch (ConnectException $exception) {
+
+            }
+        });
+
         static::updating(function(Program $program) {
             $program->sequence++;
+        });
+
+        static::deleted(function(Program $program) {
+            try {
+                static::$google->deleteEvent($program);
+            } catch (ConnectException $exception) {
+
+            }
         });
     }
 

@@ -69,3 +69,6 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+{{-- TODO: modal delete script; include modal --}}
+@endpush
