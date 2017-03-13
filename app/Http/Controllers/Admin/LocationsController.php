@@ -42,4 +42,11 @@ class LocationsController extends Controller
 
         return redirect()->route('admin.locations.index');
     }
+/*
+    public function show(Location $location)
+    {
+        return view('admin.locations.show', [
+            'location' => $location
+        ]);
+    }*/
 }

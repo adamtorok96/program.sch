@@ -37,9 +37,8 @@ class Handler extends ExceptionHandler
     {
         if ($this->shouldReport($exception)) {
             /* @var $sentry \Raven_Client */
-            $sentry = app('Sentry');
+            $sentry = app('sentry');
 
-            /*
             if( Auth::check() ) {
                 $sentry->user_context([
                     'id'    => Auth::user()->id,
@@ -47,12 +46,11 @@ class Handler extends ExceptionHandler
                     'email' => Auth::user()->email
                 ]);
             }
-*/
-            /*
+
             $sentry->extra_context([
                'ip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null
             ]);
-            */
+
 
             $sentry->captureException($exception);
         }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Circle;
+use App\Models\Location;
 use App\Models\Program;
 use App\Models\Resort;
 use App\Models\User;
@@ -59,8 +60,11 @@ class AjaxController extends Controller
 
     public function users()
     {
-        $users = User::orderBy('name')->get();
+        return response()->json(User::orderBy('name')->get());
+    }
 
-        return response()->json($users);
+    public function locations()
+    {
+        return response()->json(Location::orderBy('name')->get());
     }
 }
