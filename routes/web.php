@@ -74,6 +74,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('{circle}', 'CirclesController@show')->name('show');
     });
 
+    Route::group(['prefix' => 'locations', 'as' => 'locations.'], function()
+    {
+        Route::get('/', 'LocationsController@index')->name('index');
+        Route::get('create', 'LocationsController@create')->name('create');
+        Route::post('store', 'LocationsController@store')->name('store');
+        Route::get('edit/{location}', 'LocationsController@edit')->name('edit');
+        Route::post('update/{location}', 'LocationsController@update')->name('update');
+        Route::post('destroy/{location}', 'LocationsController@destroy')->name('destroy');
+        Route::get('{location}', 'LocationsController@show')->name('show');
+    });
+
     Route::group(['prefix' => 'users', 'as' => 'users.'], function()
     {
         Route::get('/', 'UsersController@index')->name('index');

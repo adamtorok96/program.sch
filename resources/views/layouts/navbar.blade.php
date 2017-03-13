@@ -15,21 +15,21 @@
                     <a href="{{ route('index') }}">Naptár</a>
                 </li>
                 @if( Auth::check() )
-                   {{--<li>
-                        <a href="{{ route('programs.create') }}">Új program</a>
-                    </li>--}}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Új program <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            @foreach(\App\Models\Circle::WherePRManager(Auth::user())->get() as $circle)
-                                <li>
-                                    <a href="{{ route('programs.create', ['circle' => $circle]) }}">{{ $circle->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
+                    @php($circles = \App\Models\Circle::WherePRManager(Auth::user())->get())
+                    @if( count($circles) )
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Új program <i class="fa fa-caret-down" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach($circles as $circle)
+                                    <li>
+                                        <a href="{{ route('programs.create', ['circle' => $circle]) }}">{{ $circle->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">

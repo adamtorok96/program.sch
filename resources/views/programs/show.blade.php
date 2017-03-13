@@ -78,6 +78,12 @@
                     <button type="button" class="btn btn-sm btn-primary">
                         <i class="fa fa-facebook" aria-hidden="true"></i>
                     </button>
+
+                    @role('admin')
+                        <a href="{{ route('admin.programs.edit', ['program' => $program]) }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                        </a>
+                    @endrole()
                 </div>
             </div>
         </div>
@@ -89,7 +95,9 @@
                         <h3 class="panel-title">Plakát</h3>
                     </div>
                     <div class="panel-body">
-                        <img src="{{ asset($program->poster->getUrl()) }}" class="img-responsive">
+                        <a href="{{ asset($program->poster->getUrl()) }}" target="_blank">
+                            <img src="{{ asset($program->poster->getUrl()) }}" class="img-responsive">
+                        </a>
                     </div>
                 </div>
             </div>

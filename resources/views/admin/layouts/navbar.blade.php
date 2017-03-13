@@ -14,6 +14,10 @@
             </li>
 
             <li role="presentation">
+                <a href="{{ route('admin.locations.index') }}"><i class="fa fa-map-marker" aria-hidden="true"></i> Helyszínek</a>
+            </li>
+
+            <li role="presentation">
                 <a href="{{ route('admin.users.index') }}"><i class="fa fa-users" aria-hidden="true"></i> Felhasználók</a>
             </li>
         </ul>
