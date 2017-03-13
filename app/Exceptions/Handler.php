@@ -46,10 +46,12 @@ class Handler extends ExceptionHandler
                     'email' => Auth::user()->email
                 ]);
             }
-
+            
+            /*
             $sentry->extra_context([
                'ip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null
             ]);
+            */
 
             $sentry->captureException($exception);
         }
