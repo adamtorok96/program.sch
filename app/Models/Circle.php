@@ -24,6 +24,11 @@ class Circle extends Model
         return $this->belongsToMany('App\Models\User');
     }
 
+    public function filteredUsers()
+    {
+        return $this->belongsToMany('App\Models\User', 'program_filters');
+    }
+
     public function scopeWherePRManager(Builder $query, User $user)
     {
         return $query->whereHas('users', function (Builder $query) use($user) {

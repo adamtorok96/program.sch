@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth'], function()
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function()
     {
        Route::get('/', 'ProfileController@index')->name('index');
+       Route::get('enable/filters', 'ProfileController@enableFilters')->name('enable.filters');
+       Route::get('disable/filters', 'ProfileController@disableFilters')->name('disable.filters');
        Route::get('calendar/create', 'CalendarController@create')->name('calendar.create');
     });
 });

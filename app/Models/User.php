@@ -11,7 +11,7 @@ class User extends Authenticatable
 {
     use Notifiable, EntrustUserTrait;
 
-    protected $fillable = ['name', 'email'];
+    protected $fillable = ['name', 'email', 'filter'];
 
     protected $hidden   = ['remember_token', 'created_at', 'updated_at'];
 
@@ -23,6 +23,11 @@ class User extends Authenticatable
     public function circles()
     {
         return $this->belongsToMany('App\Models\Circle')->withPivot(['leader', 'pr']);
+    }
+
+    public function filteredCircles()
+    {
+        return $this->belongsToMany('App\Models\Circle', 'program_filters');
     }
 
     public function calendar()

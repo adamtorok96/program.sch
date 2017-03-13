@@ -16,42 +16,42 @@
                     <input type="text" id="circle" readonly class="form-control" value="{{ $circle->name }}">
                 </div>
 
-                <div class="form-group">
-                    <label for="name">Program / Nyitás megnevezése:</label>
+                <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                    <label for="name">Program / Nyitás megnevezése: *</label>
                     <input type="text" name="name" id="name" class="form-control" required="required" placeholder="Program / Nyitás megnevezése" value="{{ old('name') }}">
                 </div>
 
-                <div class="form-group">
-                    <label for="from">Mettől:*</label>
+                <div class="form-group {{ $errors->has('from') ? 'has-error' : '' }}">
+                    <label for="from">Mettől: *</label>
                     <input type="datetime-local" name="from" id="from" class="form-control" required="required" placeholder="YYYY-mm-ddTHH:mm:ss" value="{{ old('from') }}">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('to') ? 'has-error' : '' }}">
                     <label for="to">Meddig:</label>
                     <input type="datetime-local" name="to" id="to" class="form-control" required="required" placeholder="YYYY-mm-ddTHH:mm:ss" value="{{ old('to') }}">
                 </div>
 
-                <div class="form-group">
-                    <label for="location">Helyszín:</label>
+                <div class="form-group {{ $errors->has('location') ? 'has-error' : '' }}">
+                    <label for="location">Helyszín: *</label>
                     <input type="text" name="location" id="location" class="form-control" required="required" placeholder="Helyszín" value="{{ old('location') }}">
                 </div>
 
-                <div class="form-group">
-                    <label for="summary">Rövid összefoglaló:</label>
+                <div class="form-group {{ $errors->has('summary') ? 'has-error' : '' }}">
+                    <label for="summary">Rövid összefoglaló: *</label>
                     <textarea name="summary" id="summary" maxlength="255" class="form-control" placeholder="Rövid összefoglaló">{{ old('summary') }}</textarea>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
                     <label for="description">Leírás / Részletek:</label>
                     <textarea name="description" id="description" rows="5" class="form-control" placeholder="Leírás / Részletek">{{ old('description') }}</textarea>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('website') ? 'has-error' : '' }}">
                     <label for="website">Weboldal:</label>
                     <input type="text" name="website" id="website" class="form-control" placeholder="Weboldal" value="{{ old('website') }}">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('facebook_event_id') ? 'has-error' : '' }}">
                     <label for="facebook_event_id">Facebook esemény azonosító:</label>
                     <div class="input-group">
                         <span class="input-group-addon">https://www.facebook.com/events/</span>
@@ -59,18 +59,18 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('poster') ? 'has-error' : '' }}">
                     <label for="poster">Plakát:</label>
                     <input type="file" name="poster" id="poster" accept="image/*" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <div class="checkbox">
+                    <div class="checkbox {{ $errors->has('display_poster') ? 'has-error' : '' }}">
                         <label>
                             <input type="checkbox" name="display_poster" value="1" {{ old('display_poster', true) ? 'checked="checked"' : '' }}> Megjelenjen a rendezvény a heti nagyplakáton?
                         </label>
                     </div>
-                    <div class="checkbox">
+                    <div class="checkbox {{ $errors->has('display_site') ? 'has-error' : '' }}">
                         <label>
                             <input type="checkbox" name="display_site" value="1" {{ old('display_site', true) ? 'checked="checked"' : '' }}> Megjelenjen a rendezvény a program.sch-n?
                         </label>

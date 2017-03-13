@@ -85,7 +85,7 @@ class ProgramsController extends Controller
         return [
             'name'              => 'required|string|max:255',
             'from'              => 'required|date',
-            'to'                => 'date',
+            'to'                => 'date|after:from',
             'location'          => 'nullable|string',
             'summary'           => 'required|string|max:255',
             'description'       => 'nullable|string',

@@ -33,19 +33,35 @@
                     <h3 class="panel-title">Műveletek</h3>
                 </div>
                 <div class="panel-body">
-                    @if( $user->hasCalendar() )
-                        <div class="input-group">
-                            <span class="input-group-addon">iCalendar:</span>
-                            <input type="text" class="form-control" id="icalc" readonly value="{{ route('calendar.calendar', ['uuid' => $user->calendar->uuid]) }}">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" id="copy-icalc">
-                                    <i class="fa fa-clipboard" aria-hidden="true"></i>
-                                </button>
-                            </span>
-                        </div>
-                    @else
-                        <a href="{{ route('profile.calendar.create') }}" class="btn btn-block btn-primary">iCalendar létrehozása</a>
-                    @endif
+                    <p>
+                        @if( $user->filter )
+                            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                <div class="btn-group" role="group">
+                                    <a href="{{ route('profile.disable.filters') }}" class="btn btn-block btn-danger">Programok szűrűsének kikapcsolása</a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a href="" class="btn btn-block btn-primary">Szűrők beállítása</a>
+                                </div>
+                            </div>
+                        @else
+                            <a href="{{ route('profile.enable.filters') }}" class="btn btn-block btn-primary">Programok szűrűsének bekapcsolása</a>
+                        @endif
+                    </p>
+                    <p>
+                        @if( $user->hasCalendar() )
+                            <div class="input-group">
+                                <span class="input-group-addon">iCalendar</span>
+                                <input type="text" class="form-control" id="icalc" readonly value="{{ route('calendar.calendar', ['uuid' => $user->calendar->uuid]) }}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" id="copy-icalc">
+                                        <i class="fa fa-clipboard" aria-hidden="true"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        @else
+                            <a href="{{ route('profile.calendar.create') }}" class="btn btn-block btn-primary">iCalendar létrehozása</a>
+                        @endif
+                    </p>
                 </div>
             </div>
         </div>
