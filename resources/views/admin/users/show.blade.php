@@ -18,6 +18,10 @@
                         <td>E-mail cím</td>
                         <th class="text-right">{{ $user->email }}</th>
                     </tr>
+                    <tr>
+                        <td>Regisztráció időpontja</td>
+                        <th class="text-right">{{ $user->created_at->format('Y. m. d. H:i') }}</th>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -47,6 +51,8 @@
                 <table class="table">
                     <tr>
                         <th>Kör neve</th>
+                        <th class="text-center">Körvezető</th>
+                        <th class="text-center">PR Menedzser</th>
                     </tr>
                     @foreach($user->circles as $circle)
                         <tr>
@@ -54,6 +60,16 @@
                                 <a href="{{ route('admin.circles.show', ['circle' => $circle]) }}">
                                     {{ $circle->name }}
                                 </a>
+                            </td>
+                            <td class="text-center">
+                                @if( $circle->pivot->leader )
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                @if( $circle->pivot->pr )
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

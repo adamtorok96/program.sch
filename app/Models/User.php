@@ -34,6 +34,11 @@ class User extends Authenticatable
         return $this->hasRole('admin');
     }
 
+    public function isPRManagerAt(Circle $circle)
+    {
+        return $this->circles()->where('id', $circle->id)->wherePivot('leader', true)->orWherePivot('pr')->exists();
+    }
+
     public function isInCircle(Circle $circle)
     {
         foreach($this->circles as $user_circle) {

@@ -25,8 +25,8 @@ Route::group(['middleware' => 'auth'], function()
 {
     Route::group(['prefix' => 'programs', 'as' => 'programs.'], function()
     {
-        Route::get('create/{circle}', 'ProgramsController@create')->name('create');
-        Route::post('store/{circle}', 'ProgramsController@store')->name('store');
+        Route::get('create/{circle}', 'ProgramsController@create')->name('create')->middleware(['pr_manager']);
+        Route::post('store/{circle}', 'ProgramsController@store')->name('store')->middleware(['pr_manager']);
         Route::get('{program}', 'ProgramsController@show')->name('show');
     });
 
