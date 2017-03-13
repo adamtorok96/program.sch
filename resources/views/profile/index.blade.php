@@ -36,7 +36,7 @@
                     @if( $user->hasCalendar() )
                         <div class="input-group">
                             <span class="input-group-addon">iCalendar:</span>
-                            <input type="text" class="form-control" id="icalc" readonly value="{{ route('calendar', ['uuid' => $user->calendar->uuid]) }}">
+                            <input type="text" class="form-control" id="icalc" readonly value="{{ route('calendar.calendar', ['uuid' => $user->calendar->uuid]) }}">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button" id="copy-icalc">
                                     <i class="fa fa-clipboard" aria-hidden="true"></i>

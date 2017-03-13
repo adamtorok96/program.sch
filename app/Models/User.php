@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
@@ -36,7 +37,14 @@ class User extends Authenticatable
 
     public function isPRManagerAt(Circle $circle)
     {
-        return $this->circles()->where('id', $circle->id)->wherePivot('leader', true)->orWherePivot('pr')->exists();
+        return $this
+            ->circles()
+            ->where('id', $circle->id)
+            ->where(function (Builder $query) {
+                $query
+                    ->where('circle_user.leader', true)
+                    ->orWhere('circle_user.pr', true);
+            })->exists();
     }
 
     public function isInCircle(Circle $circle)

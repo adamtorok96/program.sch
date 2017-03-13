@@ -20,10 +20,9 @@ class TestController extends Controller
 
     public function makeAdmin()
     {
-        User::all()
-            ->first()
-            ->attach(Role::whereName('admin')->firstOrFail())
-            ;
+        $user = User::all()->first();
+
+        $user->attachRole(Role::whereName('admin')->firstOrFail());
 
         return redirect()->route('index');
     }
