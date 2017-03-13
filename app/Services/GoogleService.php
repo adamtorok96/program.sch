@@ -31,9 +31,9 @@ class GoogleService
 
     public function newEvent(Program $program)
     {
-        $this->calendar->events->insert($this->getCalendarId(), new Google_Service_Calendar_Event([
-            'id'            => $program->uuid,
-            'summary'       => $program->name,
+        return $this->calendar->events->insert($this->getCalendarId(), new Google_Service_Calendar_Event([
+            //'id'            => $program->uuid,
+            'summary'       => $program->circle->name . ' -  '. $program->name,
             'location'      => $program->location,
             'description'   => $program->summary,
             'sequence'      => $program->sequence,
@@ -52,7 +52,7 @@ class GoogleService
 
     public function deleteEvent(Program $program)
     {
-        $this->calendar->events->delete($this->getCalendarId(), $program->uuid);
+        return isset($program->google_calendar_event_id) ? $this->calendar->events->delete($this->getCalendarId(), $program->google_calendar_event_id) : false;
     }
 
     private function getCalendarId()

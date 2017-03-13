@@ -32,6 +32,14 @@
     <p>
         <div class="btn-group btn-group-justified" role="group">
             <div class="btn-group" role="group">
+                <a href="{{ route('admin.posters.index') }}" class="btn btn-default">
+                    <i class="fa fa-picture-o fa-3x" aria-hidden="true"></i>
+                    <h3>{{ $posters }}</h3>
+                    <small>Plakátok</small>
+                </a>
+            </div>
+
+            <div class="btn-group" role="group">
                 <a href="{{ route('admin.locations.index') }}" class="btn btn-default">
                     <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
                     <h3>{{ $locations }}</h3>

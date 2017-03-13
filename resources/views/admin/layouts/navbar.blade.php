@@ -14,6 +14,10 @@
             </li>
 
             <li role="presentation">
+                <a href="{{ route('admin.posters.index') }}"><i class="fa fa-image" aria-hidden="true"></i> Plakátok</a>
+            </li>
+
+            <li role="presentation">
                 <a href="{{ route('admin.locations.index') }}"><i class="fa fa-map-marker" aria-hidden="true"></i> Helyszínek</a>
             </li>
 

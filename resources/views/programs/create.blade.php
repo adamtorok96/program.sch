@@ -33,7 +33,7 @@
 
                 <div class="form-group">
                     <label for="location">Helyszín:</label>
-                    <input type="text" name="location" id="location" class="form-control" placeholder="Helyszín" value="{{ old('location') }}">
+                    <input type="text" name="location" id="location" class="form-control" required="required" placeholder="Helyszín" value="{{ old('location') }}">
                 </div>
 
                 <div class="form-group">

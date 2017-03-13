@@ -27,7 +27,8 @@ class Program extends Model
         'summary',
         'description',
         'display_poster',
-        'display_site'
+        'display_site',
+        'google_calendar_event_id'
     ];
 
     protected $hidden   = ['created_at', 'updated_at'];
@@ -46,7 +47,11 @@ class Program extends Model
 
         static::created(function(Program $program) {
             try {
-                static::$google->newEvent($program);
+                $event = static::$google->newEvent($program);
+
+                $program->update([
+                    'google_calendar_event_id' => $event->id
+                ]);
             } catch (ConnectException $exception) {
 
             }
@@ -102,4 +107,14 @@ class Program extends Model
     public function scopeOnThisDay(Builder $query, Carbon $carbon) {
         return $query->whereDate('from', '<=', $carbon)->whereDate('to', '>=', $carbon);
     }
+
+    public function delete()
+    {
+        if( $this->hasPoster() )
+            $this->poster->delete();
+
+        return parent::delete();
+    }
+
+
 }

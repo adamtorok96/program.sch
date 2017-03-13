@@ -96,7 +96,7 @@
                     </div>
                     <div class="panel-body">
                         <a href="{{ asset($program->poster->getUrl()) }}" target="_blank">
-                            <img src="{{ asset($program->poster->getUrl()) }}" class="img-responsive">
+                            <img src="{{ asset($program->poster->getUrl()) }}" class="center-block img-responsive">
                         </a>
                     </div>
                 </div>

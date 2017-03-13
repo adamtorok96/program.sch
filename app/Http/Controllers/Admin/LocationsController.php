@@ -11,7 +11,7 @@ class LocationsController extends Controller
 {
     public function index()
     {
-
+        return view('admin.locations.index');
     }
 
     public function create()

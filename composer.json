@@ -44,7 +44,8 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
-            "ln -s storage/app/public/ public/storage"
+            "php artisan storage:link",
+            "php artisan migrate:refresh --seed"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",

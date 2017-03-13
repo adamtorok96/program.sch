@@ -85,6 +85,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('{location}', 'LocationsController@show')->name('show');
     });
 
+    Route::group(['prefix' => 'posters', 'as' => 'posters.'], function()
+    {
+        Route::get('/', 'PostersController@index')->name('index');
+        Route::get('destroy/{poster}', 'PostersController@destroy')->name('destroy');
+    });
+
     Route::group(['prefix' => 'users', 'as' => 'users.'], function()
     {
         Route::get('/', 'UsersController@index')->name('index');
@@ -111,5 +117,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('circles', 'AjaxController@circles')->name('circles');
         Route::get('circles/{circle}/users', 'AjaxController@circlesUsers')->name('circles.users');
         Route::get('users', 'AjaxController@users')->name('users');
+        Route::get('locations', 'AjaxController@locations')->name('locations');
+        //Route::get('posters', 'AjaxController@posters')->name('posters');
     });
 });
