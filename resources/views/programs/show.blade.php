@@ -6,7 +6,7 @@
     @include('layouts.title')
 
     <div class="row">
-        <div class="col-md-6 {{ $program->hasPoster() ? '' : 'col-md-offset-3' }}">
+        <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Információk</h3>
@@ -83,9 +83,20 @@
         </div>
 
         @if( $program->hasPoster() )
-            <div class="col-md-6">
-                <img src="{{ asset($program->poster->getUrl()) }}">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Plakát</h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="{{ asset($program->poster->getUrl()) }}" class="img-responsive">
+                    </div>
+                </div>
             </div>
         @endif
     </div>
 @endsection
+@if( $program->hasPoster() )
+    @push('ogs', '<meta property="og:image" content="'. asset($program->poster->getUrl()) .'" />')
+    @push('ogs', '<meta property="og:description" content="'. (isset($program->description) ? $program->description : $program->summary) .'" />')
+@endif

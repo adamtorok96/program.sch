@@ -5,6 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <meta property="og:title" content="@yield('title') | Program.sch" />
+        <meta property="og:url" content="{{ Request::url() }}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="hu_HU" />
+        @stack('ogs')
+
         <title>@yield('title') | Program.sch</title>
 
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">

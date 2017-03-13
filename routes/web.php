@@ -4,7 +4,8 @@ Route::get('/', 'CalendarController@index')->name('index');
 
 Route::group(['prefix' => 'test', 'as' => 'test.'], function ()
 {
-   Route::get('login', 'TestController@login')->name('login');
+    Route::get('login', 'TestController@login');
+    Route::get('admin', 'TestController@makeAdmin');
 });
 
 Route::group(['prefix' => 'calendar', 'as' => 'calendar.'], function()

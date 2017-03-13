@@ -21,7 +21,7 @@ class User extends Authenticatable
 
     public function circles()
     {
-        return $this->belongsToMany('App\Models\Circle');
+        return $this->belongsToMany('App\Models\Circle')->withPivot(['leader', 'pr']);
     }
 
     public function calendar()

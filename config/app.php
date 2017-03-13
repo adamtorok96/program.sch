@@ -181,7 +181,6 @@ return [
          * Custom
          */
         Zizaco\Entrust\EntrustServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 

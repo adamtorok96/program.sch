@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Circle extends Model
@@ -21,5 +22,16 @@ class Circle extends Model
     public function users()
     {
         return $this->belongsToMany('App\Models\User');
+    }
+
+    public function scopeWherePRManager(Builder $query, User $user)
+    {
+        return $query->whereHas('users', function (Builder $query) use($user) {
+            $query
+                ->where('user_id', $user->id)
+                ->where('leader', true)
+                ->orWhere('pr', true)
+            ;
+        });
     }
 }

@@ -23,7 +23,7 @@
                             Új program <i class="fa fa-caret-down" aria-hidden="true"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            @foreach(Auth::user()->circles as $circle)
+                            @foreach(\App\Models\Circle::WherePRManager(Auth::user())->get() as $circle)
                                 <li>
                                     <a href="{{ route('programs.create', ['circle' => $circle]) }}">{{ $circle->name }}</a>
                                 </li>

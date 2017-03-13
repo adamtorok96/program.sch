@@ -74,6 +74,7 @@ class AuthController extends Controller
 
     private function registerCircles(User $user, array $circles)
     {
+        //dd($circles);
         $user->detachCircles();
 
         foreach ($circles as $circ) {
@@ -86,7 +87,10 @@ class AuthController extends Controller
                 ]);
             }
 
-            $user->circles()->attach($circle->id);
+            $user->circles()->attach($circle->id, [
+                'leader'    => $circ['status'] == 'körvezető',
+                'pr'        => isset($circ['title']) && in_array('PR menedzser', $circ['title'])
+            ]);
         }
     }
 }
