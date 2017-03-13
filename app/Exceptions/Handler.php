@@ -6,6 +6,8 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
+use Sentry\SentryLaravel\SentryFacade;
+use Sentry\SentryLaravel\SentryLaravel;
 use Symfony\Component\Debug\Exception\FlattenException;
 
 class Handler extends ExceptionHandler
@@ -34,6 +36,13 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if ($this->shouldReport($exception)) {
+            /* @var $sentry SentryLaravel */
+            $sentry = app('Sentry');
+            
+            $sentry->captureException($exception);
+        }
+
         if ( $this->isHttpException($exception) ) {
             return $this->renderHttpException($exception);
         }
