@@ -46,7 +46,7 @@
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
             "php artisan storage:link",
-            "php clear-compiled",
+            "php artisan clear-compiled",
             "php artisan view:clear",
             "php artisan cache:clear",
             "composer dump-autoload",
