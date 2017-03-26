@@ -38,9 +38,7 @@ class Handler extends ExceptionHandler
         if ( $this->shouldReport($exception) ) {
             try {
                 $this->sentry($exception);
-            } catch (Exception $e) {
-                echo "Sentry exception";
-            }
+            } catch (Exception $e) {}
         }
 
         if ( $this->isHttpException($exception) ) {
@@ -74,7 +72,6 @@ class Handler extends ExceptionHandler
         $sentry->extra_context([
             'ip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null
         ]);
-
 
         $sentry->captureException($exception);
     }
