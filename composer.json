@@ -46,6 +46,8 @@
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
             "php artisan storage:link",
+            "php artisan view:clear",
+            "php artisan cache:clear",
             "php artisan migrate:refresh --seed --env production"
         ],
         "post-update-cmd": [
