@@ -52,7 +52,7 @@
                             <td>Weboldal</td>
                             <th class="text-right">
                                 <a href="{{ $program->website }}" target="_blank">
-                                    {{ $program->website }}
+                                    Megnyitás
                                 </a>
                             </th>
                         </tr>
