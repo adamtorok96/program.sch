@@ -35,24 +35,12 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if ( $this->shouldReport($exception) && class_exists('sentry') ) {
-            /* @var $sentry \Raven_Client */
-            $sentry = app('sentry');
-
-            if( Auth::check() ) {
-                $sentry->user_context([
-                    'id'    => Auth::user()->id,
-                    'name'  => Auth::user()->name,
-                    'email' => Auth::user()->email
-                ]);
+        if ( $this->shouldReport($exception) ) {
+            try {
+                $this->sentry($exception);
+            } catch (Exception $e) {
+                echo "Sentry exception";
             }
-
-            $sentry->extra_context([
-               'ip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null
-            ]);
-
-
-            $sentry->captureException($exception);
         }
 
         if ( $this->isHttpException($exception) ) {
@@ -68,6 +56,27 @@ class Handler extends ExceptionHandler
         }
 
         parent::report($exception);
+    }
+
+    private function sentry(Exception $exception)
+    {
+        /* @var $sentry \Raven_Client */
+        $sentry = app('sentry');
+
+        if( Auth::check() ) {
+            $sentry->user_context([
+                'id'    => Auth::user()->id,
+                'name'  => Auth::user()->name,
+                'email' => Auth::user()->email
+            ]);
+        }
+
+        $sentry->extra_context([
+            'ip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null
+        ]);
+
+
+        $sentry->captureException($exception);
     }
 
     /**
