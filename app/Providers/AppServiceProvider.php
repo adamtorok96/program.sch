@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Blade;
 use Illuminate\Support\ServiceProvider;
 use Schema;
 
@@ -20,6 +21,14 @@ class AppServiceProvider extends ServiceProvider
 
         $socialite->extend('sch', function ($app) use ($socialite) {
             return $socialite->buildProvider(SchProvider::class, $app['config']['services.sch']);
+        });
+
+        Blade::directive('prmanagerat', function ($expression) {
+            return '<?php if( Auth::user()->isPRManagerAt('. $expression .') ) { ?>';
+        });
+        
+        Blade::directive('endprmanagerat', function ($expression) {
+            return  '<?php } ?>';
         });
     }
 

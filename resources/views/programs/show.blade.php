@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('title', 'Programok')
 @section('subtitle', $program->name)
-@section('icon', '')
+@section('icon', 'calendar')
 @section('content')
     @include('layouts.title')
 
@@ -67,6 +67,7 @@
                     @endif
                 </table>
                 <div class="panel-footer text-right">
+                    {{--}}
                     <button type="button" class="btn btn-sm btn-primary">
                         <i class="fa fa-twitter" aria-hidden="true"></i>
                     </button>
@@ -78,12 +79,18 @@
                     <button type="button" class="btn btn-sm btn-primary">
                         <i class="fa fa-facebook" aria-hidden="true"></i>
                     </button>
-
+                     --}}
                     @role('admin')
                         <a href="{{ route('admin.programs.edit', ['program' => $program]) }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-edit" aria-hidden="true"></i>
                         </a>
                     @endrole()
+
+                    @prmanagerat($program->circle)
+                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    @endprmanagerat
                 </div>
             </div>
         </div>
@@ -103,6 +110,7 @@
             </div>
         @endif
     </div>
+    @include('programs.modals.delete')
 @endsection
 @if( $program->hasPoster() )
     @push('ogs', '<meta property="og:image" content="'. asset($program->poster->getUrl()) .'" />')

@@ -105,7 +105,10 @@ class Program extends Model
     }
 
     public function scopeOnThisDay(Builder $query, Carbon $carbon) {
-        return $query->whereDate('from', '<=', $carbon)->whereDate('to', '>=', $carbon);
+        return $query
+            ->whereDate('from', '<=', $carbon)
+            ->whereDate('to', '>=', $carbon)
+            ;
     }
 
     public function delete()

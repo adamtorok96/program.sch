@@ -16,20 +16,26 @@
                 </li>
                 @if( Auth::check() )
                     @php($circles = \App\Models\Circle::WherePRManager(Auth::user())->get())
-                    @if( count($circles) )
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Új program <i class="fa fa-caret-down" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                @foreach($circles as $circle)
-                                    <li>
-                                        <a href="{{ route('programs.create', ['circle' => $circle]) }}">{{ $circle->name }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
-                    @endif
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Új program <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ route('programs.info') }}">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i> Információ
+                                </a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            @foreach($circles as $circle)
+                                <li>
+                                    <a href="{{ route('programs.create', ['circle' => $circle]) }}">
+                                        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> {{ $circle->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">

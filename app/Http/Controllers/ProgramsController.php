@@ -22,6 +22,11 @@ class ProgramsController extends Controller
         ]);
     }
 
+    public function info()
+    {
+        return view('programs.info');
+    }
+
     public function store(Request $request, Circle $circle)
     {
         $validator = $this->getValidator($request);
@@ -73,6 +78,13 @@ class ProgramsController extends Controller
         return view('programs.show', [
             'program' => $program
         ]);
+    }
+
+    public function destroy(Program $program)
+    {
+        $program->delete();
+
+        return redirect()->route('index');
     }
 
     private function getValidator($request)
