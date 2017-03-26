@@ -35,7 +35,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if ($this->shouldReport($exception)) {
+        if ( $this->shouldReport($exception) && class_exists('sentry') ) {
             /* @var $sentry \Raven_Client */
             $sentry = app('sentry');
 
