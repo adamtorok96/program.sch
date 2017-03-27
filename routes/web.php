@@ -125,3 +125,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         //Route::get('posters', 'AjaxController@posters')->name('posters');
     });
 });
+
+/*
+ * "php artisan clear-compiled",
+            "php artisan view:clear",
+            "php artisan cache:clear",
+            "composer dump-autoload",
+            "php artisan migrate:refresh --seed --env production"
+ */
