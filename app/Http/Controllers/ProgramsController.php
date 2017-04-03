@@ -152,11 +152,12 @@ class ProgramsController extends Controller
         return [
             'name'              => 'required|string|max:255',
             'from'              => 'required|date',
-            'to'                => 'date|after:from',
+            'to'                => 'required|date|after:from',
             'location'          => 'nullable|string',
             'summary'           => 'required|string|max:255',
             'description'       => 'nullable|string',
             'display_poster'    => 'nullable|boolean',
+            'display_email'     => 'nullable|boolean',
             'display_site'      => 'nullable|boolean',
             'facebook_event_id' => 'nullable|numeric',
             'website'           => 'nullable|string|max:255',
@@ -170,17 +171,23 @@ class ProgramsController extends Controller
             'name.required'                 => 'A program nevének megadása kötelező!',
             'name.string'                   => 'A program nevének karakterláncnak kell lennie!',
             'name.max'                      => 'A program neve maximálisan 255 karakter hosszú lehet!',
-            'from.required'                 => 'from.required',
-            'from.date'                     => 'from.date',
-            'to.date'                       => 'to.date',
+            'from.required'                 => 'A program kezdetének megadása kötelező!',
+            'from.date'                     => 'A program kezdetének formátuma hibás!',
+            'to.required'                   => 'A program végének megadása kötelező!',
+            'to.date'                       => 'A program végének formátuma hibás!',
+            'to.after'                      => 'A program végének a program kezdete után kell lennie!',
+            'summary.required'              => 'A program rövid összefoglalásának megadása kötelező!',
+            'summary.string'                => '',
+            'summary.max'                   => 'A program rövid összefoglalásának hossza maximum 255 karakter hosszú lehet!',
             'location.nullable'             => 'location.nullable',
             'location.string'               => 'location.string',
             'description.string'            => 'description.string',
             'display_poster.boolean'        => 'display_poster.boolean',
+            'display_email.boolean'         => 'display_email.boolean',
             'display_site.boolean'          => 'display_site.boolean',
             'facebook_event_id.numeric'     => 'facebook_event_id.numeric',
             'website.string'                => 'website.string',
-            'poster.image'                  => 'poster.image'
+            'poster.image'                  => 'A plakátnak képnek kell lennie!'
         ];
     }
 

@@ -11,8 +11,8 @@
                 <img src="{{ asset($poster->getUrl()) }}" class="img-responsive">
             </a>
         </div>
-        <div class="panel-footer">
-            <a href="{{ route('admin.posters.destroy', ['poster' => $poster]) }}" class="btn btn-block btn-danger">Törlés</a>
+        <div class="list-group"">
+            <a href="{{ route('admin.posters.destroy', ['poster' => $poster]) }}" class="list-group-item list-group-item-danger">Törlés</a>
         </div>
     </div>
 </div>

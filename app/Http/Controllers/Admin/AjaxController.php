@@ -9,6 +9,7 @@ use App\Models\Location;
 use App\Models\Program;
 use App\Models\Resort;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
@@ -24,9 +25,17 @@ class AjaxController extends Controller
         return response()->json($circles);
     }
 
-    public function programs()
+    public function programs(Request $request)
     {
-        $programs = Program::orderBy('from', 'DESC')->get();
+        $programs = Program::orderBy('from', 'DESC');
+
+        if( $request->has('only_poster') )
+            $programs->where('display_poster', true);
+
+        if( $request->has('only_email') )
+            $programs->where('display_email', true);
+
+        $programs = $programs->get();
 
         $programs->each(function(Program $program) {
             $program->date      = $program->fullDate();

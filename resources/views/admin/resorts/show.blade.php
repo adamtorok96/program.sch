@@ -23,9 +23,9 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Műveletek</h3>
                 </div>
-                <div class="panel-body">
-                    <a href="{{ route('admin.resorts.edit', ['resort' => $resort]) }}" class="btn btn-block btn-primary">Szerkesztés</a>
-                    <button type="button" class="btn btn-block btn-danger">Törlés</button>
+                <div class="list-group">
+                    <a href="{{ route('admin.resorts.edit', ['resort' => $resort]) }}" class="list-group-item list-group-item-info">Szerkesztés</a>
+                    <button type="button" class="list-group-item list-group-item-danger">Törlés</button>
                 </div>
             </div>
         </div>

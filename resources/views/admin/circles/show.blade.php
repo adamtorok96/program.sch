@@ -33,12 +33,12 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Műveletek</h3>
                 </div>
-                <div class="panel-body">
-                    <a href="{{ route('admin.circles.edit', ['circle' => $circle]) }}" class="btn btn-block btn-primary">Szerkesztés</a>
+                <div class="list-group">
+                    <a href="{{ route('admin.circles.edit', ['circle' => $circle]) }}" class="list-group-item list-group-item-info">Szerkesztés</a>
                     @if( $circle->active )
-                        <a href="{{ route('admin.circles.deactivate', ['circle' => $circle]) }}" class="btn btn-block btn-danger">Elrejt</a>
+                        <a href="{{ route('admin.circles.deactivate', ['circle' => $circle]) }}" class="list-group-item list-group-item-danger">Elrejt</a>
                     @else
-                        <a href="{{ route('admin.circles.activate', ['circle' => $circle]) }}" class="btn btn-block btn-primary">Megjelenít</a>
+                        <a href="{{ route('admin.circles.activate', ['circle' => $circle]) }}" class="list-group-item list-group-item-info">Megjelenít</a>
                     @endif
                 </div>
             </div>

@@ -8,11 +8,11 @@
         </a>
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary">
-                <input type="checkbox" autocomplete="off">
+                <input type="checkbox" autocomplete="off" id="only_poster">
                 Nagyplakát
             </label>
             <label class="btn btn-primary">
-                <input type="checkbox" autocomplete="off">
+                <input type="checkbox" autocomplete="off" id="only_email">
                 PR e-mail
             </label>
         </div>
@@ -22,6 +22,7 @@
             data-pagination="true"
             data-search="true"
             data-toolbar="#toolbar"
+            data-query-params="queryParams"
             data-url="{{ route('admin.ajax.programs') }}">
         <thead>
             <tr>
@@ -34,6 +35,23 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
+    function queryParams(params) {
+        if( $("#only_poster").is(":checked") )
+            params.only_poster = true;
+
+        if( $("#only_email").is(":checked") )
+            params.only_email = true;
+
+        return params;
+    }
+
+    function reload() {
+        $("table[data-toggle='table']").bootstrapTable('refresh');
+    }
+
+    $("#only_poster").change(reload);
+    $("#only_email").change(reload);
+
     function nameFormatter(value, row, index) {
         return [
             '<a href="{{ route('admin.programs.show', ['program' => null]) }}/' + row['id'] + '">',

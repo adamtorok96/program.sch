@@ -21,8 +21,8 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Műveletek</h3>
                 </div>
-                <div class="panel-body">
-                    <a href="{{ route('admin.locations.edit', ['location' => $location]) }}" class="btn btn-block btn-primary">Szerkesztés</a>
+                <div class="list-group">
+                    <a href="{{ route('admin.locations.edit', ['location' => $location]) }}" class="list-group-item list-group-item-info">Szerkesztés</a>
                 </div>
             </div>
         </div>

@@ -16,7 +16,11 @@
                     </tr>
                     <tr>
                         <td>Kör</td>
-                        <th class="text-right">{{ $program->circle->name }}</th>
+                        <th class="text-right">
+                            <a href="{{ route('admin.circles.show', ['circle' => $program->circle]) }}">
+                                {{ $program->circle->name }}
+                            </a>
+                        </th>
                     </tr>
                     <tr>
                         <td>Időpont</td>
