@@ -31,11 +31,11 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Műveletek</h3>
                 </div>
-                <div class="panel-body">
+                <div class="list-group">
                     @if( $user->isAdmin() )
-                        <a href="{{ route('admin.users.demote.admin', ['user' => $user]) }}" class="btn btn-block btn-danger">Adminisztrátor jog megvonása</a>
+                        <a href="{{ route('admin.users.demote.admin', ['user' => $user]) }}" class="list-group-item list-group-item-danger">Adminisztrátor jog megvonása</a>
                     @else
-                        <a href="{{ route('admin.users.promote.admin', ['user' => $user]) }}" class="btn btn-block btn-primary">Adminisztrátor jog adása</a>
+                        <a href="{{ route('admin.users.promote.admin', ['user' => $user]) }}" class="list-group-item list-group-item-info">Adminisztrátor jog adása</a>
                     @endif
                 </div>
             </div>

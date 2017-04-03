@@ -74,12 +74,9 @@
                     </button>
                      --}}
                     @role('admin')
-                        <a href="{{ route('admin.programs.edit', ['program' => $program]) }}" class="btn btn-sm btn-primary">
-                            <i class="fa fa-edit" aria-hidden="true"></i>
+                        <a href="{{ route('admin.programs.show', ['program' => $program]) }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
                         </a>
-                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
                     @else
                         @prmanagerat($program->circle)
                             <a href="{{ route('programs.edit', ['program' => $program]) }}" class="btn btn-sm btn-primary">

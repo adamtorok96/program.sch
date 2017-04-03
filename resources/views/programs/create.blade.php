@@ -24,12 +24,16 @@
 
                 <div class="form-group {{ $errors->has('from') ? 'has-error' : '' }}">
                     <label for="from">Mettől: *</label>
-                    <input type="datetime-local" name="from" id="from" class="form-control" required="required" placeholder="YYYY-mm-ddTHH:mm:ss" value="{{ old('from') }}">
+                    <input type="text" id="from" class="form-control" required="required">
+                    {{--}}<input type="datetime-local" name="from" id="from" class="form-control" required="required" placeholder="YYYY-mm-ddTHH:mm:ss" value="{{ old('from') }}">
+                    --}}
                 </div>
 
                 <div class="form-group {{ $errors->has('to') ? 'has-error' : '' }}">
                     <label for="to">Meddig:</label>
-                    <input type="datetime-local" name="to" id="to" class="form-control" required="required" placeholder="YYYY-mm-ddTHH:mm:ss" value="{{ old('to') }}">
+                    <input type="text" id="to" class="form-control">
+                    {{--}}<input type="datetime-local" name="to" id="to" class="form-control" required="required" placeholder="YYYY-mm-ddTHH:mm:ss" value="{{ old('to') }}">
+                    --}}
                 </div>
 
                 <div class="form-group {{ $errors->has('location') ? 'has-error' : '' }}">
@@ -95,16 +99,51 @@
 @push('scripts')
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#from").datetimepicker({
+            formatTime: 'H:i',
+            formatDate: 'Y. m. d.',
+            lang: 'hu'
+            /*,
+            onChangeDateTime: function(dp, $input) {
+                console.log(dp);
+                console.log($input);
+                $("to").datetimepicker('setOptions', {'minDate': $("to").val()});
+            }*/
+        });
+
+        $("#to").datetimepicker({
+            formatTime: 'H:i',
+            formatDate: 'Y. m. d.',
+            lang: 'hu'
+        });
+
+
         $("#from").change(function () {
             var from = new Date($("#from").val());
             from.setHours(from.getHours() + 4);
 
-            var str = from.toISOString();
+            $("#to").val([
+                from.getFullYear(),
+                '/',
+                from.getMonth() + 1,
+                '/',
+                from.getDay() % 12 || 12,
+                ' ',
+                from.getHours(),
+                ':',
+                from.getMinutes()
+            ].join(''));
 
-            $("#to").val(str.substr(0, str.length - 1));
+            console.log(from.toDateString());
+            console.log(from.toISOString());
+            console.log(from.toUTCString());
+            console.log(from.toLocaleString());
+            //var str = from.toISOString();
+
+            //$("#to").val(str.substr(0, str.length - 1));
         });
 
-        $( "#location" ).autocomplete({
+        $("#location").autocomplete({
             source: [
                 @foreach($locations as $location)'{{ $location->name }}'@if( !$loop->last ),@endif @endforeach
             ]

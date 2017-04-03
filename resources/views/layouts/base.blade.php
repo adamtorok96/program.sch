@@ -13,6 +13,9 @@
 
         <title>@yield('title') | Program.sch</title>
 
+        <link href="{{ asset('favicon.ico') }}" type="image/x-icon" rel="shortcut icon">
+        <link href="{{ asset('favicon.ico') }}" type="image/x-icon" rel="icon">
+
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
         @stack('styles')
     </head>
