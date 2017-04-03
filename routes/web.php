@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth'], function()
         Route::get('info', 'ProgramsController@info')->name('info');
         Route::get('create/{circle}', 'ProgramsController@create')->name('create')->middleware(['pr_manager']);
         Route::post('store/{circle}', 'ProgramsController@store')->name('store')->middleware(['pr_manager']);
+        Route::get('edit/{program}', 'ProgramsController@edit')->name('edit')->middleware(['pr_manager']);
+        Route::post('update/{program}', 'ProgramsController@update')->name('update')->middleware(['pr_manager']);
         Route::get('destroy/{program}', 'ProgramsController@destroy')->name('destroy')->middleware(['pr_manager']);
         Route::get('{program}', 'ProgramsController@show')->name('show');
     });

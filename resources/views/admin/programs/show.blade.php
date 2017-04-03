@@ -14,12 +14,10 @@
                         <td>Program megnevezése</td>
                         <th class="text-right">{{ $program->name }}</th>
                     </tr>
-                    @if( isset($program->circle) )
-                        <tr>
-                            <td>Kör</td>
-                            <th class="text-right">{{ $program->circle->name }}</th>
-                        </tr>
-                    @endif
+                    <tr>
+                        <td>Kör</td>
+                        <th class="text-right">{{ $program->circle->name }}</th>
+                    </tr>
                     <tr>
                         <td>Időpont</td>
                         <th class="text-right">{{ $program->fullDate() }}</th>
@@ -34,6 +32,14 @@
                             <th class="text-right"><a href="{{ $program->website }}" target="_blank">Link</a></th>
                         </tr>
                     @endif
+                    <tr>
+                        <td>Megjelenés - heti nagyplakát</td>
+                        <th class="text-right">{{ $program->display_poster ? 'Igen' : 'Nem' }}</th>
+                    </tr>
+                    <tr>
+                        <td>Megjelenés - pr email</td>
+                        <th class="text-right">{{ $program->display_email ? 'Igen' : 'Nem' }}</th>
+                    </tr>
                     <tr>
                         <td>Beküldő</td>
                         <th class="text-right">
@@ -61,14 +67,26 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Műveletek</h3>
                 </div>
-                <div class="panel-body">
-                    <a href="{{ route('admin.programs.edit', ['program' => $program]) }}" class="btn btn-block btn-primary">Szerkesztés</a>
-                    <button class="btn btn-block btn-danger">Törlés</button>
+                <div class="list-group">
+                    <a href="{{ route('admin.programs.edit', ['program' => $program]) }}" class="list-group-item list-group-item-info">Szerkesztés</a>
+                    <button data-toggle="modal" data-target="#modal-delete" class="list-group-item list-group-item-danger">Törlés</button>
                 </div>
             </div>
         </div>
+        @if( $program->hasPoster() )
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Plakát</h3>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{{ asset($program->poster->getUrl()) }}" target="_blank">
+                            <img src="{{ asset($program->poster->getUrl()) }}" class="center-block img-responsive">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
+    @include('admin.programs.modals.delete')
 @endsection
-@push('scripts')
-{{-- TODO: modal delete script; include modal --}}
-@endpush

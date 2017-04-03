@@ -26,18 +26,10 @@ class AjaxController extends Controller
 
     public function programs()
     {
-        $programs = Program::all();
+        $programs = Program::orderBy('from', 'DESC')->get();
 
         $programs->each(function(Program $program) {
-            $program->date      = $program->from->format('Y. m. d. H:i') . ' - ';
-
-            if( $program->from->isSameDay($program->to) )
-                $program->date .= $program->to->format('H:i');
-            else if( $program->from->isSameMonth($program->to) )
-                $program->date .= $program->to->format('d. H:i');
-            else
-                $program->date .= $program->to->format('Y. m. d. H:i');
-
+            $program->date      = $program->fullDate();
             $program->user_name = $program->user->name;
         });
 

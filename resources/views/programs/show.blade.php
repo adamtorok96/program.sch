@@ -23,14 +23,7 @@
                     <tr>
                         <td>Időpont</td>
                         <th class="text-right">
-                            {{ $program->from->format('Y. m. d. H:i') }} -
-                            @if( $program->from->isSameDay($program->to) )
-                                {{ $program->to->format('H:i') }}
-                            @elseif( $program->from->isSameMonth($program->to) )
-                                {{ $program->to->format('m. d. H:i') }}
-                            @else
-                                {{ $program->to->format('Y. m. d. H:i') }}
-                            @endif
+                            {{ $program->fullDate() }}
                         </th>
                     </tr>
                     <tr>
@@ -84,13 +77,19 @@
                         <a href="{{ route('admin.programs.edit', ['program' => $program]) }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-edit" aria-hidden="true"></i>
                         </a>
-                    @endrole()
-
-                    @prmanagerat($program->circle)
                         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
-                    @endprmanagerat
+                    @else
+                        @prmanagerat($program->circle)
+                            <a href="{{ route('programs.edit', ['program' => $program]) }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        @endprmanagerat
+                    @endrole()
                 </div>
             </div>
         </div>

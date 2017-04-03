@@ -27,6 +27,7 @@ class CreateProgramsTable extends Migration
            $table->string('facebook_event_id')->nullable();
            $table->string('website')->nullable();
            $table->boolean('display_poster')->default(false);
+           $table->boolean('display_email')->default(false);
            $table->boolean('display_site')->default(false);
            $table->string('google_calendar_event_id')->nullable();
            $table->unsignedInteger('sequence')->default(0);

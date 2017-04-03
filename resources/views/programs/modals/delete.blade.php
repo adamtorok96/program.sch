@@ -6,11 +6,11 @@
                 <h4 class="modal-title">Program törlése</h4>
             </div>
             <div class="modal-body">
-                <p>Biztosan törölni akarod a programot?</p>
+                <p>Biztosan törölni akarod a programot ({{ $program->name }})?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Mégse</button>
-                <a href="{{ route('programs.destroy', ['program' => $program]) }}" id="btn-delete" class="btn btn-danger">Törlés</a>
+                <a href="{{ route((Auth::user()->isAdmin() ? 'admin.' : '') . 'programs.destroy', ['program' => $program]) }}" id="btn-delete" class="btn btn-danger">Törlés</a>
             </div>
         </div>
     </div>

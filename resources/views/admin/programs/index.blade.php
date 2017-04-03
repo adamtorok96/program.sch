@@ -6,6 +6,16 @@
         <a href="{{ route('admin.programs.create') }}" class="btn btn-default">
             <i class="fa fa-plus" aria-hidden="true"></i>
         </a>
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off">
+                Nagyplakát
+            </label>
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off">
+                PR e-mail
+            </label>
+        </div>
     </div>
     <table  class="table"
             data-toggle="table"

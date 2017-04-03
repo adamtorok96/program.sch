@@ -71,11 +71,17 @@
                             <input type="checkbox" name="display_poster" value="1" {{ old('display_poster', true) ? 'checked="checked"' : '' }}> Megjelenjen a rendezvény a heti nagyplakáton?
                         </label>
                     </div>
+                    <div class="checkbox {{ $errors->has('display_email') ? 'has-error' : '' }}">
+                        <label>
+                            <input type="checkbox" name="display_email" value="1" {{ old('display_email', true) ? 'checked="checked"' : '' }}> Megjelenjen a rendezvény a heti PR e-mailben?
+                        </label>
+                    </div>
+                    {{--}}
                     <div class="checkbox {{ $errors->has('display_site') ? 'has-error' : '' }}">
                         <label>
                             <input type="checkbox" name="display_site" value="1" {{ old('display_site', true) ? 'checked="checked"' : '' }}> Megjelenjen a rendezvény a program.sch-n?
                         </label>
-                    </div>
+                    </div>--}}
                 </div>
 
                 <div class="form-group">

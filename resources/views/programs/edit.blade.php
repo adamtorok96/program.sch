@@ -1,13 +1,15 @@
-@extends('admin.layouts.layout')
+@extends('layouts.layout')
 @section('title', 'Programok')
-@section('subtitle', $program->name)
+@section('subtitle', $program->circle->name . ' - ' . $program->name)
 @section('icon', 'calendar')
 @section('content')
+    @include('layouts.title')
+
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-6 col-md-offset-3">
             @include('layouts.errors')
 
-            <form method="post" action="{{ route('admin.programs.update', ['program' => $program]) }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('programs.update', ['program' => $program]) }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 <div class="form-group">

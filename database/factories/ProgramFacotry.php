@@ -22,6 +22,9 @@ $factory->define(Program::class, function (Faker\Generator $faker) {
         'website'           => $faker->boolean ? $faker->url : null,
         'summary'           => $faker->text(random_int(50, 200)),
         'description'       => $faker->text(random_int(50, 1000)),
-        'uuid'              => \Webpatser\Uuid\Uuid::generate()
+        'uuid'              => \Webpatser\Uuid\Uuid::generate(),
+        'display_poster'    => $faker->boolean,
+        'display_email'     => $faker->boolean,
+        'display_site'      => $faker->boolean
     ];
 });

@@ -27,8 +27,10 @@ class Program extends Model
         'summary',
         'description',
         'display_poster',
+        'display_email',
         'display_site',
-        'google_calendar_event_id'
+        'google_calendar_event_id',
+        'facebook_event_id'
     ];
 
     protected $hidden   = ['created_at', 'updated_at'];
