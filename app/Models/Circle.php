@@ -34,8 +34,12 @@ class Circle extends Model
         return $query->whereHas('users', function (Builder $query) use($user) {
             $query
                 ->where('user_id', $user->id)
-                ->where('leader', true)
-                ->orWhere('pr', true)
+                ->where(function(Builder $query) {
+                    $query
+                        ->where('leader', true)
+                        ->orWhere('pr', true)
+                    ;
+                });
             ;
         });
     }
