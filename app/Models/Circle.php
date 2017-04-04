@@ -24,7 +24,7 @@ class Circle extends Model
         return $this->belongsToMany('App\Models\User');
     }
 
-    public function filteredUsers()
+    public function filters()
     {
         return $this->belongsToMany('App\Models\User', 'program_filters');
     }

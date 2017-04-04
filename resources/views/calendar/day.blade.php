@@ -1,4 +1,4 @@
-@php($programs = \App\Models\Program::OnThisDay($day)->orderBy('from')->get())
+@php($programs = \App\Models\Program::OnThisDay($day, Auth::user())->orderBy('from')->get())
 <div class="col-xs-12 col-sm-6 col-md-1-7 {{ count($programs) == 0 ? 'hidden-xs' : '' }}">
     <div class="panel panel-{{ $day->isToday() ? 'info' : 'default' }}">
         <div class="panel-heading">
