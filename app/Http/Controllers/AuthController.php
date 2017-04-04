@@ -74,7 +74,6 @@ class AuthController extends Controller
 
     private function registerCircles(User $user, array $circles)
     {
-        //dd($circles);
         $user->detachCircles();
 
         foreach ($circles as $circ) {

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Blade;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Schema;
 
@@ -16,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(190);
+        Carbon::setLocale(config('app.locale'));
 
         $socialite = $this->app->make('Laravel\Socialite\Contracts\Factory');
 
