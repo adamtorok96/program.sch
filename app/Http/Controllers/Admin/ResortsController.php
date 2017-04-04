@@ -25,8 +25,10 @@ class ResortsController extends Controller
         $validator = $this->getValidator($request);
 
         if( $validator->fails() ) {
-            return redirect()->route('admin.resorts.create')
-                ->withErrors($validator)->withInput($request->all());
+            return redirect()
+                ->route('admin.resorts.create')
+                ->withErrors($validator)
+                ->withInput($request->all());
         }
 
         $resort = Resort::create([
@@ -40,12 +42,31 @@ class ResortsController extends Controller
 
     public function edit(Resort $resort)
     {
-
+        return view('admin.resorts.edit', [
+            'resort' => $resort
+        ]);
     }
 
     public function update(Request $request, Resort $resort)
     {
+        $validator = $this->getValidator($request);
 
+        if( $validator->fails() ) {
+            return redirect()
+                ->route('admin.resorts.edit', [
+                    'resort' => $resort
+                ])
+                ->withErrors($validator)
+                ->withInput($request->all());
+        }
+
+        $resort->update([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route('admin.resorts.show', [
+            'resort' => $resort
+        ]);
     }
 
     public function show(Resort $resort)

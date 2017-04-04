@@ -88,6 +88,9 @@
                             <img src="{{ asset($program->poster->getUrl()) }}" class="center-block img-responsive">
                         </a>
                     </div>
+                    <duv class="list-group">
+                        <a href="{{ route('admin.posters.destroy', ['poster' => $program->poster]) }}" class="list-group-item list-group-item-danger">Törlés</a>
+                    </duv>
                 </div>
             </div>
         @endif

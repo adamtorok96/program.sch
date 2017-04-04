@@ -20,7 +20,7 @@
                     <select name="resort" id="resort" class="form-control">
                         <option></option>
                         @foreach($resorts as $resort)
-                            <option value="{{ $resort->id }}" {{ old('resort', null) == $resort->id }}>{{ $resort->name }}</option>
+                            <option value="{{ $resort->id }}" {{ old('resort', isset($circle->resort) ? $circle->resort->id : null) == $resort->id ? ' selected="selected"' : '' }}>{{ $resort->name }}</option>
                         @endforeach
                     </select>
                 </div>
