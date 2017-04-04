@@ -31,8 +31,13 @@ Route::group(['middleware' => 'auth'], function()
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function()
     {
        Route::get('/', 'ProfileController@index')->name('index');
-       Route::get('enable/filters', 'ProfileController@enableFilters')->name('enable.filters');
-       Route::get('disable/filters', 'ProfileController@disableFilters')->name('disable.filters');
+       Route::group(['prefix' => 'filters', 'as' => 'filters.'], function()
+       {
+           Route::get('enable', 'FiltersController@enable')->name('enable');
+           Route::get('disable', 'FiltersController@disable')->name('disable');
+           Route::get('edit', 'FiltersController@edit')->name('edit');
+           Route::post('toggle/{circle}', 'FiltersController@toggle')->name('toggle');
+       });
        Route::get('calendar/create', 'CalendarController@create')->name('calendar.create');
     });
 });

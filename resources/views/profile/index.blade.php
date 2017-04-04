@@ -32,37 +32,40 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Műveletek</h3>
                 </div>
-                <div class="panel-body">
-                    <p>
-                        @if( $user->filter )
-                            <div class="btn-group btn-group-justified" role="group">
-                                <div class="btn-group" role="group">
-                                    <a href="{{ route('profile.disable.filters') }}" class="btn btn-block btn-danger">Programok szűrűsének kikapcsolása</a>
-                                </div>
-                                <div class="btn-group" role="group">
-                                    <a href="" class="btn btn-block btn-primary">Szűrők beállítása</a>
-                                </div>
-                            </div>
-                        @else
-                            <a href="{{ route('profile.enable.filters') }}" class="btn btn-block btn-primary">Programok szűrűsének bekapcsolása</a>
-                        @endif
-                    </p>
-                    <p>
-                        @if( $user->hasCalendar() )
-                            <div class="input-group">
-                                <span class="input-group-addon">iCalendar</span>
-                                <input type="text" class="form-control" id="icalc" readonly value="{{ route('calendar.calendar', ['uuid' => $user->calendar->uuid]) }}">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" id="copy-icalc">
-                                        <i class="fa fa-clipboard" aria-hidden="true"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        @else
-                            <a href="{{ route('profile.calendar.create') }}" class="btn btn-block btn-primary">iCalendar létrehozása</a>
-                        @endif
-                    </p>
+                <div class="list-group">
+                    @if( $user->filter )
+                        <a href="{{ route('profile.filters.edit') }}" class="list-group-item list-group-item-info">Szűrők beállítása</a>
+                        <a href="{{ route('profile.filters.disable') }}" class="list-group-item list-group-item-danger">Programok szűrűsének kikapcsolása</a>
+                    @else
+                        <a href="{{ route('profile.filters.enable') }}" class="list-group-item list-group-item-info">Programok szűrűsének bekapcsolása</a>
+                    @endif
                 </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">iCalendar</h3>
+                </div>
+                @if( $user->hasCalendar() )
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="icalc" readonly value="{{ route('calendar.calendar', ['uuid' => $user->calendar->uuid]) }}">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="copy-icalc">
+                                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                @else
+                    <div class="list-group">
+                        <a href="{{ route('profile.calendar.create') }}" class="list-group-item list-group-item-info">iCalendar létrehozása</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

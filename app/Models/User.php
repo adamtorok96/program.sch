@@ -25,7 +25,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Circle')->withPivot(['leader', 'pr']);
     }
 
-    public function filteredCircles()
+    public function filters()
     {
         return $this->belongsToMany('App\Models\Circle', 'program_filters');
     }
@@ -54,14 +54,12 @@ class User extends Authenticatable
 
     public function isInCircle(Circle $circle)
     {
-        foreach($this->circles as $user_circle) {
+        return $this->circles()->where('id', $circle->id)->exists();
+    }
 
-            if( $user_circle == $circle )
-                return true;
-
-        }
-
-        return false;
+    public function isInFilter(Circle $circle)
+    {
+        return $this->filters()->where('id', $circle->id)->exists();
     }
 
     public function hasCalendar()
