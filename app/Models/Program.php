@@ -114,15 +114,15 @@ class Program extends Model
         return $this->from->format('Y. m. d. H:i') . ' - '. $this->to->format($format);
     }
 
-    public function scopeOnThisDay(Builder $query, Carbon $carbon, User $user = null) {
+    public function scopeOnThisDay(Builder $query, Carbon $carbon) {
         $query
             ->whereDate('from', '<=', $carbon)
             ->whereDate('to', '>=', $carbon)
             ;
+    }
 
-        if( $user == null || !$user->filter )
-            return $query;
-
+    public function scopeFiltered(Builder $query, User $user)
+    {
         return $query->whereHas('circle.filters', function(Builder $query) use($user) {
             $query->where('user_id', $user->id);
         });

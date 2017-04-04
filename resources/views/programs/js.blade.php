@@ -6,12 +6,14 @@
             formatDate: 'Y. m. d.',
             lang: 'hu'
         }).change(function () {
-            var from = new Date($("#from").val());
-            from.setHours(from.getHours() + 4);
+            if( $("#to").val().length == 0 ) {
+                var from = new Date($("#from").val());
+                from.setHours(from.getHours() + 4);
 
-            $("#to").datetimepicker('setOptions', {
-                value: from
-            });
+                $("#to").datetimepicker('setOptions', {
+                    value: from
+                });
+            }
         });
 
         $("#to").datetimepicker({
