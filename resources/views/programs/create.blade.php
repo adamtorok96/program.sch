@@ -24,16 +24,12 @@
 
                 <div class="form-group {{ $errors->has('from') ? 'has-error' : '' }}">
                     <label for="from">Mettől: *</label>
-                    <input type="text" id="from" class="form-control" required="required">
-                    {{--}}<input type="datetime-local" name="from" id="from" class="form-control" required="required" placeholder="YYYY-mm-ddTHH:mm:ss" value="{{ old('from') }}">
-                    --}}
+                    <input type="text" name="from" id="from" class="form-control" required="required" value="{{ old('from') }}">
                 </div>
 
                 <div class="form-group {{ $errors->has('to') ? 'has-error' : '' }}">
-                    <label for="to">Meddig:</label>
-                    <input type="text" id="to" class="form-control">
-                    {{--}}<input type="datetime-local" name="to" id="to" class="form-control" required="required" placeholder="YYYY-mm-ddTHH:mm:ss" value="{{ old('to') }}">
-                    --}}
+                    <label for="to">Meddig: *</label>
+                    <input type="text" name="to" id="to" class="form-control" required="required" value="{{ old('to') }}">
                 </div>
 
                 <div class="form-group {{ $errors->has('location') ? 'has-error' : '' }}">
@@ -43,7 +39,7 @@
 
                 <div class="form-group {{ $errors->has('summary') ? 'has-error' : '' }}">
                     <label for="summary">Rövid összefoglaló: *</label>
-                    <textarea name="summary" id="summary" maxlength="255" class="form-control" placeholder="Rövid összefoglaló">{{ old('summary') }}</textarea>
+                    <textarea name="summary" id="summary" maxlength="255" class="form-control" required="required" placeholder="Rövid összefoglaló">{{ old('summary') }}</textarea>
                 </div>
 
                 <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
@@ -53,7 +49,7 @@
 
                 <div class="form-group {{ $errors->has('website') ? 'has-error' : '' }}">
                     <label for="website">Weboldal:</label>
-                    <input type="text" name="website" id="website" class="form-control" placeholder="Weboldal" value="{{ old('website') }}">
+                    <input type="text" name="website" id="website" class="form-control" placeholder="Weboldal (http(s):// sémával)" value="{{ old('website') }}">
                 </div>
 
                 <div class="form-group {{ $errors->has('facebook_event_id') ? 'has-error' : '' }}">
@@ -72,12 +68,12 @@
                 <div class="form-group">
                     <div class="checkbox {{ $errors->has('display_poster') ? 'has-error' : '' }}">
                         <label>
-                            <input type="checkbox" name="display_poster" value="1" {{ old('display_poster', true) ? 'checked="checked"' : '' }}> Megjelenjen a rendezvény a heti nagyplakáton?
+                            <input type="checkbox" name="display_poster" value="1" {{ old('display_poster', false) != null ? 'checked="checked"' : '' }}> Megjelenjen a rendezvény a heti nagyplakáton?
                         </label>
                     </div>
                     <div class="checkbox {{ $errors->has('display_email') ? 'has-error' : '' }}">
                         <label>
-                            <input type="checkbox" name="display_email" value="1" {{ old('display_email', true) ? 'checked="checked"' : '' }}> Megjelenjen a rendezvény a heti PR e-mailben?
+                            <input type="checkbox" name="display_email" value="1" {{ old('display_email', false) != null ? 'checked="checked"' : '' }}> Megjelenjen a rendezvény a heti PR e-mailben?
                         </label>
                     </div>
                     {{--}}
@@ -96,58 +92,4 @@
         </div>
     </div>
 @endsection
-@push('scripts')
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#from").datetimepicker({
-            formatTime: 'H:i',
-            formatDate: 'Y. m. d.',
-            lang: 'hu'
-            /*,
-            onChangeDateTime: function(dp, $input) {
-                console.log(dp);
-                console.log($input);
-                $("to").datetimepicker('setOptions', {'minDate': $("to").val()});
-            }*/
-        });
-
-        $("#to").datetimepicker({
-            formatTime: 'H:i',
-            formatDate: 'Y. m. d.',
-            lang: 'hu'
-        });
-
-
-        $("#from").change(function () {
-            var from = new Date($("#from").val());
-            from.setHours(from.getHours() + 4);
-
-            $("#to").val([
-                from.getFullYear(),
-                '/',
-                from.getMonth() + 1,
-                '/',
-                from.getDay() % 12 || 12,
-                ' ',
-                from.getHours(),
-                ':',
-                from.getMinutes()
-            ].join(''));
-
-            console.log(from.toDateString());
-            console.log(from.toISOString());
-            console.log(from.toUTCString());
-            console.log(from.toLocaleString());
-            //var str = from.toISOString();
-
-            //$("#to").val(str.substr(0, str.length - 1));
-        });
-
-        $("#location").autocomplete({
-            source: [
-                @foreach($locations as $location)'{{ $location->name }}'@if( !$loop->last ),@endif @endforeach
-            ]
-        });
-    });
-</script>
-@endpush
+@include('programs.js')

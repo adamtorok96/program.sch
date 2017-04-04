@@ -50,6 +50,24 @@ class GoogleService
         ]));
     }
 
+    public function updateEvent(Program $program)
+    {
+        return $this->calendar->events->update($this->getCalendarId(), $program->google_calendar_event_id, new Google_Service_Calendar_Event([
+            'summary'       => $program->circle->name . ' -  '. $program->name,
+            'location'      => $program->location,
+            'description'   => $program->summary,
+            'sequence'      => $program->sequence,
+            'start' => [
+                'dateTime' => $program->from->format('Y-m-d\TH:i:s'),
+                'timeZone' => config('app.timezone'),
+            ],
+            'end' => [
+                'dateTime' => $program->to->format('Y-m-d\TH:i:s'),
+                'timeZone' => config('app.timezone'),
+            ],
+        ]));
+    }
+
     public function deleteEvent(Program $program)
     {
         return isset($program->google_calendar_event_id) ? $this->calendar->events->delete($this->getCalendarId(), $program->google_calendar_event_id) : false;

@@ -35,7 +35,7 @@
                 <div class="panel-body">
                     <p>
                         @if( $user->filter )
-                            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group btn-group-justified" role="group">
                                 <div class="btn-group" role="group">
                                     <a href="{{ route('profile.disable.filters') }}" class="btn btn-block btn-danger">Programok szűrűsének kikapcsolása</a>
                                 </div>

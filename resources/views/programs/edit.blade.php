@@ -24,12 +24,12 @@
 
                 <div class="form-group {{ $errors->has('from') ? 'has-error' : '' }}">
                     <label for="from">Mettől: *</label>
-                    <input type="datetime-local" name="from" id="from" class="form-control" required="required" placeholder="YYYY-mm-ddTHH:mm:ss" value="{{ old('from', $program->from->format('Y-m-d\TH:i:s')) }}">
+                    <input type="text" name="from" id="from" class="form-control" required="required" value="{{ old('from', $program->from) }}">
                 </div>
 
                 <div class="form-group {{ $errors->has('to') ? 'has-error' : '' }}">
                     <label for="to">Meddig:</label>
-                    <input type="datetime-local" name="to" id="to" class="form-control" required="required" placeholder="YYYY-mm-ddTHH:mm:ss" value="{{ old('to', $program->to->format('Y-m-d\TH:i:s')) }}">
+                    <input type="text" name="to" id="to" class="form-control" required="required" value="{{ old('to', $program->to) }}">
                 </div>
 
                 <div class="form-group {{ $errors->has('location') ? 'has-error' : '' }}">
@@ -39,7 +39,7 @@
 
                 <div class="form-group {{ $errors->has('summary') ? 'has-error' : '' }}">
                     <label for="summary">Rövid összefoglaló: *</label>
-                    <textarea name="summary" id="summary" maxlength="255" class="form-control" placeholder="Rövid összefoglaló">{{ old('summary', $program->summary) }}</textarea>
+                    <textarea name="summary" id="summary" maxlength="255" class="form-control" required="required" placeholder="Rövid összefoglaló">{{ old('summary', $program->summary) }}</textarea>
                 </div>
 
                 <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
@@ -49,7 +49,7 @@
 
                 <div class="form-group {{ $errors->has('website') ? 'has-error' : '' }}">
                     <label for="website">Weboldal:</label>
-                    <input type="text" name="website" id="website" class="form-control" placeholder="Weboldal" value="{{ old('website', $program->website) }}">
+                    <input type="text" name="website" id="website" class="form-control" placeholder="Weboldal (http(s):// sémával)" value="{{ old('website', $program->website) }}">
                 </div>
 
                 <div class="form-group {{ $errors->has('facebook_event_id') ? 'has-error' : '' }}">
@@ -68,13 +68,13 @@
                 <div class="form-group">
                     <div class="checkbox {{ $errors->has('display_poster') ? 'has-error' : '' }}">
                         <label>
-                            <input type="checkbox" name="display_poster" value="1" {{ old('display_poster', $program->display_poster) ? 'checked="checked"' : '' }}>
+                            <input type="checkbox" name="display_poster" value="1" {{ old('display_poster', $program->display_poster) != null ? 'checked="checked"' : '' }}>
                             Megjelenjen a rendezvény a heti nagyplakáton?
                         </label>
                     </div>
                     <div class="checkbox {{ $errors->has('display_email') ? 'has-error' : '' }}">
                         <label>
-                            <input type="checkbox" name="display_email" value="1" {{ old('display_email', $program->email) ? 'checked="checked"' : '' }}>
+                            <input type="checkbox" name="display_email" value="1" {{ old('display_email', $program->display_email) != null ? 'checked="checked"' : '' }}>
                             Megjelenjen a rendezvény a heti PR e-mailben?
                         </label>
                     </div>
@@ -94,23 +94,4 @@
         </div>
     </div>
 @endsection
-@push('scripts')
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#from").change(function () {
-            var from = new Date($("#from").val());
-            from.setHours(from.getHours() + 4);
-
-            var str = from.toISOString();
-
-            $("#to").val(str.substr(0, str.length - 1));
-        });
-
-        $( "#location" ).autocomplete({
-            source: [
-                @foreach($locations as $location)'{{ $location->name }}'@if( !$loop->last ),@endif @endforeach
-            ]
-        });
-    });
-</script>
-@endpush
+@include('programs.js')

@@ -14,17 +14,17 @@ use Validator;
 
 class ProgramsController extends Controller
 {
+    public function info()
+    {
+        return view('programs.info');
+    }
+
     public function create(Circle $circle)
     {
         return view('programs.create', [
             'circle'    => $circle,
             'locations' => Location::all()
         ]);
-    }
-
-    public function info()
-    {
-        return view('programs.info');
     }
 
     public function store(Request $request, Circle $circle)
@@ -39,7 +39,6 @@ class ProgramsController extends Controller
                 ->withInput($request->all());
         }
 
-       // dd($request->all());
         $program = Program::create([
             'user_id'               => Auth::user()->id,
             'circle_id'             => $circle->id,
@@ -51,8 +50,8 @@ class ProgramsController extends Controller
             'location'              => $request->location,
             'website'               => $request->website,
             'facebook_event_id'     => $request->facebook_event_id,
-            'display_poster'        => $request->display_poster,
-            'display_email'         => $request->display_email
+            'display_poster'        => $request->get('display_poster', false),
+            'display_email'         => $request->get('display_email', false)
         ]);
 
         if( $request->hasFile('poster') ) {
@@ -92,8 +91,8 @@ class ProgramsController extends Controller
             'location'              => $request->location,
             'website'               => $request->website,
             'facebook_event_id'     => $request->facebook_event_id,
-            'display_poster'        => $request->display_poster,
-            'display_email'         => $request->display_email
+            'display_poster'        => $request->get('display_poster', false),
+            'display_email'         => $request->get('display_email', false)
         ]);
 
         if( $request->hasFile('poster') ) {
@@ -159,8 +158,8 @@ class ProgramsController extends Controller
             'display_poster'    => 'nullable|boolean',
             'display_email'     => 'nullable|boolean',
             'display_site'      => 'nullable|boolean',
-            'facebook_event_id' => 'nullable|numeric',
-            'website'           => 'nullable|string|max:255',
+            'facebook_event_id' => 'nullable|integer',
+            'website'           => 'nullable|string|url|max:255',
             'poster'            => 'nullable|image'
         ];
     }
@@ -177,7 +176,7 @@ class ProgramsController extends Controller
             'to.date'                       => 'A program végének formátuma hibás!',
             'to.after'                      => 'A program végének a program kezdete után kell lennie!',
             'summary.required'              => 'A program rövid összefoglalásának megadása kötelező!',
-            'summary.string'                => '',
+            'summary.string'                => 'A program rövid összefoglalásának karakterláncnak kell lennie!',
             'summary.max'                   => 'A program rövid összefoglalásának hossza maximum 255 karakter hosszú lehet!',
             'location.nullable'             => 'location.nullable',
             'location.string'               => 'location.string',
@@ -185,8 +184,10 @@ class ProgramsController extends Controller
             'display_poster.boolean'        => 'display_poster.boolean',
             'display_email.boolean'         => 'display_email.boolean',
             'display_site.boolean'          => 'display_site.boolean',
-            'facebook_event_id.numeric'     => 'facebook_event_id.numeric',
+            'facebook_event_id.integer'     => 'A Facebook esemény azonosítónak számnak kell lennie!',
             'website.string'                => 'website.string',
+            'website.url'                   => 'A weboldal címe hibás formátumú!',
+            'website.max'                   => 'A weboldal címének hossza maximum 255 karakter hosszú lehet!',
             'poster.image'                  => 'A plakátnak képnek kell lennie!'
         ];
     }

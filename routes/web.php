@@ -2,12 +2,6 @@
 
 Route::get('/', 'CalendarController@index')->name('index');
 
-Route::group(['prefix' => 'test', 'as' => 'test.'], function ()
-{
-    Route::get('login', 'TestController@login');
-    Route::get('admin', 'TestController@makeAdmin');
-});
-
 Route::group(['prefix' => 'calendar', 'as' => 'calendar.'], function()
 {
     Route::get('calendar/{uuid}.ics', 'CalendarController@calendar')->name('calendar');
@@ -127,6 +121,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         //Route::get('posters', 'AjaxController@posters')->name('posters');
     });
 });
+
+if( config('app.debug') ) {
+    Route::group(['prefix' => 'test', 'as' => 'test.'], function ()
+    {
+        Route::get('login', 'TestController@login');
+        Route::get('admin', 'TestController@makeAdmin');
+    });
+}
 
 /*
  * "php artisan clear-compiled",

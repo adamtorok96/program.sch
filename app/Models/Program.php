@@ -63,6 +63,14 @@ class Program extends Model
             $program->sequence++;
         });
 
+        static::updated(function(Program $program) {
+           try {
+               static::$google->updateEvent($program);
+           } catch (ConnectException $exception) {
+
+           }
+        });
+
         static::deleted(function(Program $program) {
             try {
                 static::$google->deleteEvent($program);
