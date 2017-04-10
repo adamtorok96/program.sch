@@ -29,6 +29,8 @@ class ProgramsController extends Controller
 
     public function store(Request $request, Circle $circle)
     {
+        $this->httpCompletion($request);
+
         $validator = $this->getValidator($request);
 
         if( $validator->fails() ) {
@@ -73,6 +75,8 @@ class ProgramsController extends Controller
 
     public function update(Request $request, Program $program)
     {
+        $this->httpCompletion($request);
+
         $validator = $this->getValidator($request);
 
         if( $validator->fails() ) {
@@ -138,6 +142,17 @@ class ProgramsController extends Controller
                 'program_id'    => $program->id,
                 'file'          => $name
             ]);
+        }
+    }
+
+    private function httpCompletion(Request $request)
+    {
+        if( $request->has('website') && !empty($request->website) &&
+            (
+                strpos($request->website, 'http://') !== 0 &&
+                strpos($request->website, 'https://') !== 0
+            ) ) {
+            $request->merge(['website' => 'http://' . $request->website]);
         }
     }
 

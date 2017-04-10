@@ -49,7 +49,7 @@
 
                 <div class="form-group {{ $errors->has('website') ? 'has-error' : '' }}">
                     <label for="website">Weboldal:</label>
-                    <input type="text" name="website" id="website" class="form-control" placeholder="Weboldal (http(s):// sémával)" value="{{ old('website') }}">
+                    <input type="text" name="website" id="website" class="form-control" placeholder="Weboldal" value="{{ old('website') }}">
                 </div>
 
                 <div class="form-group {{ $errors->has('facebook_event_id') ? 'has-error' : '' }}">
