@@ -3,7 +3,7 @@
 @section('subtitle', $circle->name .' - Új program felvétele')
 @section('icon', 'calendar-plus-o')
 @section('content')
-    @include('layouts.title')
+    @include('layouts.title-center')
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">

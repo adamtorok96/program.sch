@@ -3,7 +3,7 @@
 @section('subtitle', $program->name)
 @section('icon', 'calendar')
 @section('content')
-    @include('layouts.title')
+    @include('layouts.title-center')
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
