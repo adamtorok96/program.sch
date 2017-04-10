@@ -19,7 +19,7 @@
 
                 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                     <label for="name">Program / Nyitás megnevezése: *</label>
-                    <input type="text" name="name" id="name" class="form-control" required="required" placeholder="Program / Nyitás megnevezése" value="{{ old('name', $program->name) }}">
+                    <input type="text" name="name" id="name" maxlength="40" class="form-control" required="required" placeholder="Program / Nyitás megnevezése" value="{{ old('name', $program->name) }}">
                 </div>
 
                 <div class="form-group {{ $errors->has('from') ? 'has-error' : '' }}">

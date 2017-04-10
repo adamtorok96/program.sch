@@ -149,7 +149,7 @@ class ProgramsController extends Controller
     private function getValidations()
     {
         return [
-            'name'              => 'required|string|max:255',
+            'name'              => 'required|string|max:40',
             'from'              => 'required|date',
             'to'                => 'required|date|after:from',
             'location'          => 'nullable|string',
@@ -169,7 +169,7 @@ class ProgramsController extends Controller
         return [
             'name.required'                 => 'A program nevének megadása kötelező!',
             'name.string'                   => 'A program nevének karakterláncnak kell lennie!',
-            'name.max'                      => 'A program neve maximálisan 255 karakter hosszú lehet!',
+            'name.max'                      => 'A program neve maximálisan 40 karakter hosszú lehet!',
             'from.required'                 => 'A program kezdetének megadása kötelező!',
             'from.date'                     => 'A program kezdetének formátuma hibás!',
             'to.required'                   => 'A program végének megadása kötelező!',
