@@ -1,4 +1,4 @@
-@extends('layouts.layout-fluid')
+@extends('layouts.layout')
 @section('title', 'Naptár')
 @section('content')
     <div class="row calendar">
