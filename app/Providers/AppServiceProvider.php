@@ -32,6 +32,23 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('endprmanagerat', function ($expression) {
             return  '<?php } ?>';
         });
+
+        Blade::directive('hunDays', function ($expression) {
+            return implode([
+                '<?php ',
+                'switch(',
+                $expression,
+                ') {',
+                'case 1: echo "Hétfő"; break;',
+                'case 2: echo "Kedd"; break;',
+                'case 3: echo "Szerda"; break;',
+                'case 4: echo "Csütörtök"; break;',
+                'case 5: echo "Péntek"; break;',
+                'case 6: echo "Szombat"; break;',
+                'case 0: echo "Vasárnap"; break;',
+                '} ?>'
+            ]);
+        });
     }
 
     /**

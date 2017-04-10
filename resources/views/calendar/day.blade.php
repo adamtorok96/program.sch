@@ -8,7 +8,7 @@
         <div class="panel-heading">
             <h3 class="panel-title text-center">
                 {{ $day->format('m. d.') }}<br>
-                {{ $day->format('l') }}
+                @hunDays($day->dayOfWeek)
             </h3>
         </div>
         <table class="table table-hover">
