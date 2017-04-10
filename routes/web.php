@@ -25,7 +25,6 @@ Route::group(['middleware' => 'auth'], function()
         Route::get('edit/{program}', 'ProgramsController@edit')->name('edit')->middleware(['pr_manager']);
         Route::post('update/{program}', 'ProgramsController@update')->name('update')->middleware(['pr_manager']);
         Route::get('destroy/{program}', 'ProgramsController@destroy')->name('destroy')->middleware(['pr_manager']);
-        Route::get('{program}', 'ProgramsController@show')->name('show');
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function()
@@ -41,6 +40,8 @@ Route::group(['middleware' => 'auth'], function()
        Route::get('calendar/create', 'CalendarController@create')->name('calendar.create');
     });
 });
+
+Route::get('programs/{program}', 'ProgramsController@show')->name('programs.show');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth', 'role:admin']], function ()
 {

@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Blade::directive('prmanagerat', function ($expression) {
-            return '<?php if( Auth::user()->isPRManagerAt('. $expression .') ) { ?>';
+            return '<?php if( Auth::check() && Auth::user()->isPRManagerAt('. $expression .') ) { ?>';
         });
         
         Blade::directive('endprmanagerat', function ($expression) {
