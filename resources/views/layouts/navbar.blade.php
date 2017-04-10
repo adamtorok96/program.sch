@@ -6,7 +6,7 @@
                 <span class="sr-only">Toggle navigation</span>
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
-            <a class="navbar-brand" href="#">Program.sch</a>
+            <a class="navbar-brand" href="{{ route('index') }}">Program.sch</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar">
