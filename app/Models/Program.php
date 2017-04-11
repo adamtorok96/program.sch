@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use Carbon\Carbon;
+use DB;
 use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -126,6 +127,11 @@ class Program extends Model
         return $query->whereHas('circle.filters', function(Builder $query) use($user) {
             $query->where('user_id', $user->id);
         });
+    }
+
+    public function scopeIntertemporal(Builder $query)
+    {
+        return $query->whereRaw('date(`from`) != date(`to`)');
     }
 
     public function delete()

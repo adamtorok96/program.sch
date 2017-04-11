@@ -1,4 +1,4 @@
-@php($programs = \App\Models\Program::OnThisDay($day)->orderBy('from'))
+@php($programs = \App\Models\Program::OnThisDay($day)->orderBy('from')) {{-- Intertemporal()-> --}}
 @if( Auth::check() && Auth::user()->filter )
     @php($programs->Filtered(Auth::user()))
 @endif
@@ -12,19 +12,7 @@
             </h3>
         </div>
         <table class="table table-hover">
-            @foreach($programs as $program)
-                <tr data-toggle="tooltip" data-placement="top" title="{{ $program->summary }}">
-                    <td>
-                        <small>{{ $program->from->format('H:i') }}</small><br>
-                        <b>
-                            <a href="{{ route('programs.show', ['program' => $program]) }}">
-                                {{ $program->name }}
-                            </a>
-                        </b>
-                        <div class="text-right small">{{ $program->location }}</div>
-                    </td>
-                </tr>
-            @endforeach
+            @each('calendar.program', $programs, 'program')
         </table>
     </div>
 </div>

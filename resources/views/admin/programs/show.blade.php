@@ -59,9 +59,11 @@
                     <tr>
                         <td colspan="2" class="text-justify">{{ $program->summary }}</td>
                     </tr>
-                    <tr>
-                        <td colspan="2" class="text-justify">{{ $program->description }}</td>
-                    </tr>
+                    @if( isset($program->description) )
+                        <tr>
+                            <td colspan="2" class="text-justify">{{ $program->description }}</td>
+                        </tr>
+                    @endif
                 </table>
             </div>
         </div>
