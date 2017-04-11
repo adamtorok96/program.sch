@@ -11,7 +11,7 @@
                 {{ csrf_field() }}
 
                 <div class="form-group {{ $errors->has('circle') ? 'has-error' : '' }}">
-                    <label name="circle">Kör:</label>
+                    <label for="circle">Kör:</label>
                     <select name="circle" id="circle" class="form-control">
                         @foreach($resorts as $resort)
                             <optgroup label="{{ $resort->name }}">

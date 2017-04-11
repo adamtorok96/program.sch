@@ -10,9 +10,17 @@
             <form method="post" action="{{ route('admin.programs.update', ['program' => $program]) }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('circle') ? 'has-error' : '' }}">
                     <label for="circle">Kör:</label>
-                    <input type="text" id="circle" readonly class="form-control" value="{{ $program->circle->name }}">
+                    <select name="circle" id="circle" class="form-control">
+                        @foreach($resorts as $resort)
+                            <optgroup label="{{ $resort->name }}">
+                                @foreach($resort->circles as $circle)
+                                    <option value="{{ $circle->id }}" {{ old('circle', $program->circle->id) == $circle->id ? ' selected="selected"' : '' }}>{{ $circle->name }}</option>
+                                @endforeach
+                            </optgroup>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
