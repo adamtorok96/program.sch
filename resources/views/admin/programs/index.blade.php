@@ -7,11 +7,11 @@
             <i class="fa fa-plus" aria-hidden="true"></i>
         </a>
         <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-primary">
+            <label class="btn btn-default">
                 <input type="checkbox" autocomplete="off" id="only_poster">
                 Nagyplakát
             </label>
-            <label class="btn btn-primary">
+            <label class="btn btn-default">
                 <input type="checkbox" autocomplete="off" id="only_email">
                 PR e-mail
             </label>
