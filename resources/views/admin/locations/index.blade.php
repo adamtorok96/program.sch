@@ -1,5 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title', 'Helyszínek')
+@section('icon', 'map-marker')
 @section('content')
     <div id="toolbar" class="btn-group">
         <a href="{{ route('admin.locations.create') }}" class="btn btn-default">

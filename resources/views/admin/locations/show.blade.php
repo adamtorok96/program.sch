@@ -1,6 +1,7 @@
 @extends('admin.layouts.layout')
 @section('title', 'Helyszínek')
 @section('subtitle', $location->name)
+@section('icon', 'map-marker')
 @section('content')
     <div class="row">
         <div class="col-md-6">
