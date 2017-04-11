@@ -1,6 +1,11 @@
 @extends('admin.layouts.layout')
 @section('title', 'Helyszínek')
 @section('content')
+    <div id="toolbar" class="btn-group">
+        <a href="{{ route('admin.locations.create') }}" class="btn btn-default">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+    </div>
     <table  class="table"
             data-toggle="table"
             data-pagination="true"

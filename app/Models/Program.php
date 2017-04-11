@@ -134,6 +134,11 @@ class Program extends Model
         return $query->whereRaw('date(`from`) != date(`to`)');
     }
 
+    public function scopeOneTime(Builder $query)
+    {
+        return $query->whereRaw('date(`from`) = date(`to`)');
+    }
+
     public function delete()
     {
         if( $this->hasPoster() )
