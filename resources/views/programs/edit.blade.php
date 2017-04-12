@@ -68,13 +68,13 @@
                 <div class="form-group">
                     <div class="checkbox {{ $errors->has('display_poster') ? 'has-error' : '' }}">
                         <label>
-                            <input type="checkbox" name="display_poster" value="1" {{ old('display_poster', $program->display_poster) != null ? 'checked="checked"' : '' }}>
+                            <input type="checkbox" name="display_poster" value="1" {{ old('display_poster', $program->display_poster) ? 'checked="checked"' : ''  }}>
                             Megjelenjen a rendezvény a heti nagyplakáton?
                         </label>
                     </div>
                     <div class="checkbox {{ $errors->has('display_email') ? 'has-error' : '' }}">
                         <label>
-                            <input type="checkbox" name="display_email" value="1" {{ old('display_email', $program->display_email) != null ? 'checked="checked"' : '' }}>
+                            <input type="checkbox" name="display_email" value="1" {{ old('display_email', $program->display_email) ? 'checked="checked"' : '' }}>
                             Megjelenjen a rendezvény a heti PR e-mailben?
                         </label>
                     </div>
