@@ -17,8 +17,8 @@ class GoogleService
     {
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path('google.json'));
 
-        
-        dd(env('GOOGLE_APPLICATION_CREDENTIALS'), json_decode(env('GOOGLE_APPLICATION_CREDENTIALS'), true));
+
+        dd(env('GOOGLE_APPLICATION_CREDENTIALS'), json_decode(file_get_contents(env('GOOGLE_APPLICATION_CREDENTIALS'), true)));
 
         $this->client = new Google_Client();
         $this->client->useApplicationDefaultCredentials();
