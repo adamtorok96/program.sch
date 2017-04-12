@@ -62,7 +62,7 @@ class Program extends Model
             } catch (ConnectException $exception) {
 
             } catch (DomainException $exception) {
-                dd($exception, static::$google, base_path('google.json'));
+                //dd($exception, static::$google, base_path('google.json'));
             }
             catch (Exception $exception) {
 
