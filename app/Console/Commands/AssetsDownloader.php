@@ -20,7 +20,8 @@ class AssetsDownloader extends Command
      */
     protected $description = 'Downloading assets';
 
-    protected $url = 'http://rickp.sch.bme.hu/program';
+    //protected $url = 'http://rickp.sch.bme.hu/program';
+    protected $url = 'http://152.66.180.21/program';
 
     /**
      * Create a new command instance.
@@ -41,7 +42,7 @@ class AssetsDownloader extends Command
     {
         $files = [
             '/mix-manifest.json',
-            '/fonts/FontAwesome.otf',
+            /*'/fonts/FontAwesome.otf',
             '/fonts/fontawesome-webfont.eot',
             '/fonts/fontawesome-webfont.svg',
             '/fonts/fontawesome-webfont.ttf',
@@ -51,7 +52,7 @@ class AssetsDownloader extends Command
             '/fonts/glyphicons-halflings-regular.svg',
             '/fonts/glyphicons-halflings-regular.ttf',
             '/fonts/glyphicons-halflings-regular.woff',
-            '/fonts/glyphicons-halflings-regular.woff2'
+            '/fonts/glyphicons-halflings-regular.woff2' */
         ];
 
         foreach ($files as $file) {
