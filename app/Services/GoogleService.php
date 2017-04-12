@@ -17,13 +17,13 @@ class GoogleService
     {
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path('google.json'));
 
+        dd(putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path('google.json')));
+
         $this->client = new Google_Client();
         $this->client->useApplicationDefaultCredentials();
         $this->client->addScope([Google_Service_Calendar::CALENDAR]);
 
         $this->calendar = new Google_Service_Calendar($this->client);
-
-        dd($this->client->getClientId(), $this->client->getAccessToken(), $this->client, $this->client->getOAuth2Service());
     }
 
     public function events()
