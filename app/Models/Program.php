@@ -5,6 +5,8 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use DB;
+use DomainException;
+use Exception;
 use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -57,6 +59,11 @@ class Program extends Model
                 ]);
             } catch (ConnectException $exception) {
 
+            } catch (DomainException $exception) {
+                dd($exception);
+            }
+            catch (Exception $exception) {
+
             }
         });
 
@@ -69,6 +76,8 @@ class Program extends Model
                static::$google->updateEvent($program);
            } catch (ConnectException $exception) {
 
+           } catch (Exception $exception) {
+
            }
         });
 
@@ -76,6 +85,8 @@ class Program extends Model
             try {
                 static::$google->deleteEvent($program);
             } catch (ConnectException $exception) {
+
+            } catch (Exception $exception) {
 
             }
         });
