@@ -22,6 +22,9 @@ class GoogleService
             env('GOOGLE_APPLICATION_CREDENTIALS'),
             file_get_contents(env('GOOGLE_APPLICATION_CREDENTIALS')),
             json_decode(
+                file_get_contents(env('GOOGLE_APPLICATION_CREDENTIALS'))
+            ),
+            json_decode(
                 file_get_contents(env('GOOGLE_APPLICATION_CREDENTIALS')), true
             )
         );
