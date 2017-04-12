@@ -17,6 +17,8 @@ class GoogleService
     {
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path('google.json'));
 
+        dd(env('GOOGLE_APPLICATION_CREDENTIALS'));
+
         $this->client = new Google_Client();
         $this->client->useApplicationDefaultCredentials();
         $this->client->addScope([Google_Service_Calendar::CALENDAR]);
