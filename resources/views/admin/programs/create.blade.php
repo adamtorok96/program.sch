@@ -7,7 +7,7 @@
         <div class="col-md-8 col-md-offset-2">
             @include('layouts.errors')
 
-            <form method="post" action="{{ route('admin.programs.store') }}">
+            <form method="post" action="{{ route('admin.programs.store') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 <div class="form-group {{ $errors->has('circle') ? 'has-error' : '' }}">

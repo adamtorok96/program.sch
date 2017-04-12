@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Location;
+use App\Models\Poster;
 use App\Models\Program;
 use App\Models\Resort;
 use Auth;
@@ -162,7 +163,8 @@ class ProgramsController extends Controller
             'website'           => 'nullable|string',
             'facebook_event_id' => 'nullable|integer',
             'display_poster'    => 'nullable|boolean',
-            'display_site'      => 'nullable|boolean'
+            'display_site'      => 'nullable|boolean',
+            'poster'            => 'nullable|image'
         ];
     }
 

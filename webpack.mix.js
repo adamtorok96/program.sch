@@ -1,4 +1,6 @@
-const { mix } = require('laravel-mix');
+const mix = require('laravel-mix');
+const gulp = require('gulp');
+const scp = require('gulp-scp2');
 
 mix
     .sass('resources/assets/sass/app.scss', 'public/css')

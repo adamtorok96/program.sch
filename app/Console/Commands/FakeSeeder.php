@@ -39,13 +39,15 @@ class FakeSeeder extends Command
      */
     public function handle()
     {
-        $seeds = [
+     /*   $seeds = [
             new FakeUserSeeder(),
             new FakeProgramSeeder()
         ];
 
         foreach ($seeds as $seed) {
             $seed->run();
-        }
+        }*/
+
+        echo base_path('google.json');
     }
 }
