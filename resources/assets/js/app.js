@@ -9,3 +9,5 @@ require('bootstrap-table');
 require('jquery-datetimepicker');
 
 import 'jquery-ui/ui/widgets/autocomplete.js';
+
+requirejs('google-analytics.js');
