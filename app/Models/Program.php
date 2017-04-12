@@ -44,6 +44,7 @@ class Program extends Model
     {
         parent::boot();
 
+        dd('asddasdadadas');
         static::$google = resolve('App\Services\GoogleService');
 
         static::creating(function(Program $program) {
