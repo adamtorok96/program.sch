@@ -53,7 +53,8 @@ class Program extends Model
 
         static::created(function(Program $program) {
             try {
-                $event = static::$google->newEvent($program);
+                //$event = static::$google->newEvent($program);
+                $event = resolve('App\Services\GoogleService')->newEvent($program);
 
                 $program->update([
                     'google_calendar_event_id' => $event->id
@@ -153,11 +154,9 @@ class Program extends Model
 
     public function delete()
     {
-        if( $this->hasPoster() )
+        if ($this->hasPoster())
             $this->poster->delete();
 
         return parent::delete();
     }
-
-
 }
