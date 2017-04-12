@@ -15,7 +15,6 @@ class GoogleService
 
     public function __construct()
     {
-        dd('googleService');
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path('google.json'));
 
         $this->client = new Google_Client();
