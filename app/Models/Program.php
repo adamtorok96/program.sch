@@ -63,9 +63,9 @@ class Program extends Model
             } //catch (DomainException $exception) {
                 //dd($exception, static::$google, base_path('google.json'));
            // }
-            catch (Exception $exception) {
+           /* catch (Exception $exception) {
 
-            }
+            } */
         });
 
         static::updating(function(Program $program) {
