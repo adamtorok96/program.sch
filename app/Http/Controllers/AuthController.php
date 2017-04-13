@@ -87,7 +87,7 @@ class AuthController extends Controller
             }
 
             $user->circles()->attach($circle->id, [
-                'leader'    => $circ['status'] == 'körvezető',
+                'leader'    => isset($circ['status']) && $circ['status'] == 'körvezető',
                 'pr'        => isset($circ['title']) && in_array('PR menedzser', $circ['title'])
             ]);
         }
