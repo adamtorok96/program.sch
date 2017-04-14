@@ -5,7 +5,7 @@
         @each('calendar.day', $days, 'day')
     </div>
 
-    <p class="text-center">{{ $from->format('Y. m. d.') }} - {{ $to->format('Y. m. d.') }}</p>
+    <p class="text-center">{{ $from->format('Y. m. d.') }} - {{ $to->addDays(-1)->format('Y. m. d.') }}</p>
 
     <nav>
         <ul class="pager">
