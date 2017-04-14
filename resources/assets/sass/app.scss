@@ -45,3 +45,12 @@ section {
 .fixed-table-pagination .pagination-info {
   margin-left: 1em;
 }
+
+@media (max-width: $screen-xs-max) {
+  .navbar-brand {
+    display: block;
+    text-align: center;
+    float: none;
+    line-height: inherit;
+  }
+}

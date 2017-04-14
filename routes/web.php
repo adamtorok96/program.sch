@@ -71,8 +71,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::group(['prefix' => 'circles', 'as' => 'circles.'], function()
     {
         Route::get('/', 'CirclesController@index')->name('index');
-        Route::get('create', 'CirclesController@create')->name('create');
-        Route::post('store', 'CirclesController@store')->name('store');
+        //Route::get('create', 'CirclesController@create')->name('create');
+        //Route::post('store', 'CirclesController@store')->name('store');
         Route::get('edit/{circle}', 'CirclesController@edit')->name('edit');
         Route::post('update/{circle}', 'CirclesController@update')->name('update');
         Route::get('activate/{circle}', 'CirclesController@activate')->name('activate');

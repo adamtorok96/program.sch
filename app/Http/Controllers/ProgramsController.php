@@ -76,12 +76,15 @@ class ProgramsController extends Controller
     public function update(Request $request, Program $program)
     {
         $this->httpCompletion($request);
+        $this->checkboxFix($request);
 
         $validator = $this->getValidator($request);
 
         if( $validator->fails() ) {
             return redirect()
-                ->route('programs.edit')
+                ->route('programs.edit', [
+                    'program' => $program
+                ])
                 ->withInput($request->all())
                 ->withErrors($validator);
         }
@@ -153,6 +156,19 @@ class ProgramsController extends Controller
                 strpos($request->website, 'https://') !== 0
             ) ) {
             $request->merge(['website' => 'http://' . $request->website]);
+        }
+    }
+
+    private function checkboxFix(Request $request)
+    {
+        $inputs = [
+            'display_email',
+            'display_poster'
+        ];
+
+        foreach ($inputs as $input) {
+            if( !$request->has($input) || ($request->has($input) && $request->get($input) === null) )
+                $request->merge([$input => false]);
         }
     }
 
