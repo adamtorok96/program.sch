@@ -55,7 +55,7 @@
                         </tr>
                     @if(isset($program->description))
                         <tr>
-                            <td colspan="2" class="text-justify">{{ $program->description }}</td>
+                            <td colspan="2" class="text-justify">@nl2br($program->description)</td>
                         </tr>
                     @endif
                 </table>

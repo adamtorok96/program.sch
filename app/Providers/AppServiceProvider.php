@@ -49,6 +49,17 @@ class AppServiceProvider extends ServiceProvider
                 '} ?>'
             ]);
         });
+
+        Blade::directive('nl2br', function($expression) {
+            return implode([
+               '<?php ',
+                'foreach(explode("\n", ',
+                $expression,
+                ') as $line) {',
+                'echo e($line)."<br>";',
+                '} ?>'
+            ]);
+        });
     }
 
     /**
