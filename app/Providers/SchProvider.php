@@ -50,7 +50,7 @@ class SchProvider extends AbstractProvider implements ProviderInterface
         $result->id         = $user['internal_id'];
         $result->name       = $user['displayName'];
         $result->email      = $user['mail'];
-        $result->circles    = $user['eduPersonEntitlement'];
+        $result->circles    = isset($user['eduPersonEntitlement']) ? $user['eduPersonEntitlement'] : [];
 
         return $result;
     }
