@@ -128,10 +128,15 @@ class Program extends Model
     }
 
     public function scopeOnThisDay(Builder $query, Carbon $carbon) {
-        $query
+        return $query
             ->whereDate('from', '<=', $carbon)
             ->whereDate('to', '>=', $carbon)
             ;
+    }
+
+    public function scopeStartOnThisDay(Builder $query, Carbon $carbon)
+    {
+        return $query->whereDate('from', $carbon);
     }
 
     public function scopeFiltered(Builder $query, User $user)

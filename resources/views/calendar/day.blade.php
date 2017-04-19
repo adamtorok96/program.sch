@@ -1,5 +1,5 @@
 @php
-$programs = \App\Models\Program::OnThisDay($day)->orderBy('from');
+$programs = \App\Models\Program::StartOnThisDay($day)->orderBy('from');
 
     if( Auth::check() && Auth::user()->filter ) {
         $programs->Filtered(Auth::user());
