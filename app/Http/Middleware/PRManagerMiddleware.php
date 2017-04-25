@@ -15,9 +15,10 @@ class PRManagerMiddleware
      */
     public function handle($request, Closure $next)
     {
+        //dd($request->user()->isPRManagerAt($request->route()->parameter('circle')));
         if(
-            $request->route()->parameter('circle') != null &&
-            !$request->user()->isPRManagerAt($request->route()->parameter('circle'))
+            ! $request->route()->hasParameter('circle') ||
+            ! $request->user()->isPRManagerAt($request->route()->parameter('circle'))
         ) {
             abort(403);
         }

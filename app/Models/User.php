@@ -48,17 +48,30 @@ class User extends Authenticatable
 
     public function isPRManagerAt(Circle $circle)
     {
+//        $sql = $this
+//            ->circles()
+//            ->where('id', $circle->id)
+//            ->where(function (Builder $query) {
+//                $query
+//                    ->where('site_pr', true)
+//                    ->orWhere('leader', true)
+//                    ->orWhere('site_pr', null)
+//                    ->where('pr', true)
+//                ;
+//            });
+//        dd($sql->toSql(), $sql->get(), $circle->id);
+
         return $this
             ->circles()
             ->where('id', $circle->id)
             ->where(function (Builder $query) {
                 $query
-                    ->where('circle_user.leader', true)
-                    ->orWhere('circle_user.site_pr', null)
-                    ->where('circle_user.pr', true)
+                    ->where('site_pr', true)
+                    ->orWhere('leader', true)
+                    ->orWhere('site_pr', null)
+                    ->where('pr', true)
                 ;
             })
-            ->orWhere('circle_user.site_pr', true)
             ->exists();
     }
 
