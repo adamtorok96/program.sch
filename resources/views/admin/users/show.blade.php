@@ -1,7 +1,9 @@
 @extends('admin.layouts.layout')
+
 @section('title', 'Felhasználók')
 @section('subtitle', $user->name)
 @section('icon', 'users')
+
 @section('content')
     <div class="row">
         <div class="col-md-6">
@@ -67,9 +69,19 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                @if( $circle->pivot->pr )
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                @endif
+                                <a href="{{ route('admin.users.toggle.pr', ['user' => $user, 'circle' => $circle]) }}">
+                                    @if( $circle->pivot->site_pr === null )
+                                        @if( $circle->pivot->pr )
+                                            <i class="fa fa-check text-warning" aria-hidden="true" title="VIR-ből alapértelmezetten PR Menedzser"></i>
+                                        @else
+                                            <i class="fa fa-remove text-warning" aria-hidden="true" title="VIR-ből alapértelmezetten nem PR Menedzser"></i>
+                                        @endif
+                                    @elseif( $circle->pivot->site_pr )
+                                        <i class="fa fa-check text-success" aria-hidden="true" title="Oldalról engedélyezett PR Menedzser"></i>
+                                    @else
+                                        <i class="fa fa-remove text-danger" aria-hidden="true" title="Oldalról tiltott PR Menedzser"></i>
+                                    @endif
+                                </a>
                             </td>
                         </tr>
                     @endforeach

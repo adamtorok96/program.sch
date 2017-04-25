@@ -22,7 +22,13 @@ class User extends Authenticatable
 
     public function circles()
     {
-        return $this->belongsToMany('App\Models\Circle')->withPivot(['leader', 'pr']);
+        return $this
+            ->belongsToMany('App\Models\Circle')
+            ->withPivot([
+                'leader',
+                'pr',
+                'site_pr'
+            ]);
     }
 
     public function filters()
@@ -48,10 +54,12 @@ class User extends Authenticatable
             ->where(function (Builder $query) {
                 $query
                     ->where('circle_user.leader', true)
-                    ->orWhere('circle_user.pr', true)
-                    ->orWhere('circle_user.site_pr', true)
+                    ->orWhere('circle_user.site_pr', null)
+                    ->where('circle_user.pr', true)
                 ;
-            })->exists();
+            })
+            ->orWhere('circle_user.site_pr', true)
+            ->exists();
     }
 
     public function isInCircle(Circle $circle)

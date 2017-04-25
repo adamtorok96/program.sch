@@ -21,7 +21,13 @@ class Circle extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\Models\User');
+        return $this
+            ->belongsToMany('App\Models\User')
+            ->withPivot([
+                'leader',
+                'pr',
+                'site_pr'
+            ]);
     }
 
     public function filters()
@@ -37,9 +43,11 @@ class Circle extends Model
                 ->where(function(Builder $query) {
                     $query
                         ->where('leader', true)
-                        ->orWhere('pr', true)
+                        ->orWhere('site_pr', null)
+                        ->where('pr', true)
                     ;
-                });
+                })
+                ->orWhere('site_pr', true);
             ;
         });
     }

@@ -102,6 +102,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('/', 'UsersController@index')->name('index');
         Route::get('edit/{user}', 'UsersController@edit')->name('edit');
         Route::post('update/{user}', 'UsersController@update')->name('update');
+        Route::get('toggle/pr/{user}/{circle}', 'UsersController@togglePr')->name('toggle.pr');
 
         Route::group(['prefix' => 'promote', 'as' => 'promote.'], function()
         {
