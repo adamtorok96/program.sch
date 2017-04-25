@@ -74,22 +74,31 @@ class AuthController extends Controller
 
     private function registerCircles(User $user, array $circles)
     {
-        $user->detachCircles();
+        foreach ($circles as $_circle) {
 
-        foreach ($circles as $circ) {
-
-            $circle = Circle::whereName($circ['name'])->first();
+            $circle = Circle::whereName($_circle['name'])->first();
 
             if( $circle == null ) {
                 $circle = Circle::create([
-                    'name' => $circ['name']
+                    'name' => $_circle['name']
                 ]);
             }
 
-            $user->circles()->attach($circle->id, [
-                'leader'    => isset($circ['status']) && $circ['status'] == 'körvezető',
-                'pr'        => isset($circ['title']) && in_array('PR menedzser', $circ['title'])
-            ]);
+            $isLeader   = isset($_circle['status']) && $_circle['status'] == 'körvezető';
+            $isPr       = isset($_circle['title']) && in_array('PR menedzser', $_circle['title']);
+
+            if( $circle->users()->where('user_id', $user->id)->exists() ) {
+                $user->circles()->updateExistingPivot($circle->id, [
+                    'leader'    => $isLeader,
+                    'pr'        => $isPr
+                ]);
+            } else {
+                $user->circles()->attach($circle->id, [
+                    'leader'    => $isLeader,
+                    'pr'        => $isPr
+                ]);
+            }
+
         }
     }
 }

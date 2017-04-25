@@ -48,7 +48,9 @@ class User extends Authenticatable
             ->where(function (Builder $query) {
                 $query
                     ->where('circle_user.leader', true)
-                    ->orWhere('circle_user.pr', true);
+                    ->orWhere('circle_user.pr', true)
+                    ->orWhere('circle_user.site_pr', true)
+                ;
             })->exists();
     }
 

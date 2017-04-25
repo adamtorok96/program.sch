@@ -6,7 +6,7 @@
     @include('layouts.title-center')
 
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-2">
             @include('layouts.errors')
 
             <form method="post" action="{{ route('programs.store', ['circle' => $circle]) }}" enctype="multipart/form-data">
@@ -37,15 +37,21 @@
                     <input type="text" name="location" id="location" class="form-control" required="required" placeholder="Helyszín" value="{{ old('location') }}">
                 </div>
 
-                <div class="form-group {{ $errors->has('summary') ? 'has-error' : '' }}">
-                    <label for="summary">Rövid összefoglaló: *</label>
-                    <textarea name="summary" id="summary" maxlength="255" class="form-control" required="required" placeholder="Rövid összefoglaló">{{ old('summary') }}</textarea>
-                </div>
+                {{--<div class="row">--}}
+                    {{--<div class="col-md-6">--}}
+                        <div class="form-group {{ $errors->has('summary') ? 'has-error' : '' }}">
+                            <label for="summary">Rövid összefoglaló: *</label>
+                            <textarea name="summary" id="summary" maxlength="255" class="form-control" required="required" placeholder="Rövid összefoglaló">{{ old('summary') }}</textarea>
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-md-6">--}}
+                        <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
+                            <label for="description">Részletes leírás: *</label>
+                            <textarea name="description" id="description" rows="5" class="form-control" placeholder="Részletes leírás">{{ old('description') }}</textarea>
+                        </div>
+                    {{--</div>--}}
+                {{--</div>--}}
 
-                <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                    <label for="description">Leírás / Részletek:</label>
-                    <textarea name="description" id="description" rows="5" class="form-control" placeholder="Leírás / Részletek">{{ old('description') }}</textarea>
-                </div>
 
                 <div class="form-group {{ $errors->has('website') ? 'has-error' : '' }}">
                     <label for="website">Weboldal:</label>
