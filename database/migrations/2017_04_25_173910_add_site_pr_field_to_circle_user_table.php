@@ -14,7 +14,12 @@ class AddSitePrFieldToCircleUserTable extends Migration
     public function up()
     {
         Schema::table('circle_user', function(Blueprint $table) {
-            $table->boolean('site_pr')->nullable()->after('pr');
+            $table
+                ->boolean('site_pr')
+                ->nullable()
+                ->default(null)
+                ->after('pr')
+            ;
         });
     }
 
@@ -26,7 +31,7 @@ class AddSitePrFieldToCircleUserTable extends Migration
     public function down()
     {
         Schema::table('circle_user', function (Blueprint $table) {
-           $table->removeColumn('site_pr');
+           $table->dropColumn('site_pr');
         });
     }
 }
