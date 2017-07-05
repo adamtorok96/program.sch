@@ -1,0 +1,19 @@
+language: php
+
+php:
+  - 7.0
+
+install:
+  - cp .env.travis .env
+  - mysql -e 'create database programsch_test;'
+  - composer self-update
+  - composer install --no-interaction --no-suggest
+  - php artisan key:generate
+  - . $HOME/.nvm/nvm.sh
+  - nvm install stable
+  - nvm use stable
+  - npm install
+  - npm run dev
+
+script:
+  - vendor/bin/phpunit
