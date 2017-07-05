@@ -75,6 +75,6 @@ class GoogleService
 
     private function getCalendarId()
     {
-        return env('GOOGLE_CALENDAR_ID');
+        return config('services.google.calendar_id');
     }
 }
