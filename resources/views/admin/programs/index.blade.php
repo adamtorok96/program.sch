@@ -19,16 +19,18 @@
     </div>
     <table  class="table"
             data-toggle="table"
-            data-pagination="true"
             data-search="true"
             data-toolbar="#toolbar"
+            data-pagination="true"
+            data-side-pagination="server"
             data-query-params="queryParams"
             data-url="{{ route('admin.ajax.programs') }}">
         <thead>
             <tr>
-                <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Program megnevezése</th>
-                <th data-field="date" data-sortable="true">Dátum</th>
-                <th data-field="user_name" data-sortable="true" data-formatter="userFormatter">Beküldő</th>
+                <th data-field="name" data-formatter="nameFormatter">Program megnevezése</th>
+                <th data-field="circle_name" data-formatter="circleFormatter">Kör</th>
+                <th data-field="date">Dátum</th>
+                <th data-field="user_name" data-formatter="userFormatter">Beküldő</th>
             </tr>
         </thead>
     </table>
@@ -55,6 +57,14 @@
     function nameFormatter(value, row, index) {
         return [
             '<a href="{{ route('admin.programs.show', ['program' => null]) }}/' + row['id'] + '">',
+            value,
+            '</a>'
+        ].join('');
+    }
+
+    function circleFormatter(value, row, index) {
+        return [
+            '<a href="{{ route('admin.circles.show', ['circle' => null]) }}/' + row['circle_id'] + '">',
             value,
             '</a>'
         ].join('');
