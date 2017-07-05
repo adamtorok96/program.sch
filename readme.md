@@ -1,3 +1,9 @@
+# Program.sch
+
+![Travis-CI][travis-ci]
+
+[travis-ci]: https://travis-ci.com/adamtorok96/program.sch.svg?token=LvZyDKYYfyCUWtz6cemE&branch=master
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
