@@ -5,7 +5,7 @@ php:
 
 install:
   - cp .env.travis .env
-  - mysql -e 'create database program.sch.test;'
+  - mysql -e 'create database "program.sch.test";'
   - composer self-update
   - composer install --no-interaction --no-suggest
   - php artisan key:generate
