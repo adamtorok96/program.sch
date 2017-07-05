@@ -4,10 +4,7 @@ namespace App\Models;
 
 
 use Carbon\Carbon;
-use DB;
-use DomainException;
 use Exception;
-use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
@@ -44,28 +41,23 @@ class Program extends Model
     {
         parent::boot();
 
-        static::$google = resolve('App\Services\GoogleService');
+        static::$google = app('App\Services\GoogleService');
 
         static::creating(function(Program $program) {
             $program->uuid = Uuid::generate();
         });
 
         static::created(function(Program $program) {
+            if( app()->environment('production') === false )
+                return;
+
             try {
-                //$event = static::$google->newEvent($program);
-                $event = resolve('App\Services\GoogleService')->newEvent($program);
+                $event = app('App\Services\GoogleService')->newEvent($program);
 
                 $program->update([
                     'google_calendar_event_id' => $event->id
                 ]);
-            } catch (ConnectException $exception) {
-
-            } //catch (DomainException $exception) {
-                //dd($exception, static::$google, base_path('google.json'));
-           // }
-           /* catch (Exception $exception) {
-
-            } */
+            } catch (Exception $exception) { }
         });
 
         static::updating(function(Program $program) {
@@ -73,23 +65,21 @@ class Program extends Model
         });
 
         static::updated(function(Program $program) {
-           try {
-               static::$google->updateEvent($program);
-           } catch (ConnectException $exception) {
+            if( app()->environment('production') === false )
+                return;
 
-           } catch (Exception $exception) {
-
-           }
+            try {
+                static::$google->updateEvent($program);
+            } catch (Exception $exception) { }
         });
 
         static::deleted(function(Program $program) {
+            if( app()->environment('production') === false )
+                return;
+
             try {
                 static::$google->deleteEvent($program);
-            } catch (ConnectException $exception) {
-
-            } catch (Exception $exception) {
-
-            }
+            } catch (Exception $exception) { }
         });
     }
 
@@ -129,14 +119,14 @@ class Program extends Model
 
     public function scopeOnThisDay(Builder $query, Carbon $carbon) {
         return $query
-            ->whereDate('from', '<=', $carbon)
-            ->whereDate('to', '>=', $carbon)
-            ;
+            ->whereRaw('DATE(`from`) <= DATE("' . $carbon .'")')
+            ->whereRaw('DATE(`to`) >= DATE("' . $carbon .'")')
+        ;
     }
 
     public function scopeStartOnThisDay(Builder $query, Carbon $carbon)
     {
-        return $query->whereDate('from', $carbon);
+        return $query->whereRaw('DATE(`from`) = DATE("' . $carbon . '")');
     }
 
     public function scopeFiltered(Builder $query, User $user)
@@ -146,7 +136,7 @@ class Program extends Model
         });
     }
 
-    public function scopeIntertemporal(Builder $query)
+    public function scopeInterTemporal(Builder $query)
     {
         return $query->whereRaw('date(`from`) != date(`to`)');
     }
