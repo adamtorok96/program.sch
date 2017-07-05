@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class PRManagerMiddleware
+class CirclePrManager
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,6 @@ class PRManagerMiddleware
      */
     public function handle($request, Closure $next)
     {
-        //dd($request->user()->isPRManagerAt($request->route()->parameter('circle')));
         if(
             ! $request->route()->hasParameter('circle') ||
             ! $request->user()->isPRManagerAt($request->route()->parameter('circle'))

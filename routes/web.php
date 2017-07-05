@@ -20,16 +20,17 @@ Route::group(['middleware' => 'auth'], function()
     Route::group(['prefix' => 'programs', 'as' => 'programs.'], function()
     {
         Route::get('info', 'ProgramsController@info')->name('info');
-        Route::get('create/{circle}', 'ProgramsController@create')->name('create')->middleware(['pr_manager']);
-        Route::post('store/{circle}', 'ProgramsController@store')->name('store')->middleware(['pr_manager']);
-        Route::get('edit/{program}', 'ProgramsController@edit')->name('edit')->middleware(['pr_manager']);
-        Route::post('update/{program}', 'ProgramsController@update')->name('update')->middleware(['pr_manager']);
-        Route::get('destroy/{program}', 'ProgramsController@destroy')->name('destroy')->middleware(['pr_manager']);
+        Route::get('create/{circle}', 'ProgramsController@create')->name('create')->middleware(['circle.pr.manager']);
+        Route::post('store/{circle}', 'ProgramsController@store')->name('store')->middleware(['circle.pr.manager']);
+        Route::get('edit/{program}', 'ProgramsController@edit')->name('edit')->middleware(['program.pr.manager']);
+        Route::post('update/{program}', 'ProgramsController@update')->name('update')->middleware(['program.pr.manager']);
+        Route::get('destroy/{program}', 'ProgramsController@destroy')->name('destroy')->middleware(['program.pr.manager']);
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function()
     {
        Route::get('/', 'ProfileController@index')->name('index');
+
        Route::group(['prefix' => 'filters', 'as' => 'filters.'], function()
        {
            Route::get('enable', 'FiltersController@enable')->name('enable');
@@ -37,6 +38,7 @@ Route::group(['middleware' => 'auth'], function()
            Route::get('edit', 'FiltersController@edit')->name('edit');
            Route::post('toggle/{circle}', 'FiltersController@toggle')->name('toggle');
        });
+
        Route::get('calendar/create', 'CalendarController@create')->name('calendar.create');
     });
 });
