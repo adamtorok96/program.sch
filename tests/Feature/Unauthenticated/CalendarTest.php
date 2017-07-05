@@ -15,4 +15,20 @@ class CalendarTest extends FeatureTestCase
             ->assertStatus(200)
         ;
     }
+
+    public function testNextWeek()
+    {
+        $this
+            ->get('/calendar/' . random_int(1, 10))
+            ->assertStatus(200)
+        ;
+    }
+
+    public function testPreviousWeek()
+    {
+        $this
+            ->get('/calendar/-' . random_int(1, 10))
+            ->assertStatus(200)
+        ;
+    }
 }

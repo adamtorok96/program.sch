@@ -20,7 +20,7 @@ $factory->define(Program::class, function (Faker\Generator $faker) {
         'to'                => $to,
         'location'          => $locations[array_rand($locations)],
         'website'           => $faker->boolean ? $faker->url : null,
-        'summary'           => filter_var($faker->text(random_int(50, 200)), FILTER_SANITIZE_STRING),
+        'summary'           => filter_var($faker->text(random_int(50, 100)), FILTER_SANITIZE_STRING),
         'description'       => filter_var($faker->text(random_int(50, 1000)), FILTER_SANITIZE_STRING),
         'uuid'              => \Webpatser\Uuid\Uuid::generate(),
         'display_poster'    => $faker->boolean,
