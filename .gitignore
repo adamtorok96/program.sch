@@ -7,6 +7,7 @@
 Homestead.json
 Homestead.yaml
 .env
+.env.testing
 public/css
 public/js
 public/fonts
