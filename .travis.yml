@@ -21,7 +21,7 @@ script:
 notifications:
   email: false
   slack:
-      rooms:
-        - edems:D8VO6BTDJLNYNznx8YSA3uD3#program_sch
-      on_success: change
-      on_failure: always
+    rooms:
+      - edems:D8VO6BTDJLNYNznx8YSA3uD3#program_sch
+    on_success: change
+    on_failure: always
