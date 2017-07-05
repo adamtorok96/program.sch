@@ -15,6 +15,6 @@ class Resort extends Model
 
     public function circles()
     {
-        return $this->hasMany('App\Models\Circle');
+        return $this->hasMany(Circle::class);
     }
 }

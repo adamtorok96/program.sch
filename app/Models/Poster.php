@@ -16,7 +16,7 @@ class Poster extends Model
 
     public function program()
     {
-        return $this->belongsTo('App\Models\Program');
+        return $this->belongsTo(Program::class);
     }
 
     public function getUrl()

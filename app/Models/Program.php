@@ -95,17 +95,17 @@ class Program extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     public function circle()
     {
-        return $this->belongsTo('App\Models\Circle');
+        return $this->belongsTo(Circle::class);
     }
 
     public function poster()
     {
-        return $this->hasOne('App\Models\Poster');
+        return $this->hasOne(Poster::class);
     }
 
     public function hasPoster()

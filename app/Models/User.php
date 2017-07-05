@@ -17,13 +17,13 @@ class User extends Authenticatable
 
     public function accounts()
     {
-        return $this->hasMany('App\Models\SocialAccount');
+        return $this->hasMany(SocialAccount::class);
     }
 
     public function circles()
     {
         return $this
-            ->belongsToMany('App\Models\Circle')
+            ->belongsToMany(Circle::class)
             ->withPivot([
                 'leader',
                 'pr',
@@ -33,12 +33,12 @@ class User extends Authenticatable
 
     public function filters()
     {
-        return $this->belongsToMany('App\Models\Circle', 'program_filters');
+        return $this->belongsToMany(Circle::class, 'program_filters');
     }
 
     public function calendar()
     {
-        return $this->hasOne('App\Models\Calendar');
+        return $this->hasOne(Calendar::class);
     }
 
     public function isAdmin()
@@ -72,7 +72,8 @@ class User extends Authenticatable
                     ->where('pr', true)
                 ;
             })
-            ->exists();
+            ->exists()
+        ;
     }
 
     public function isInCircle(Circle $circle)

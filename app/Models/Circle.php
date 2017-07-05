@@ -16,13 +16,13 @@ class Circle extends Model
 
     public function resort()
     {
-        return $this->belongsTo('App\Models\Resort');
+        return $this->belongsTo(Resort::class);
     }
 
     public function users()
     {
         return $this
-            ->belongsToMany('App\Models\User')
+            ->belongsToMany(User::class)
             ->withPivot([
                 'leader',
                 'pr',
@@ -32,7 +32,7 @@ class Circle extends Model
 
     public function filters()
     {
-        return $this->belongsToMany('App\Models\User', 'program_filters');
+        return $this->belongsToMany(User::class, 'program_filters');
     }
 
     public function scopeWherePRManager(Builder $query, User $user)
