@@ -1,6 +1,5 @@
-
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import "~roboto-fontface/css/roboto/roboto-fontface";
 
 // Variables
 @import "variables";
@@ -42,8 +41,9 @@ section {
   }
 }
 
-.fixed-table-pagination .pagination-info {
-  margin-left: 1em;
+.fixed-table-pagination {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
 }
 
 @media (max-width: $screen-xs-max) {

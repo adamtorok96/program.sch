@@ -19,7 +19,6 @@
     "bootstrap-table": "1.11.*",
     "jquery-ui": "1.12.*",
     "jquery-datetimepicker": "^2.5.4",
-    "gulp": "^3.9.1",
-    "gulp-scp2": "^0.2.0"
+    "roboto-fontface": "^0.7.0"
   }
 }
