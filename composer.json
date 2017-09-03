@@ -1,14 +1,14 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "adamtorok96/programsch",
+    "description": "Program.sch website",
+    "keywords": ["website", "program", "programsch", "sch", "schonherz"],
     "license": "MIT",
     "type": "project",
     "require": {
         "php": ">=5.6.4",
         "filp/whoops": "^2.1",
         "google/apiclient": "^2.0",
-        "laravel/framework": "5.4.*",
+        "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "sentry/sentry-laravel": "^0.6.1",

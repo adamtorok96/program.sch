@@ -16,6 +16,14 @@
                 PR e-mail
             </label>
         </div>
+        {{--<div class="input-group">--}}
+            {{--<span class="input-group-addon">Mettől</span>--}}
+            {{--<input type="datetime" name="form" class="form-control">--}}
+        {{--</div>--}}
+        {{--<div class="input-group">--}}
+            {{--<span class="input-group-addon">Meddig</span>--}}
+            {{--<input type="datetime" name="form" class="form-control">--}}
+        {{--</div>--}}
     </div>
     <table  class="table"
             data-toggle="table"
