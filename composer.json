@@ -11,14 +11,14 @@
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
-        "sentry/sentry-laravel": "^0.6.1",
+        "sentry/sentry-laravel": "^0.7.0",
         "webpatser/laravel-uuid": "^2.0",
         "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.3",
+        "barryvdh/laravel-ide-helper": "^2.4",
         "deployer/deployer": "^6.0",
-        "doctrine/dbal": "~2.3",
+        "doctrine/dbal": "~2.5",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~6.0"

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a5ef62ceda868286ce38397489d5c93a",
-    "content-hash": "97718ce20a7ea3c129033b45b6ae36b6",
+    "hash": "2bea04dc49e254a8513c8c633b7c61f4",
+    "content-hash": "dd7c53f0524d37015ccba1d5352a5743",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -428,16 +428,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.21",
+            "version": "v0.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/google/google-api-php-client-services.git",
-                "reference": "b8282036684f2989e820b7830e8270f337304f23"
+                "reference": "f3cc7456ec878086ee6b53591e979a022e24ac27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/b8282036684f2989e820b7830e8270f337304f23",
-                "reference": "b8282036684f2989e820b7830e8270f337304f23",
+                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/f3cc7456ec878086ee6b53591e979a022e24ac27",
+                "reference": "f3cc7456ec878086ee6b53591e979a022e24ac27",
                 "shasum": ""
             },
             "require": {
@@ -461,7 +461,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2017-08-28 00:23:45"
+            "time": "2017-09-02 00:25:09"
         },
         {
             "name": "google/auth",
@@ -781,16 +781,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.5.1",
+            "version": "v5.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "fad090f6e14b97df91489803644ac88b5321864e"
+                "reference": "65da63c8ad4836e2bcddcff75becd49c71c5041c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/fad090f6e14b97df91489803644ac88b5321864e",
-                "reference": "fad090f6e14b97df91489803644ac88b5321864e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/65da63c8ad4836e2bcddcff75becd49c71c5041c",
+                "reference": "65da63c8ad4836e2bcddcff75becd49c71c5041c",
                 "shasum": ""
             },
             "require": {
@@ -909,7 +909,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-09-01 06:33:38"
+            "time": "2017-09-04 14:09:04"
         },
         {
             "name": "laravel/socialite",
@@ -2010,16 +2010,16 @@
         },
         {
             "name": "sentry/sentry-laravel",
-            "version": "0.6.1",
+            "version": "0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-laravel.git",
-                "reference": "21ea11e02da7a6ea344d4e69d1955d2624a00faa"
+                "reference": "c1471d1d7fff0fa5618ecfb936eb6a523c1ea8fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-laravel/zipball/21ea11e02da7a6ea344d4e69d1955d2624a00faa",
-                "reference": "21ea11e02da7a6ea344d4e69d1955d2624a00faa",
+                "url": "https://api.github.com/repos/getsentry/sentry-laravel/zipball/c1471d1d7fff0fa5618ecfb936eb6a523c1ea8fa",
+                "reference": "c1471d1d7fff0fa5618ecfb936eb6a523c1ea8fa",
                 "shasum": ""
             },
             "require": {
@@ -2034,7 +2034,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.6.x-dev"
+                    "dev-master": "0.7.x-dev"
                 }
             },
             "autoload": {
@@ -2060,7 +2060,7 @@
                 "logging",
                 "sentry"
             ],
-            "time": "2017-02-09 17:35:04"
+            "time": "2017-04-21 17:44:27"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2963,16 +2963,16 @@
         },
         {
             "name": "webpatser/laravel-uuid",
-            "version": "2.1.1",
+            "version": "2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webpatser/laravel-uuid.git",
-                "reference": "317b835cf492240187e00673582e056ec4dc076a"
+                "reference": "5612ff06f62805cd257ebf000be5a11bad35b73d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webpatser/laravel-uuid/zipball/317b835cf492240187e00673582e056ec4dc076a",
-                "reference": "317b835cf492240187e00673582e056ec4dc076a",
+                "url": "https://api.github.com/repos/webpatser/laravel-uuid/zipball/5612ff06f62805cd257ebf000be5a11bad35b73d",
+                "reference": "5612ff06f62805cd257ebf000be5a11bad35b73d",
                 "shasum": ""
             },
             "require": {
@@ -3013,7 +3013,7 @@
             "keywords": [
                 "UUID RFC4122"
             ],
-            "time": "2017-08-30 20:45:29"
+            "time": "2017-09-04 00:24:34"
         },
         {
             "name": "zizaco/entrust",
@@ -3209,16 +3209,16 @@
         },
         {
             "name": "deployer/deployer",
-            "version": "v6.0.2",
+            "version": "v6.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deployphp/deployer.git",
-                "reference": "818dbdb7f2fe8af064694da3e46f385c7b892b72"
+                "reference": "18b279de97b89279307f1704350f2f40118ef066"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/deployer/zipball/818dbdb7f2fe8af064694da3e46f385c7b892b72",
-                "reference": "818dbdb7f2fe8af064694da3e46f385c7b892b72",
+                "url": "https://api.github.com/repos/deployphp/deployer/zipball/18b279de97b89279307f1704350f2f40118ef066",
+                "reference": "18b279de97b89279307f1704350f2f40118ef066",
                 "shasum": ""
             },
             "require": {
@@ -3258,7 +3258,7 @@
             ],
             "description": "Deployment Tool",
             "homepage": "https://deployer.org",
-            "time": "2017-08-29 05:14:52"
+            "time": "2017-09-04 11:05:30"
         },
         {
             "name": "deployer/phar-update",
@@ -4177,16 +4177,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.7.1",
+            "version": "v1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "15ea9ac619e37009edcda64089e3fa4cc88aa659"
+                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/15ea9ac619e37009edcda64089e3fa4cc88aa659",
-                "reference": "15ea9ac619e37009edcda64089e3fa4cc88aa659",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
+                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
                 "shasum": ""
             },
             "require": {
@@ -4236,7 +4236,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2017-09-03 09:38:53"
+            "time": "2017-09-04 11:05:03"
         },
         {
             "name": "phpunit/php-code-coverage",
