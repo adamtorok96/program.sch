@@ -1,7 +1,9 @@
 @extends('layouts.layout')
+
 @section('title', 'Programok')
 @section('subtitle', $program->circle->name . ' - ' . $program->name)
 @section('icon', 'calendar')
+
 @section('content')
     @include('layouts.title-center')
 
@@ -99,4 +101,5 @@
         </div>
     </div>
 @endsection
+
 @include('programs.js')
