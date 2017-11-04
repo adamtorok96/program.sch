@@ -40,4 +40,8 @@ return [
         'client_secret' => env('SCH_CLIENT_SECRET'),
         'redirect'      => env('SCH_REDIRECT'),
     ],
+
+    'google' => [
+        'calendar_id'   => env('GOOGLE_CALENDAR_ID', null)
+    ]
 ];

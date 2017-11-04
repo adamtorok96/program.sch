@@ -27,26 +27,47 @@ class AjaxController extends Controller
 
     public function programs(Request $request)
     {
-        $programs = Program::orderBy('from', 'DESC');
+        $query = Program::when($request->has('search'), function ($query) use($request) {
+            return $query
+                ->where('name', 'LIKE', '%' . $request->search .'%')
+                ->orWhereHas('circle', function ($query) use($request) {
+                    $query->where('name', 'LIKE', '%' . $request->search .'%');
+                })
+                ->orWhereHas('user', function ($query) use($request) {
+                    $query->where('name', 'LIKE', '%' . $request->search .'%');
+                })
+            ;
+        });
 
         if( $request->has('only_poster') )
-            $programs->where('display_poster', true);
+            $query->where('display_poster', true);
 
         if( $request->has('only_email') )
-            $programs->where('display_email', true);
+            $query->where('display_email', true);
 
-        $programs = $programs->get();
+        $total = $query->count();
+
+        $programs = $query
+            ->skip($request->get('offset', 0))
+            ->take($request->get('limit', 10))
+            ->latest('from')
+            ->get()
+        ;
 
         $programs->each(function(Program $program) {
-            $program->date      = $program->fullDate();
-            $program->user_name = $program->user->name;
+            $program->date          = $program->fullDate();
+            $program->circle_name   = $program->circle->name;
+            $program->user_name     = $program->user->name;
         });
 
         $programs->makeHidden([
             'user'
         ]);
 
-        return response()->json($programs);
+        return response()->json([
+            'total' => $total,
+            'rows'  => $programs
+        ]);
     }
 
     public function circlesUsers(Circle $circle)

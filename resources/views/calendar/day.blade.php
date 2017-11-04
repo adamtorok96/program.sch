@@ -11,7 +11,7 @@ $isEmpty = $programs->count() == 0;
 <div class="col-xs-12 col-sm-6 col-md-1-7 {{ $isEmpty ? 'hidden-xs' : '' }}">
     <div class="panel panel-{{ $day->isToday() ? 'info' : 'default' }}">
         <div class="panel-heading">
-            <h3 class="panel-title text-center">
+            <h3 class="panel-title text-center raleway">
                 {{ $day->format('m. d.') }}<br>
                 @hunDays($day->dayOfWeek)
             </h3>

@@ -1,7 +1,9 @@
 @extends('layouts.layout')
+
 @section('title', 'Programok')
 @section('subtitle', $program->circle->name . ' - ' . $program->name)
 @section('icon', 'calendar')
+
 @section('content')
     @include('layouts.title-center')
 
@@ -41,7 +43,7 @@
                     {{--<div class="col-md-6">--}}
                         <div class="form-group {{ $errors->has('summary') ? 'has-error' : '' }}">
                             <label for="summary">Rövid összefoglaló: *</label>
-                            <textarea name="summary" id="summary" maxlength="255" class="form-control" required="required" placeholder="Rövid összefoglaló">{{ old('summary', $program->summary) }}</textarea>
+                            <textarea name="summary" id="summary" maxlength="190" class="form-control" required="required" placeholder="Rövid összefoglaló">{{ old('summary', $program->summary) }}</textarea>
                         </div>
                     {{--</div>--}}
                     {{--<div class="col-md-6">--}}
@@ -99,4 +101,5 @@
         </div>
     </div>
 @endsection
+
 @include('programs.js')

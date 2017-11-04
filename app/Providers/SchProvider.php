@@ -11,8 +11,6 @@ class SchProvider extends AbstractProvider implements ProviderInterface
     protected $scopes = [
         'basic',
         'displayName',
-        'sn',
-        'givenName',
         'mail',
         'eduPersonEntitlement',
     ];

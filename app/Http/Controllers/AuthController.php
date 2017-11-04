@@ -8,6 +8,7 @@ use App\Models\SocialAccount;
 use App\Models\User;
 use Auth;
 use GuzzleHttp\Exception\ClientException;
+use InvalidArgumentException;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\InvalidStateException;
 
@@ -22,7 +23,11 @@ class AuthController extends Controller
 
     public function redirect($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        try {
+            return Socialite::driver($provider)->redirect();
+        } catch (InvalidArgumentException $exception) {
+            return abort(404);
+        }
     }
 
     public function callback($provider)
@@ -33,7 +38,9 @@ class AuthController extends Controller
             return redirect()->route('auth.redirect', [
                 'provider' => $provider
             ]);
-        } catch (ClientException $exception) {
+        } catch (InvalidArgumentException $exception) {
+            abort(404);
+        }  catch (ClientException $exception) {
             return redirect()->route('auth.redirect', [
                 'provider' => $provider
             ]);
