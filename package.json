@@ -20,5 +20,10 @@
     "jquery-datetimepicker": "^2.5.4",
     "roboto-fontface": "^0.7.0",
     "raleway-webfont": "^3.0.1"
+  },
+  "apidoc": {
+    "title": "Qpa api",
+    "version": "1.0.0",
+    "url": "https://qpa.sch.bme.hu/api"
   }
 }
