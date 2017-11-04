@@ -8,11 +8,18 @@ use Storage;
 
 class Poster extends Model
 {
-    protected $table    = 'posters';
+    protected $fillable = [
+        'program_id',
+        'file'
+    ];
 
-    protected $fillable = ['program_id', 'file'];
+    protected $appends = [
+        'url'
+    ];
 
-    protected $hidden   = ['created_at', 'updated_at'];
+    protected $hidden   = [
+        'created_at', 'updated_at'
+    ];
 
     public function program()
     {
@@ -24,6 +31,11 @@ class Poster extends Model
         return Storage::url('posters/' . $this->file);
     }
 
+    public function getUrlAttribute()
+    {
+        return $this->getUrl();
+    }
+
     public function delete()
     {
         /*
@@ -31,6 +43,4 @@ class Poster extends Model
          */
         return parent::delete();
     }
-
-
 }

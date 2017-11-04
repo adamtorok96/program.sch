@@ -13,8 +13,6 @@ class Program extends Model
 {
     private static $google;
 
-    protected $table    = 'programs';
-
     protected $fillable = [
         'uuid',
         'circle_id',
@@ -33,9 +31,25 @@ class Program extends Model
         'facebook_event_id'
     ];
 
-    protected $hidden   = ['created_at', 'updated_at'];
+    protected $hidden   = [
+        'uuid',
+        'google_calendar_event_id',
+        'sequence'
+    ];
 
-    protected $dates    = ['from', 'to'];
+    protected $appends  = [
+        'poster_url'
+    ];
+
+    protected $dates    = [
+        'from', 'to'
+    ];
+
+    protected $casts    = [
+        'display_poster'    => 'bool',
+        'display_email'     => 'bool',
+        'display_site'      => 'bool'
+    ];
 
     public static function boot()
     {
@@ -144,6 +158,11 @@ class Program extends Model
     public function scopeOneTime(Builder $query)
     {
         return $query->whereRaw('date(`from`) = date(`to`)');
+    }
+
+    public function getPosterUrlAttribute()
+    {
+        return $this->hasPoster() ? $this->poster->url : null;
     }
 
     public function delete()
