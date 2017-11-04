@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 class CirclesController extends Controller
 {
     /**
-     * @api {get} /circles Request list of circles
+     * @api {get} /v1/circles Request list of circles
      * @apiName index
      * @apiGroup Circles
      * @apiVersion 1.0.0
@@ -21,6 +21,17 @@ class CirclesController extends Controller
      * @apiSuccess {Number} data.id Circle's id
      * @apiSuccess {Number} data.resort_id Circle's resort id (null if not provided)
      * @apiSuccess {String} data.name Circle's name
+     *
+     * @apiSuccessExample {json} Success
+     * {
+     *      "data": [
+     *          {
+     *              "id": 1,
+     *              "resort_id": 6,
+     *              "name": "VödörKör"
+     *          }
+     *      ]
+     * }
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -39,7 +50,7 @@ class CirclesController extends Controller
     }
 
     /**
-     * @api {get} /circles/:id Request circle information
+     * @api {get} /v1/circles/:id Request circle information
      * @apiName show
      * @apiGroup Circles
      * @apiVersion 1.0.0

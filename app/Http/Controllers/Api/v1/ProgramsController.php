@@ -4,7 +4,9 @@ namespace app\Http\Controllers\Api\v1;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\v1\IndexProgram;
 use App\Models\Program;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class ProgramsController extends Controller
@@ -12,14 +14,27 @@ class ProgramsController extends Controller
     /**
      * @apiDefine Pagination
      * @apiSuccess {Number} total Total number of result
-     * @apiSuccess {Number} per_page Number of elements per page
+     * @apiSuccess {Number} per_page=15 Number of elements per page
      * @apiSuccess {Number} from Element's from
      * @apiSuccess {Number} to Element's to
-     * @apiSuccess {Number} current_page Current page number (from 1)
+     * @apiSuccess {Number} current_page=1 Current page number (from 1)
      * @apiSuccess {Number} last_page Last page number
      * @apiSuccess {String} path Current path
      * @apiSuccess {String} next_page_url Next page's url
      * @apiSuccess {String} prev_page_url Previous page's url
+     *
+     * @apiSuccessExample {json} Pagination
+     * {
+     *      "total": 140,
+     *      "per_page": 15,
+     *      "from": 1,
+     *      "to": 15,
+     *      "current_page": 1,
+     *      "last_page": 10,
+     *      "path": "https://program.sch.bme.hu/api/v1/circles",
+     *      "next_page_url": "https://program.sch.bme.hu/api/v1/circles?page=2",
+     *      "prev_page_url": null
+     * }
      */
 
     /**
@@ -29,12 +44,15 @@ class ProgramsController extends Controller
 
 
     /**
-     * @api {get} /programs Request list of programs
+     * @api {get} /v1/programs Request list of programs
      * @apiName index
      * @apiGroup Programs
-     * @apiVersion 1.0.0
+     * @apiVersion 1.0.1
      * @apiUse Pagination
      * @apiUse Authorization
+     *
+     * @apiParam {Number} circle Filter for circle
+     * @apiParam {Array} circles Filter for circles
      *
      * @apiSuccess {Program[]} data List of programs
      * @apiSuccess {Number} data.id Program's id
@@ -51,14 +69,28 @@ class ProgramsController extends Controller
      * @apiSuccess {DateTime} data.updated_at DateTime of update
      *
      *
+     * @param IndexProgram $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(IndexProgram $request)
     {
         /**
          * @var $programs Collection
          */
-        $programs = Program::paginate(15);
+        $programs = Program::when($request->has('circle'), function(Builder $query) use($request) {
+            return $query->whereCircleId($request->circle);
+        })
+            ->when($request->has('circles'), function (Builder $query) use($request) {
+                return $query->whereIn('circle_id', $request->circles);
+            })
+            ->when($request->has('from'), function (Builder $query) use($request) {
+                return $query->whereDate('from', '>=', new $request->from);
+            })
+            ->when($request->has('to'), function (Builder $query) use($request) {
+                return $query->whereDate('to', '<=', $request->to);
+            })
+            ->paginate(15)
+        ;
 
         $programs->makeHidden([
             'user_id',
@@ -73,7 +105,7 @@ class ProgramsController extends Controller
     }
 
     /**
-     * @api {get} /programs/:id Request program information
+     * @api {get} /v1/programs/:id Request program information
      * @apiName show
      * @apiGroup Programs
      * @apiVersion 1.0.0
