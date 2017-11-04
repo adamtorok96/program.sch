@@ -8,6 +8,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Symfony\Component\Debug\Exception\FlattenException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -90,6 +91,27 @@ class Handler extends ExceptionHandler
         return parent::render($request, $exception);
     }
 
+    protected function renderJsonHttpException(HttpException $exception)
+    {
+        return response()->json([
+            'status'    => $exception->getStatusCode(),
+            'error'     => $exception->getMessage()
+        ], $exception->getStatusCode(), $exception->getHeaders());
+    }
+
+    protected function prepareResponse($request, Exception $e)
+    {
+        if ($this->isHttpException($e)) {
+            if( $request->expectsJson() )
+                return $this->toIlluminateResponse($this->renderJsonHttpException($e), $e);
+            else
+                return $this->toIlluminateResponse($this->renderHttpException($e), $e);
+        } else {
+            return $this->toIlluminateResponse($this->convertExceptionToResponse($e), $e);
+        }
+    }
+
+
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
@@ -100,7 +122,9 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
+            return response()->json([
+                'error' => 'Unauthenticated.'
+            ], 401);
         }
 
         return redirect()->guest('/');

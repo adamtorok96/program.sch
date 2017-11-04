@@ -45,29 +45,29 @@
 
         <div class="clearfix"></div>
 
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">iCalendar</h3>
-                </div>
-                @if( $user->hasCalendar() )
-                    <div class="panel-body">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="icalc" readonly value="{{ route('calendar.calendar', ['uuid' => $user->calendar->uuid]) }}">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" id="copy-icalc">
-                                    <i class="fa fa-clipboard" aria-hidden="true"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                @else
-                    <div class="list-group">
-                        <a href="{{ route('profile.calendar.create') }}" class="list-group-item list-group-item-info">iCalendar létrehozása</a>
-                    </div>
-                @endif
-            </div>
-        </div>
+        {{--<div class="col-md-6">--}}
+            {{--<div class="panel panel-default">--}}
+                {{--<div class="panel-heading">--}}
+                    {{--<h3 class="panel-title">iCalendar</h3>--}}
+                {{--</div>--}}
+                {{--@if( $user->hasCalendar() )--}}
+                    {{--<div class="panel-body">--}}
+                        {{--<div class="input-group">--}}
+                            {{--<input type="text" class="form-control" id="icalc" readonly value="{{ route('calendar.calendar', ['uuid' => $user->calendar->uuid]) }}">--}}
+                            {{--<span class="input-group-btn">--}}
+                                {{--<button class="btn btn-default" type="button" id="copy-icalc">--}}
+                                    {{--<i class="fa fa-clipboard" aria-hidden="true"></i>--}}
+                                {{--</button>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--@else--}}
+                    {{--<div class="list-group">--}}
+                        {{--<a href="{{ route('profile.calendar.create') }}" class="list-group-item list-group-item-info">iCalendar létrehozása</a>--}}
+                    {{--</div>--}}
+                {{--@endif--}}
+            {{--</div>--}}
+        {{--</div>--}}
     </div>
 @endsection
 @push('scripts')

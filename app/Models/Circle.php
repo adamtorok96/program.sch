@@ -5,14 +5,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Passport\HasApiTokens;
 
 class Circle extends Model
 {
-    protected $table    = 'circles';
+    protected $fillable = [
+        'resort_id',
+        'name',
+        'active'
+    ];
 
-    protected $fillable = ['resort_id', 'name', 'active'];
-
-    protected $hidden   = ['created_at', 'updated_at'];
+    protected $hidden   = [
+        'created_at', 'updated_at'
+    ];
 
     public function resort()
     {
@@ -33,6 +38,11 @@ class Circle extends Model
     public function filters()
     {
         return $this->belongsToMany(User::class, 'program_filters');
+    }
+
+    public function scopeActive(Builder $query)
+    {
+        return $query->whereActive(true);
     }
 
     public function scopeWherePRManager(Builder $query, User $user)

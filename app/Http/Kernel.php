@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\CirclePrManager;
 use App\Http\Middleware\ProgramPrManager;
+use App\Http\Middleware\VerifyApiToken;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -41,6 +42,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            VerifyApiToken::class
         ],
     ];
 
