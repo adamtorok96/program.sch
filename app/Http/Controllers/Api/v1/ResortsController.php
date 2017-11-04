@@ -9,7 +9,7 @@ use App\Models\Resort;
 class ResortsController extends Controller
 {
     /**
-     * @api {get} /resorts Request list of resorts
+     * @api {get} /v1/resorts Request list of resorts
      * @apiName index
      * @apiGroup Resorts
      * @apiVersion 1.0.0
@@ -30,7 +30,7 @@ class ResortsController extends Controller
     }
 
     /**
-     * @api {get} /resorts/:id Request resort information
+     * @api {get} /v1/resorts/:id Request resort information
      * @apiName show
      * @apiGroup Resorts
      * @apiVersion 1.0.0
