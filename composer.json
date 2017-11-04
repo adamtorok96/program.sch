@@ -18,7 +18,11 @@
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.4",
         "deployer/deployer": "^6.0",
-        "doctrine/dbal": "2.4",
+        "doctrine/dbal": "2.5",
+        "doctrine/inflector": "1.1",
+        "doctrine/annotations": "1.4",
+        "doctrine/cache": "1.6",
+        "doctrine/collections": "1.4",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~5.7"
