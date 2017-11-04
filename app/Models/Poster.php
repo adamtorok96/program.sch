@@ -28,7 +28,7 @@ class Poster extends Model
 
     public function getUrl()
     {
-        return Storage::url('posters/' . $this->file);
+        return asset('posters/' . $this->file);
     }
 
     public function getUrlAttribute()

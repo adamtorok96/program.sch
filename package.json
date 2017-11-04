@@ -22,8 +22,8 @@
     "raleway-webfont": "^3.0.1"
   },
   "apidoc": {
-    "title": "Qpa api",
+    "title": "Program.sch Web Api Documentation",
     "version": "1.0.0",
-    "url": "https://qpa.sch.bme.hu/api"
+    "url": "https://program.sch.bme.hu/api"
   }
 }

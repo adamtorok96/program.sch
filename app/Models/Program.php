@@ -48,7 +48,8 @@ class Program extends Model
     protected $casts    = [
         'display_poster'    => 'bool',
         'display_email'     => 'bool',
-        'display_site'      => 'bool'
+        'display_site'      => 'bool',
+        'facebook_event_id' => 'int'
     ];
 
     public static function boot()
