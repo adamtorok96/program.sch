@@ -23,7 +23,7 @@ set('allow_anonymous_stats', false);
 // Hosts
 
 host('project.com')
-    ->set('deploy_path', '~/{{application}}')
+    ->set('deploy_path', '/data/sites/program.sch.bme.hu/root')
 ;
     
 // Tasks
@@ -39,8 +39,8 @@ task('assets:create', function () {
 })->local();
 
 task('assets:upload', function () {
-    upload('public/css', '{{release_path}}/public/');
-    upload('public/fonts', '{{release_path}}/public/');
-    upload('public/js', '{{release_path}}/public/');
-    upload('public/mix-manifest.json', '{{release_path}}/public/mix-manifest.json');
+    upload('public/css', '{{deploy_path}}/public/');
+    upload('public/fonts', '{{deploy_path}}/public/');
+    upload('public/js', '{{deploy_path}}/public/');
+    upload('public/mix-manifest.json', '{{deploy_path}}/public/mix-manifest.json');
 });
