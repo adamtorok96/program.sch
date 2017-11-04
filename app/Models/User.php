@@ -5,15 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
     use Notifiable, EntrustUserTrait;
 
-    protected $fillable = ['name', 'email', 'filter'];
+    protected $fillable = [
+        'name', 'email', 'filter'
+    ];
 
-    protected $hidden   = ['remember_token', 'created_at', 'updated_at'];
+    protected $hidden   = [
+        'remember_token', 'created_at', 'updated_at'
+    ];
 
     public function accounts()
     {
@@ -48,19 +53,6 @@ class User extends Authenticatable
 
     public function isPRManagerAt(Circle $circle)
     {
-//        $sql = $this
-//            ->circles()
-//            ->where('id', $circle->id)
-//            ->where(function (Builder $query) {
-//                $query
-//                    ->where('site_pr', true)
-//                    ->orWhere('leader', true)
-//                    ->orWhere('site_pr', null)
-//                    ->where('pr', true)
-//                ;
-//            });
-//        dd($sql->toSql(), $sql->get(), $circle->id);
-
         return $this
             ->circles()
             ->where('id', $circle->id)

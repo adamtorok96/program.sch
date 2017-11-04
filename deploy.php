@@ -14,7 +14,9 @@ set('git_tty', true);
 
 // Shared files/dirs between deploys 
 add('shared_files', [
-    '.env'
+    '.env',
+    'storage/oauth-private.key',
+    'storage/oauth-public.key'
 ]);
 
 add('shared_dirs', [
