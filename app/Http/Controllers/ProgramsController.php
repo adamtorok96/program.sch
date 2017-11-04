@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\StoreProgram;
+use App\Http\Requests\UpdateProgram;
 use App\Models\Circle;
 use App\Models\Location;
 use App\Models\Poster;
 use App\Models\Program;
-use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Validator;
 
 class ProgramsController extends Controller
 {
@@ -27,22 +27,12 @@ class ProgramsController extends Controller
         ]);
     }
 
-    public function store(Request $request, Circle $circle)
+    public function store(StoreProgram $request, Circle $circle)
     {
         $this->httpCompletion($request);
 
-        $validator = $this->getValidator($request);
-
-        if( $validator->fails() ) {
-            return redirect()->route('programs.create', [
-                'circle' => $circle
-            ])
-                ->withErrors($validator)
-                ->withInput($request->all());
-        }
-
         $program = Program::create([
-            'user_id'               => Auth::user()->id,
+            'user_id'               => $request->user()->id,
             'circle_id'             => $circle->id,
             'name'                  => $request->name,
             'from'                  => new Carbon($request->from),
@@ -73,21 +63,10 @@ class ProgramsController extends Controller
         ]);
     }
 
-    public function update(Request $request, Program $program)
+    public function update(UpdateProgram $request, Program $program)
     {
         $this->httpCompletion($request);
         $this->checkboxFix($request);
-
-        $validator = $this->getValidator($request);
-
-        if( $validator->fails() ) {
-            return redirect()
-                ->route('programs.edit', [
-                    'program' => $program
-                ])
-                ->withInput($request->all())
-                ->withErrors($validator);
-        }
 
         $program->update([
             'name'                  => $request->name,
@@ -127,9 +106,6 @@ class ProgramsController extends Controller
 
     private function uploadFile(Program $program, Request $request, $file)
     {
-        if( $program->hasPoster() )
-            $program->poster->delete();
-
         $name = $program->id .
                 '_' .
                 sha1(str_random()) .
@@ -141,6 +117,9 @@ class ProgramsController extends Controller
             $name,
             'public'
         )) {
+            if( $program->hasPoster() )
+                $program->poster->delete();
+
             Poster::create([
                 'program_id'    => $program->id,
                 'file'          => $name
@@ -171,57 +150,4 @@ class ProgramsController extends Controller
                 $request->merge([$input => false]);
         }
     }
-
-    private function getValidator($request)
-    {
-        return Validator::make($request->all(), $this->getValidations(), $this->getValidationMessages());
-    }
-
-    private function getValidations()
-    {
-        return [
-            'name'              => 'required|string|max:40',
-            'from'              => 'required|date',
-            'to'                => 'required|date|after:from',
-            'location'          => 'nullable|string',
-            'summary'           => 'required|string|max:255',
-            'description'       => 'nullable|string',
-            'display_poster'    => 'nullable|boolean',
-            'display_email'     => 'nullable|boolean',
-            'display_site'      => 'nullable|boolean',
-            'facebook_event_id' => 'nullable|integer',
-            'website'           => 'nullable|string|url|max:255',
-            'poster'            => 'nullable|image'
-        ];
-    }
-
-    private function getValidationMessages()
-    {
-        return [
-            'name.required'                 => 'A program nevének megadása kötelező!',
-            'name.string'                   => 'A program nevének karakterláncnak kell lennie!',
-            'name.max'                      => 'A program neve maximálisan 40 karakter hosszú lehet!',
-            'from.required'                 => 'A program kezdetének megadása kötelező!',
-            'from.date'                     => 'A program kezdetének formátuma hibás!',
-            'to.required'                   => 'A program végének megadása kötelező!',
-            'to.date'                       => 'A program végének formátuma hibás!',
-            'to.after'                      => 'A program végének a program kezdete után kell lennie!',
-            'summary.required'              => 'A program rövid összefoglalásának megadása kötelező!',
-            'summary.string'                => 'A program rövid összefoglalásának karakterláncnak kell lennie!',
-            'summary.max'                   => 'A program rövid összefoglalásának hossza maximum 255 karakter hosszú lehet!',
-            'location.nullable'             => 'location.nullable',
-            'location.string'               => 'location.string',
-            'description.string'            => 'description.string',
-            'display_poster.boolean'        => 'display_poster.boolean',
-            'display_email.boolean'         => 'display_email.boolean',
-            'display_site.boolean'          => 'display_site.boolean',
-            'facebook_event_id.integer'     => 'A Facebook esemény azonosítónak számnak kell lennie!',
-            'website.string'                => 'website.string',
-            'website.url'                   => 'A weboldal címe hibás formátumú!',
-            'website.max'                   => 'A weboldal címének hossza maximum 255 karakter hosszú lehet!',
-            'poster.image'                  => 'A plakátnak képnek kell lennie!'
-        ];
-    }
-
-
 }
