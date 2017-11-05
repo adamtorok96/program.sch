@@ -17,6 +17,7 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], function()
 
 Route::group(['middleware' => 'auth'], function()
 {
+    # Programs
     Route::group(['prefix' => 'programs', 'as' => 'programs.'], function()
     {
         Route::get('info', 'ProgramsController@info')->name('info');
@@ -27,6 +28,13 @@ Route::group(['middleware' => 'auth'], function()
         Route::get('destroy/{program}', 'ProgramsController@destroy')->name('destroy')->middleware(['program.pr.manager']);
     });
 
+    # Api
+    Route::group(['prefix' => 'info/api', 'as' => 'api.'], function()
+    {
+        Route::get('/', 'ApiController@index')->name('index');
+    });
+
+    # Profile
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function()
     {
        Route::get('/', 'ProfileController@index')->name('index');

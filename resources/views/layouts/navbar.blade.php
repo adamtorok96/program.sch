@@ -36,6 +36,9 @@
                             @endforeach
                         </ul>
                     </li>
+                    <li>
+                        <a href="{{ route('api.index') }}">Api</a>
+                    </li>
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
