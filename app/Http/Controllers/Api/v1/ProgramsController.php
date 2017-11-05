@@ -47,12 +47,14 @@ class ProgramsController extends Controller
      * @api {get} /v1/programs Request list of programs
      * @apiName index
      * @apiGroup Programs
-     * @apiVersion 1.0.1
+     * @apiVersion 1.0.2
      * @apiUse Pagination
      * @apiUse Authorization
      *
      * @apiParam {Number} circle Filter for circle
      * @apiParam {Array} circles Filter for circles
+     * @apiParam {DateTime} from Filter for start date of program
+     * @apiParam {DateTime} to Filter for end date of program
      *
      * @apiSuccess {Program[]} data List of programs
      * @apiSuccess {Number} data.id Program's id
@@ -84,11 +86,13 @@ class ProgramsController extends Controller
                 return $query->whereIn('circle_id', $request->circles);
             })
             ->when($request->has('from'), function (Builder $query) use($request) {
-                return $query->whereDate('from', '>=', new $request->from);
+                return $query->whereDate('from', '>=', $request->from);
             })
             ->when($request->has('to'), function (Builder $query) use($request) {
                 return $query->whereDate('to', '<=', $request->to);
             })
+            ->orderBy('from')
+            ->orderBy('to')
             ->paginate(15)
         ;
 
