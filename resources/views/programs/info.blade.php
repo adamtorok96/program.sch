@@ -1,7 +1,9 @@
 @extends('layouts.layout')
+
 @section('title', 'Új program')
 @section('subtitle', 'Információ')
 @section('icon', 'info-circle')
+
 @section('content')
     @include('layouts.title')
     <p>
