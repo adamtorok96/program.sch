@@ -1,7 +1,9 @@
 @extends('layouts.layout')
+
 @section('title', 'Programok')
 @section('subtitle', $circle->name .' - Új program felvétele')
 @section('icon', 'calendar-plus-o')
+
 @section('content')
     @include('layouts.title-center')
 
@@ -98,4 +100,5 @@
         </div>
     </div>
 @endsection
+
 @include('programs.js')
