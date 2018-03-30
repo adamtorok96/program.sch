@@ -35,6 +35,16 @@ class ProgramAdmin {
         }
     }
 
+    static get Resorts() {
+        return class {
+            static formatName(value, data) {
+                return laroute.link_to_route('admin.resorts.show', value, {
+                    resort: data.id
+                });
+            }
+        }
+    }
+
     static get Circles() {
         return class {
             static formatName(value, data) {

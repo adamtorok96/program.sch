@@ -1,6 +1,8 @@
 @extends('admin.layouts.layout')
+
 @section('title', 'Reszortok')
 @section('icon', 'circle')
+
 @section('content')
     <div id="toolbar" class="btn-group">
         <a href="{{ route('admin.resorts.create') }}" class="btn btn-default">
@@ -16,20 +18,9 @@
             data-toolbar="#toolbar">
         <thead>
         <tr>
-            <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Reszort neve</th>
+            <th data-field="name" data-sortable="true" data-formatter="PA.Resorts.formatName">Reszort neve</th>
+            <th data-field="circles_count" class="text-center">Körök száma</th>
         </tr>
         </thead>
     </table>
-
 @endsection
-@push('scripts')
-<script type="text/javascript">
-    function nameFormatter(value, row, index) {
-        return [
-            '<a href="{{ route('admin.resorts.show', ['resort' => null]) }}/' + row['id'] + '">',
-            value,
-            '</a>'
-        ].join('');
-    }
-</script>
-@endpush

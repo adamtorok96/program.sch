@@ -17,6 +17,9 @@ class ResortsController extends Controller
             ->search([
                 'name'
             ])
+            ->withCount([
+                'circles'
+            ])
             ->get()
         ;
     }
