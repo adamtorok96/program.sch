@@ -24,6 +24,9 @@
         <section>@yield('body')</section>
 
         <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+        @if(app()->environment('production'))
+            <script type="text/javascript" src="{{ mix('js/analytics.js') }}"></script>
+        @endif
         @stack('scripts')
     </body>
 </html>
