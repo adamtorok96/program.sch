@@ -85,9 +85,14 @@ class AuthController extends Controller
 
             $circle = Circle::whereName($_circle['name'])->first();
 
-            if( $circle == null ) {
+            if( is_null($circle) ) {
                 $circle = Circle::create([
-                    'name' => $_circle['name']
+                    'pek_id'    => $_circle['id'],
+                    'name'      => $_circle['name']
+                ]);
+            } else {
+                $circle->update([
+                    'pek_id'    => $_circle['id']
                 ]);
             }
 
