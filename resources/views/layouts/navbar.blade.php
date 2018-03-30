@@ -35,6 +35,21 @@
                             @endforeach
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Új e-mail <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li role="separator" class="divider"></li>
+                            @foreach($circles as $circle)
+                                <li>
+                                    <a href="{{ route('emails.create', ['circle' => $circle]) }}">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i> {{ $circle->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
                     <li>
                         <a href="{{ route('api.index') }}">Api</a>
                     </li>
