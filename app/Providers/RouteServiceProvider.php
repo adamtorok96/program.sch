@@ -80,5 +80,12 @@ class RouteServiceProvider extends ServiceProvider
             ->as('admin.')
             ->group(base_path('routes/admin.php'))
         ;
+
+        Route::middleware(['web', 'auth', 'role:admin'])
+            ->namespace($this->namespace . '\Admin\Ajax')
+            ->prefix('admin/ajax')
+            ->as('admin.ajax.')
+            ->group(base_path('routes/admin.ajax.php'))
+        ;
     }
 }
