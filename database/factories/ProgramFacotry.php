@@ -10,7 +10,7 @@ $factory->define(Program::class, function (Faker\Generator $faker) {
     $date   = Carbon::now()->addDays(random_int(-5, 10))->addHours(random_int(0, 23))->addMinutes(random_int(0, 59));
     $to     = (new Carbon($date))->addHour(random_int(1, 12));
 
-    $locations = ['ENT', 'FNT', '102', '103', 'Nagykonyha'];
+    $locations = ['ENT', 'FNT', '102', '103', 'Nagykonyha', null];
 
     return [
         'user_id'           => User::inRandomOrder()->firstOrFail()->id,
