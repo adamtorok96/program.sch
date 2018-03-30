@@ -36,6 +36,13 @@ class User extends Authenticatable
             ]);
     }
 
+    public function scopeCircle(Builder $query, Circle $circle)
+    {
+        return $query->whereHas('circles', function (Builder $query) use($circle) {
+            $query->whereId($circle->id);
+        });
+    }
+
     public function filters()
     {
         return $this->belongsToMany(Circle::class, 'program_filters');
