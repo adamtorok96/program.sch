@@ -16,7 +16,12 @@ class ProgramsController extends Controller
         return AjaxResponse::base(Program::query(), $request)
             ->search([
                 'name',
-                'circle.name'
+                'circle.name',
+                'user.name'
+            ])
+            ->with([
+                'circle',
+                'user'
             ])
             ->get()
         ;

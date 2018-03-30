@@ -31,59 +31,21 @@
             data-toolbar="#toolbar"
             data-pagination="true"
             data-side-pagination="server"
-            data-query-params="queryParams"
+            data-query-params="PA.programs.queryParams"
             data-url="{{ route('admin.ajax.programs.index') }}">
         <thead>
             <tr>
-                <th data-field="name" data-formatter="nameFormatter">Program megnevezése</th>
-                <th data-field="circle_name" data-formatter="circleFormatter">Kör</th>
+                <th data-field="name" data-formatter="PA.Programs.formatName">Program megnevezése</th>
+                <th data-formatter="PA.Programs.formatCircle">Kör</th>
                 <th data-field="date">Dátum</th>
-                <th data-field="user_name" data-formatter="userFormatter">Beküldő</th>
+                <th data-formatter="PA.Programs.formatUser">Beküldő</th>
             </tr>
         </thead>
     </table>
 @endsection
 @push('scripts')
 <script type="text/javascript">
-    function queryParams(params) {
-        if( $("#only_poster").is(":checked") )
-            params.only_poster = true;
-
-        if( $("#only_email").is(":checked") )
-            params.only_email = true;
-
-        return params;
-    }
-
-    function reload() {
-        $("table[data-toggle='table']").bootstrapTable('refresh');
-    }
-
-    $("#only_poster").change(reload);
-    $("#only_email").change(reload);
-
-    function nameFormatter(value, row, index) {
-        return [
-            '<a href="{{ route('admin.programs.show', ['program' => null]) }}/' + row['id'] + '">',
-            value,
-            '</a>'
-        ].join('');
-    }
-
-    function circleFormatter(value, row, index) {
-        return [
-            '<a href="{{ route('admin.circles.show', ['circle' => null]) }}/' + row['circle_id'] + '">',
-            value,
-            '</a>'
-        ].join('');
-    }
-
-    function userFormatter(value, row, index) {
-        return [
-            '<a href="{{ route('admin.users.show', ['user' => null]) }}/' + row['user_id'] + '">',
-            value,
-            '</a>'
-        ].join('');
-    }
+    $("#only_poster").change(PA.Programs.reload);
+    $("#only_email").change(PA.Programs.reload);
 </script>
 @endpush
