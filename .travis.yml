@@ -10,6 +10,7 @@ install:
   - composer self-update
   - composer install --no-interaction --no-suggest
   - php artisan key:generate
+  - php artisan laroute:generate
   - . $HOME/.nvm/nvm.sh
   - nvm install stable
   - nvm use stable
