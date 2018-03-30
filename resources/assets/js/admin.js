@@ -68,6 +68,16 @@ class ProgramAdmin {
                     user: data.id
                 });
             }
+
+            static formatEmail(value, data) {
+                return [
+                    '<a href="mailto:',
+                    value,
+                    '">',
+                    value,
+                    '</a>'
+                ].join('');
+            }
         }
     }
 

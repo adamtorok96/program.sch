@@ -1,6 +1,8 @@
 @extends('admin.layouts.layout')
+
 @section('title', 'Felhasználók')
 @section('icon', 'users')
+
 @section('content')
     <table  class="table"
             data-toggle="table"
@@ -11,19 +13,9 @@
             data-url="{{ route('admin.ajax.users.index') }}">
         <thead>
         <tr>
-            <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Név</th>
+            <th data-field="name" data-sortable="true" data-formatter="PA.Users.formatName">Név</th>
+            <th data-field="email" data-formatter="PA.Users.formatEmail">E-mail cím</th>
         </tr>
         </thead>
     </table>
 @endsection
-@push('scripts')
-<script type="text/javascript">
-    function nameFormatter(value, row, index) {
-        return [
-            '<a href="{{ route('admin.users.show', ['circle' => null]) }}/' + row['id'] + '">',
-            value,
-            '</a>'
-        ].join('');
-    }
-</script>
-@endpush
