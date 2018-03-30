@@ -28,6 +28,9 @@ Route::group(['middleware' => 'auth'], function()
         Route::get('destroy/{program}', 'ProgramsController@destroy')->name('destroy')->middleware(['program.pr.manager']);
     });
 
+    # E-mails
+    Route::resource('emails', 'EmailsController');
+
     # Api
     Route::group(['prefix' => 'info/api', 'as' => 'api.'], function()
     {
