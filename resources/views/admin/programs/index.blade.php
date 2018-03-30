@@ -32,7 +32,7 @@
             data-pagination="true"
             data-side-pagination="server"
             data-query-params="queryParams"
-            data-url="{{ route('admin.ajax.programs') }}">
+            data-url="{{ route('admin.ajax.programs.index') }}">
         <thead>
             <tr>
                 <th data-field="name" data-formatter="nameFormatter">Program megnevezése</th>

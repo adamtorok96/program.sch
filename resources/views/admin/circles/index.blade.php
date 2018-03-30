@@ -9,7 +9,10 @@
     </div>--}}
     <table  class="table"
             data-toggle="table"
-            data-url="{{ route('admin.ajax.circles') }}">
+            data-search="true"
+            data-pagination="true"
+            data-side-pagination="server"
+            data-url="{{ route('admin.ajax.circles.index') }}">
            {{--}} data-toolbar="#toolbar">--}}
         <thead>
             <tr>

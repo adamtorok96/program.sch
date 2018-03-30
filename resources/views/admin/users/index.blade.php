@@ -4,10 +4,11 @@
 @section('content')
     <table  class="table"
             data-toggle="table"
-            data-pagination="true"
             data-search="true"
             data-toolbar="#toolbar"
-            data-url="{{ route('admin.ajax.users') }}">
+            data-pagination="true"
+            data-side-pagination="server"
+            data-url="{{ route('admin.ajax.users.index') }}">
         <thead>
         <tr>
             <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Név</th>

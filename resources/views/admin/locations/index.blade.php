@@ -9,10 +9,11 @@
     </div>
     <table  class="table"
             data-toggle="table"
-            data-pagination="true"
             data-search="true"
             data-toolbar="#toolbar"
-            data-url="{{ route('admin.ajax.locations') }}">
+            data-pagination="true"
+            data-side-pagination="server"
+            data-url="{{ route('admin.ajax.locations.index') }}">
         <thead>
         <tr>
             <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Név</th>
