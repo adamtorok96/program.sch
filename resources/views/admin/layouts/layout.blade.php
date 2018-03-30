@@ -1,4 +1,10 @@
 @extends('layouts.base')
+
+@push('scripts')
+    <script type="text/javascript" src="{{ mix('js/laroute.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('js/admin.js') }}"></script>
+@endpush
+
 @section('body')
     <div class="container-fluid">
         <div class="row">
