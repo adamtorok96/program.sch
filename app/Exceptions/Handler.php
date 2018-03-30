@@ -73,7 +73,8 @@ class Handler extends ExceptionHandler
         }
 
         $sentry->extra_context([
-            'ip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null
+            'ip'                => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null,
+            'x-forwarded-for'   => isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null
         ]);
 
         $sentry->captureException($exception);
