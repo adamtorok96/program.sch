@@ -182,7 +182,8 @@ return [
          */
         Zizaco\Entrust\EntrustServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Sentry\SentryLaravel\SentryLaravelServiceProvider::class
+        Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
+        Lord\Laroute\LarouteServiceProvider::class,
     ],
 
     /*
