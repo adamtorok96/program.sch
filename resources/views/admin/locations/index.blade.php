@@ -1,6 +1,8 @@
 @extends('admin.layouts.layout')
+
 @section('title', 'Helyszínek')
 @section('icon', 'map-marker')
+
 @section('content')
     <div id="toolbar" class="btn-group">
         <a href="{{ route('admin.locations.create') }}" class="btn btn-default">
@@ -16,19 +18,8 @@
             data-url="{{ route('admin.ajax.locations.index') }}">
         <thead>
         <tr>
-            <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Név</th>
+            <th data-field="name" data-sortable="true" data-formatter="PA.Locations.formatName">Név</th>
         </tr>
         </thead>
     </table>
 @endsection
-@push('scripts')
-<script type="text/javascript">
-    function nameFormatter(value, row, index) {
-        return [
-            '<a href="{{ route('admin.locations.show', ['location' => null]) }}/' + row['id'] + '">',
-            value,
-            '</a>'
-        ].join('');
-    }
-</script>
-@endpush

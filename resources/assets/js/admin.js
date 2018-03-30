@@ -70,6 +70,16 @@ class ProgramAdmin {
             }
         }
     }
+
+    static get Locations() {
+        return class {
+            static formatName(value, data) {
+                return laroute.link_to_route('admin.locations.show', value, {
+                    location: data.id
+                });
+            }
+        }
+    }
 }
 
 window.PA = ProgramAdmin;
