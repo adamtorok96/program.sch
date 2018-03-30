@@ -1,7 +1,8 @@
 const mix = require('laravel-mix');
 
 const scripts = [
-    'resources/assets/js/app.js'
+    'resources/assets/js/app.js',
+    'resources/assets/js/admin.js'
 ];
 
 const styles = [
