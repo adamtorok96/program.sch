@@ -15,7 +15,6 @@
                     <a href="{{ route('index') }}">Naptár</a>
                 </li>
                 @if( Auth::check() )
-                    @php($circles = \App\Models\Circle::WherePRManager(Auth::user())->get())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             Új program <i class="fa fa-caret-down" aria-hidden="true"></i>

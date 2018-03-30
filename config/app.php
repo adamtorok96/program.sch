@@ -176,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
 
         /*
          * Custom
@@ -184,6 +185,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
         Lord\Laroute\LarouteServiceProvider::class,
+
     ],
 
     /*
