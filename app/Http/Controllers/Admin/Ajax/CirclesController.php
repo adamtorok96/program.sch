@@ -15,6 +15,9 @@ class CirclesController extends Controller
             ->search([
                 'name'
             ])
+            ->with([
+                'resort'
+            ])
             ->get()
         ;
     }

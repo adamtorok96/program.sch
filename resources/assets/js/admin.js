@@ -8,7 +8,7 @@ class ProgramAdmin {
             }
 
             static formatResort(value, data) {
-                return data.circle === null ? '' : laroute.link_to_route('admin.resorts.show', value, {
+                return data.resort === null ? '' : laroute.link_to_route('admin.resorts.show', value, {
                     resort: data.resort.id
                 });
             }
