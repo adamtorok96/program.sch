@@ -52,7 +52,8 @@
                 <table class="table"
                        data-toggle="table"
                        data-pagination="true"
-                       data-url="{{ route('admin.ajax.circles.users', ['circle' => $circle]) }}">
+                       data-side-pagination="server"
+                       data-url="{{ route('admin.ajax.users.circle', ['circle' => $circle]) }}">
                     <thead>
                     <tr>
                         <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Tag neve</th>

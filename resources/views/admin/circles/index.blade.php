@@ -19,7 +19,7 @@
         <thead>
             <tr>
                 <th data-field="name" data-sortable="true" data-formatter="PA.Circles.formatName">Kör neve</th>
-                <th data-field="resort_name" data-sortable="true" data-formatter="PA.Circles.formatResort">Reszort neve</th>
+                <th data-field="resort.name" data-sortable="true" data-formatter="PA.Circles.formatResort">Reszort neve</th>
             </tr>
         </thead>
     </table>
