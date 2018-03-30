@@ -1,5 +1,10 @@
 <?php
 
+Route::group(['prefix' => 'programs', 'as' => 'programs.'], function()
+{
+    Route::get('/', 'ProgramsController@index')->name('index');
+});
+
 Route::get('resorts', 'ResortsController@index')->name('resorts.index');
 
 Route::group(['prefix' => 'circles', 'as' => 'circles.'], function()
