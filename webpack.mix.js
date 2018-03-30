@@ -1,10 +1,12 @@
 const mix = require('laravel-mix');
 
-mix
-    .sass('resources/assets/sass/app.scss', 'public/css')
-    .js('resources/assets/js/app.js', 'public/js')
-    .version()
-;
+const scripts = [
+    'resources/assets/js/app.js'
+];
+
+const styles = [
+    'resources/assets/sass/app.scss'
+];
 
 const fonts = [
     'node_modules/bootstrap-sass/assets/fonts/bootstrap',
@@ -13,6 +15,16 @@ const fonts = [
     'node_modules/raleway-webfont/fonts'
 ];
 
+scripts.forEach(function (script) {
+    mix.js(script, 'public/js');
+});
+
+styles.forEach(function (style) {
+    mix.sass(style, 'public/css');
+});
+
 fonts.forEach(function (font) {
     mix.copy(font, 'public/fonts')
 });
+
+mix.version();
