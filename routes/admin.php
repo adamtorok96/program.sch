@@ -71,14 +71,3 @@ Route::group(['prefix' => 'users', 'as' => 'users.'], function()
 
     Route::get('{user}', 'UsersController@show')->name('show');
 });
-
-Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], function()
-{
-    Route::get('programs', 'AjaxController@programs')->name('programs');
-    Route::get('resorts', 'AjaxController@resorts')->name('resorts');
-    Route::get('circles', 'AjaxController@circles')->name('circles');
-    Route::get('circles/{circle}/users', 'AjaxController@circlesUsers')->name('circles.users');
-    Route::get('users', 'AjaxController@users')->name('users');
-    Route::get('locations', 'AjaxController@locations')->name('locations');
-    //Route::get('posters', 'AjaxController@posters')->name('posters');
-});
