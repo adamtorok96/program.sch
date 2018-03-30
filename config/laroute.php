@@ -47,7 +47,7 @@ return [
      * the ported helper Laravel url/route functions and the route data to go
      * with them.
      */
-    'template' => 'vendor/lord/laroute/src/templates/laroute.js',
+    'template' => 'resources/assets/js/laroute.template.js',
     
     /*
      * Appends a prefix to URLs. By default the prefix is an empty string.
