@@ -31,11 +31,19 @@ class VerifyApiToken
             'Invalid token format!'
         );
 
+        $query = ApiToken::whereToken(str_after($request->header(self::HEADER_KEY), self::TOKEN_PREFIX));
+
         abort_unless(
-            ApiToken::whereToken(str_after($request->header(self::HEADER_KEY), self::TOKEN_PREFIX))->exists(),
+            $query->exists(),
             401,
             'Invalid api token!'
         );
+
+        $user = $query->firstOrFail()->user;
+
+        $request->setUserResolver(function () use($user) {
+            return $user;
+        });
 
         return $next($request);
     }
