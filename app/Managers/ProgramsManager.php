@@ -157,7 +157,7 @@ class ProgramsManager
             '.' .
             $poster->extension();
 
-        $path = $this->storage->putFileAs('posters', $poster, $name);
+        $path = $this->storage->putFileAs($program->circle->id, $poster, $name);
 
         if( $path ) {
             if( $program->hasPoster() )

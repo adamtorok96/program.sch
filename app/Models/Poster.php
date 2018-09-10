@@ -28,7 +28,7 @@ class Poster extends Model
 
     public function getUrl()
     {
-        return asset('posters/' . $this->file);
+        return Storage::url($this->circle->id . '/' . $this->file);
     }
 
     public function getUrlAttribute()
@@ -38,9 +38,13 @@ class Poster extends Model
 
     public function delete()
     {
-        /*
-         * TODO: delete file!!
-         */
+        $storage = Storage::disk('posters');
+
+        $path = $this->circle->id . '/' . $this->file;
+
+        if( $storage->exists($path) && !$storage->delete($path) )
+            return false;
+
         return parent::delete();
     }
 }
