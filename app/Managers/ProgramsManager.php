@@ -104,7 +104,9 @@ class ProgramsManager
 
     public function updateFromRequest(Request $request)
     {
-        $this->update([
+        $this->httpCompletion($request);
+
+        $data = [
             'name'                  => $request->name,
             'from'                  => new Carbon($request->from),
             'to'                    => new Carbon($request->to),
@@ -115,7 +117,15 @@ class ProgramsManager
             'facebook_event_id'     => $request->facebook_event_id,
             'display_poster'        => $request->get('display_poster', false),
             'display_email'         => $request->get('display_email', false)
-        ], $request->hasFile('poster') ? $request->file('poster') : null);
+        ];
+
+        if( isset($this->circle) )
+            $data['circle_id'] = $this->circle->id;
+
+        $this->update(
+            $data,
+            $request->hasFile('poster') ? $request->file('poster') : null
+        );
     }
 
     /**
