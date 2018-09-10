@@ -1,14 +1,16 @@
 @extends('admin.layouts.layout')
+
 @section('title', 'Programok')
 @section('subtitle', $program->name)
 @section('icon', 'calendar')
+
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @include('layouts.errors')
 
             <form method="post" action="{{ route('admin.programs.update', ['program' => $program]) }}" enctype="multipart/form-data">
-                {{ csrf_field() }}
+                @csrf
 
                 <div class="form-group {{ $errors->has('circle') ? 'has-error' : '' }}">
                     <label for="circle">Kör:</label>
@@ -45,7 +47,7 @@
 
                 <div class="form-group {{ $errors->has('summary') ? 'has-error' : '' }}">
                     <label for="summary">Rövid összefoglaló: *</label>
-                    <textarea name="summary" id="summary" maxlength="255" class="form-control" placeholder="Rövid összefoglaló">{{ old('summary', $program->summary) }}</textarea>
+                    <textarea name="summary" id="summary" maxlength="190" class="form-control" placeholder="Rövid összefoglaló">{{ old('summary', $program->summary) }}</textarea>
                 </div>
 
                 <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
