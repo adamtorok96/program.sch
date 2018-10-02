@@ -5,6 +5,8 @@ namespace app\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\IndexProgram;
+use App\Http\Requests\StoreProgram;
+use App\Http\Requests\UpdateProgram;
 use App\Models\Program;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -162,5 +164,20 @@ class ProgramsController extends Controller
         ]);
 
         return response()->json($program);
+    }
+
+    public function store(StoreProgram $request)
+    {
+
+    }
+
+    public function update(UpdateProgram $request, Program $program)
+    {
+
+    }
+
+    public function delete()
+    {
+
     }
 }

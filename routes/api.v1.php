@@ -1,5 +1,6 @@
 <?php
 
+# Circles
 Route::apiResource('circles', 'CirclesController', [
     'only' => [
         'index',
@@ -7,6 +8,7 @@ Route::apiResource('circles', 'CirclesController', [
     ]
 ]);
 
+# Resorts
 Route::apiResource('resorts', 'ResortsController', [
     'only' => [
         'index',
@@ -14,9 +16,5 @@ Route::apiResource('resorts', 'ResortsController', [
     ]
 ]);
 
-Route::apiResource('programs', 'ProgramsController', [
-    'only' => [
-        'index',
-        'show'
-    ]
-]);
+# Programs
+Route::apiResource('programs', 'ProgramsController');

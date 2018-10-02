@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProgram;
 use App\Http\Requests\UpdateProgram;
+use App\Managers\ProgramsManager;
 use App\Models\Circle;
 use App\Models\Location;
-use App\Models\Poster;
 use App\Models\Program;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProgramsController extends Controller
@@ -27,28 +26,12 @@ class ProgramsController extends Controller
         ]);
     }
 
-    public function store(StoreProgram $request, Circle $circle)
+    public function store(StoreProgram $request, Circle $circle, ProgramsManager $programsManager)
     {
-        $this->httpCompletion($request);
-
-        $program = Program::create([
-            'user_id'               => $request->user()->id,
-            'circle_id'             => $circle->id,
-            'name'                  => $request->name,
-            'from'                  => new Carbon($request->from),
-            'to'                    => new Carbon($request->to),
-            'summary'               => $request->summary,
-            'description'           => $request->description,
-            'location'              => $request->location,
-            'website'               => $request->website,
-            'facebook_event_id'     => $request->facebook_event_id,
-            'display_poster'        => $request->get('display_poster', false),
-            'display_email'         => $request->get('display_email', false)
-        ]);
-
-        if( $request->hasFile('poster') ) {
-            $this->uploadFile($program, $request,'poster');
-        }
+        $program = $programsManager
+            ->setCircle($circle)
+            ->create($request)
+        ;
 
         return redirect()->route('programs.show', [
             'program' => $program
@@ -63,27 +46,14 @@ class ProgramsController extends Controller
         ]);
     }
 
-    public function update(UpdateProgram $request, Program $program)
+    public function update(UpdateProgram $request, Program $program, ProgramsManager $programsManager)
     {
-        $this->httpCompletion($request);
         $this->checkboxFix($request);
 
-        $program->update([
-            'name'                  => $request->name,
-            'from'                  => new Carbon($request->from),
-            'to'                    => new Carbon($request->to),
-            'summary'               => $request->summary,
-            'description'           => $request->description,
-            'location'              => $request->location,
-            'website'               => $request->website,
-            'facebook_event_id'     => $request->facebook_event_id,
-            'display_poster'        => $request->get('display_poster', false),
-            'display_email'         => $request->get('display_email', false)
-        ]);
-
-        if( $request->hasFile('poster') ) {
-            $this->uploadFile($program, $request,'poster');
-        }
+        $programsManager
+            ->setProgram($program)
+            ->update($request)
+        ;
 
         return redirect()->route('programs.show', [
             'program' => $program
@@ -97,6 +67,11 @@ class ProgramsController extends Controller
         ]);
     }
 
+    /**
+     * @param Program $program
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
     public function destroy(Program $program)
     {
         $program->delete();
@@ -104,39 +79,6 @@ class ProgramsController extends Controller
         return redirect()->route('index');
     }
 
-    private function uploadFile(Program $program, Request $request, $file)
-    {
-        $name = $program->id .
-                '_' .
-                sha1(str_random()) .
-                '.' .
-                $request->file($file)->extension();
-
-        if( $request->file($file)->storeAs(
-            'posters',
-            $name,
-            'public'
-        )) {
-            if( $program->hasPoster() )
-                $program->poster->delete();
-
-            Poster::create([
-                'program_id'    => $program->id,
-                'file'          => $name
-            ]);
-        }
-    }
-
-    private function httpCompletion(Request $request)
-    {
-        if( $request->has('website') && !empty($request->website) &&
-            (
-                strpos($request->website, 'http://') !== 0 &&
-                strpos($request->website, 'https://') !== 0
-            ) ) {
-            $request->merge(['website' => 'http://' . $request->website]);
-        }
-    }
 
     private function checkboxFix(Request $request)
     {
