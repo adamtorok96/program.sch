@@ -4,16 +4,23 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Resort extends Model
 {
-    protected $table    = 'resorts';
+    protected $fillable = [
+        'name'
+    ];
 
-    protected $fillable = ['name'];
+    protected $hidden   = [
+        'created_at',
+        'updated_at'
+    ];
 
-    protected $hidden   = ['created_at', 'updated_at'];
-
-    public function circles()
+    /**
+     * @return HasMany
+     */
+    public function circles() : HasMany
     {
         return $this->hasMany(Circle::class);
     }
