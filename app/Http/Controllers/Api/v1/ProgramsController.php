@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\IndexProgram;
 use App\Http\Requests\StoreProgram;
 use App\Http\Requests\UpdateProgram;
+use App\Managers\ProgramsManager;
+use App\Models\Circle;
 use App\Models\Program;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -43,6 +45,17 @@ class ProgramsController extends Controller
      * @apiDefine Authorization
      * @apiHeader {String} Authorization="PSCH <160 characters long token>" Authorization token
      */
+
+
+    public function __construct()
+    {
+        $this->middleware('circle.pr.manager')->only('store');
+
+        $this->middleware('program.pr.manager')->only([
+            'update',
+            'destroy'
+        ]);
+    }
 
 
     /**
@@ -166,18 +179,64 @@ class ProgramsController extends Controller
         return response()->json($program);
     }
 
-    public function store(StoreProgram $request)
+    /**
+     * @param StoreProgram $request
+     * @param ProgramsManager $programsManager
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(StoreProgram $request, ProgramsManager $programsManager)
     {
+        /**
+         * @var $circle Circle
+         */
+        $circle = Circle::findOrFail($request->circle);
 
+        $program = $programsManager
+            ->setCircle($circle)
+            ->create($request)
+        ;
+
+        $program->makeHidden([
+            'user_id',
+            'poster',
+            'display_poster',
+            'display_email',
+            'display_site'
+        ]);
+
+        return response()->json($program);
     }
 
-    public function update(UpdateProgram $request, Program $program)
+    /**
+     * @param UpdateProgram $request
+     * @param Program $program
+     * @param ProgramsManager $programsManager
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(UpdateProgram $request, Program $program, ProgramsManager $programsManager)
     {
+        $programsManager
+            ->setProgram($program)
+            ->update($request)
+        ;
 
+        $program->makeHidden([
+            'user_id',
+            'poster',
+            'display_poster',
+            'display_email',
+            'display_site'
+        ]);
+
+        return response()->json($program);
     }
 
-    public function delete()
+    /**
+     * @param Program $program
+     * @throws \Exception
+     */
+    public function destroy(Program $program)
     {
-
+        $program->delete();
     }
 }
