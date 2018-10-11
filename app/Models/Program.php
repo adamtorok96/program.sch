@@ -15,20 +15,15 @@ class Program extends Model
 
     protected $fillable = [
         'uuid',
-        'circle_id',
-        'user_id',
+        'circle_id', 'user_id',
         'name',
-        'from',
-        'to',
+        'from', 'to',
         'location',
         'website',
         'summary',
         'description',
-        'display_poster',
-        'display_email',
-        'display_site',
-        'google_calendar_event_id',
-        'facebook_event_id'
+        'display_poster', 'display_email', 'display_site',
+        'google_calendar_event_id', 'facebook_event_id'
     ];
 
     protected $hidden   = [
