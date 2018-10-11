@@ -27,9 +27,17 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Report or log an exception.
+     * A list of the inputs that are never flashed for validation exceptions.
      *
-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
+     * @var array
+     */
+    protected $dontFlash = [
+        'password',
+        'password_confirmation',
+    ];
+
+    /**
+     * Report or log an exception.
      *
      * @param  \Exception $exception
      * @return void
@@ -40,22 +48,24 @@ class Handler extends ExceptionHandler
         if ( $this->shouldReport($exception) && app()->bound('sentry') ) {
             try {
                 $this->sentry($exception);
-            } catch (Exception $e) {}
-        }
+            } catch (Exception $e) {
 
-        if ( $this->isHttpException($exception) ) {
-            return $this->renderHttpException($exception);
-        }
-
-        if( $exception instanceof AuthenticationException ) {
-            return parent::report($exception);
-        }
-
-        if ( config('app.debug') ) {
-            return $this->renderExceptionWithWhoops($exception);
+            }
         }
 
         parent::report($exception);
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception  $exception
+     * @return \Illuminate\Http\Response
+     */
+    public function render($request, Exception $exception)
+    {
+        return parent::render($request, $exception);
     }
 
     private function sentry(Exception $exception)
@@ -81,18 +91,8 @@ class Handler extends ExceptionHandler
         $sentry->captureException($exception);
     }
 
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
-     */
-    public function render($request, Exception $exception)
-    {
-        return parent::render($request, $exception);
-    }
 
+    /*
     protected function renderJsonHttpException(HttpException $exception)
     {
         return response()->json([
@@ -100,7 +100,8 @@ class Handler extends ExceptionHandler
             'error'     => $exception->getMessage()
         ], $exception->getStatusCode(), $exception->getHeaders());
     }
-
+    */
+/*
     protected function prepareResponse($request, Exception $e)
     {
         if ($this->isHttpException($e)) {
@@ -112,43 +113,5 @@ class Handler extends ExceptionHandler
             return $this->toIlluminateResponse($this->convertExceptionToResponse($e), $e);
         }
     }
-
-
-    /**
-     * Convert an authentication exception into an unauthenticated response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
-     * @return \Illuminate\Http\Response
-     */
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        if ($request->expectsJson()) {
-            return response()->json([
-                'error' => 'Unauthenticated.'
-            ], 401);
-        }
-
-        return redirect()->guest('/');
-    }
-
-    /**
-     * Render an exception using Whoops.
-     *
-     * @param  \Exception $exception
-     * @return \Illuminate\Http\Response
-     */
-    protected function renderExceptionWithWhoops(Exception $exception)
-    {
-        $whoops = new \Whoops\Run;
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
-
-        $fe = FlattenException::create($exception);
-
-        return new Response(
-            $whoops->handleException($exception),
-            $fe->getStatusCode(),
-            $fe->getHeaders()
-        );
-    }
+*/
 }
