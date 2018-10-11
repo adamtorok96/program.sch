@@ -18,11 +18,21 @@ class CreateTableProgramFiltersTable extends Migration
             $table->unsignedInteger('circle_id');
             $table->unsignedInteger('user_id');
 
-            $table->foreign('circle_id')->references('id')->on('circles')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table
+                ->foreign('circle_id')
+                ->references('id')
+                ->on('circles')
+                ->onUpdate('cascade')
+                ->onDelete('cascade')
+            ;
 
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table
+                ->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade')
+            ;
 
             $table->primary(['circle_id', 'user_id']);
         });
