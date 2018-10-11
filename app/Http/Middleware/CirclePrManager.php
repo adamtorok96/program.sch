@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Circle;
 use Closure;
 
 class CirclePrManager
@@ -15,13 +16,17 @@ class CirclePrManager
      */
     public function handle($request, Closure $next)
     {
-        if(
-            ! $request->route()->hasParameter('circle') ||
-            ! $request->user()->isPRManagerAt($request->route()->parameter('circle'))
-        ) {
-            abort(403);
+        $circle = null;
+
+        if( $request->route()->hasParameter('circle') ) {
+            $circle = $request->route()->parameter('circle');
+        }
+        else if( $request->has('circle') ) {
+            $circle = Circle::findOrFail($request->circle);
         }
 
+        abort_if(is_null($circle), 403);
+        abort_unless($request->user()->isPRManagerAt($circle), 403);
 
         return $next($request);
     }
