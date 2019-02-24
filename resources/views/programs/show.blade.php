@@ -98,8 +98,8 @@
                         <h3 class="panel-title">Plakát</h3>
                     </div>
                     <div class="panel-body">
-                        <a href="{{ asset($program->poster->getUrl()) }}" target="_blank">
-                            <img src="{{ asset($program->poster->getUrl()) }}" class="center-block img-responsive">
+                        <a href="{{ $program->poster->getUrl() }}" target="_blank">
+                            <img src="{{ $program->poster->getUrl() }}" class="center-block img-responsive">
                         </a>
                     </div>
                 </div>
@@ -109,6 +109,6 @@
     @include('programs.modals.delete')
 @endsection
 @if( $program->hasPoster() )
-    @push('ogs', '<meta property="og:image" content="'. asset($program->poster->getUrl()) .'" />')
+    @push('ogs', '<meta property="og:image" content="'. $program->poster->getUrl() .'" />')
     @push('ogs', '<meta property="og:description" content="'. (isset($program->description) ? $program->description : $program->summary) .'" />')
 @endif
