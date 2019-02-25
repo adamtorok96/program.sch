@@ -1,5 +1,7 @@
 @extends('layouts.layout')
+
 @section('title', 'Naptár')
+
 @section('content')
     <div class="row calendar">
         @each('calendar.day', $days, 'day')
@@ -22,6 +24,7 @@
         </ul>
     </nav>
 @endsection
+
 @push('scripts')
 <script type="text/javascript">
     $(document).ready(function () {
