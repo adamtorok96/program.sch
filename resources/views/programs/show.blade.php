@@ -1,7 +1,9 @@
 @extends('layouts.layout')
+
 @section('title', 'Programok')
 @section('subtitle', $program->name)
 @section('icon', 'calendar')
+
 @section('content')
     @include('layouts.title-center')
 
@@ -60,19 +62,6 @@
                     @endif
                 </table>
                 <div class="panel-footer text-right">
-                    {{--}}
-                    <button type="button" class="btn btn-sm btn-primary">
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-sm btn-primary">
-                        <i class="fa fa-google" aria-hidden="true"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-sm btn-primary">
-                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                    </button>
-                     --}}
                     @role('admin')
                         <a href="{{ route('admin.programs.show', ['program' => $program]) }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-tachometer" aria-hidden="true"></i>
@@ -108,6 +97,7 @@
     </div>
     @include('programs.modals.delete')
 @endsection
+
 @if( $program->hasPoster() )
     @push('ogs', '<meta property="og:image" content="'. $program->poster->getUrl() .'" />')
     @push('ogs', '<meta property="og:description" content="'. (isset($program->description) ? $program->description : $program->summary) .'" />')

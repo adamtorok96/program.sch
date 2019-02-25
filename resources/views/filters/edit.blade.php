@@ -1,12 +1,15 @@
 @extends('layouts.layout')
+
 @section('title', 'Szűrők')
 @section('subtitle', 'Szerkesztés')
 @section('icon', 'filter')
+
 @section('content')
     <div class="row">
         @each('filters.resort', $resorts, 'resort')
     </div>
 @endsection
+
 @push('scripts')
     <script type="text/javascript">
         $(document).ready(function() {
