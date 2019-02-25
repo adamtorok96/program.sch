@@ -1,4 +1,4 @@
-<tr data-toggle="tooltip" data-placement="top" title="{{ $program->summary }}">
+<tr data-toggle="tooltip" data-placement="bottom" data-html="true" title="{{ $program->summary }}@includeWhen($program->hasPoster(), 'calendar.poster-tooltip')">
     <td>
         <small>{{ $program->from->format('H:i') }}</small><br>
         <b>
