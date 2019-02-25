@@ -5,7 +5,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Passport\HasApiTokens;
 
 class Circle extends Model
 {
@@ -52,13 +51,14 @@ class Circle extends Model
             $query
                 ->where('user_id', $user->id)
                 ->where(function(Builder $query) {
-                    $query
-                        ->where('leader', true)
-                        ->orWhere('site_pr', null)
-                        ->where('pr', true)
-                    ;
+                    $query->where(function (Builder $query) {
+                        $query
+                            ->where('leader', true)
+                            ->orWhere('site_pr', null)
+                            ->where('pr', true)
+                        ;
+                    })->orWhere('site_pr', true);
                 })
-                ->orWhere('site_pr', true);
             ;
         });
     }
