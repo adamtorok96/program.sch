@@ -6,6 +6,12 @@
 
 Api documentation: https://programsch-web-api-docs.firebaseapp.com
 
+Az oldal a Schönherz Kollégium rendezvényeinek naptárban való megjelenítéséért felel.
+
+
+A projekt még a Laravel-es ismereteim elején készült, így számos "hibát" tartalmaz.
+Ha van kedved javítani vagy fejleszteni bármilyen formában az oldalt, akkor adj fel egy PR-t és ha lesz időm, akkor elbírálom.
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
