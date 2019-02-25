@@ -2,12 +2,17 @@
 
 Route::get('/', 'CalendarController@index')->name('index');
 
+# Calendar
 Route::group(['prefix' => 'calendar', 'as' => 'calendar.'], function()
 {
     Route::get('calendar/{uuid}.ics', 'CalendarController@calendar')->name('calendar');
     Route::get('{week?}', 'CalendarController@index')->name('index');
 });
 
+# Posters
+Route::get('posters', 'PostersController@index')->name('posters.index');
+
+# Auth
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function()
 {
     Route::get('logout', 'AuthController@logout')->name('logout')->middleware('auth');
@@ -15,6 +20,7 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], function()
     Route::get('{provider}/callback', 'AuthController@callback')->name('callback');
 });
 
+# loggined
 Route::group(['middleware' => 'auth'], function()
 {
     # Programs
@@ -51,12 +57,5 @@ Route::group(['middleware' => 'auth'], function()
     });
 });
 
+# Programs
 Route::get('programs/{program}', 'ProgramsController@show')->name('programs.show');
-
-if( config('app.debug') ) {
-    Route::group(['prefix' => 'test', 'as' => 'test.'], function ()
-    {
-        Route::get('login', 'TestController@login');
-        Route::get('admin', 'TestController@makeAdmin');
-    });
-}
