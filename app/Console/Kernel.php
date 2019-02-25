@@ -16,7 +16,6 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         FakeSeeder::class,
-        AssetsDownloader::class
     ];
 
     /**

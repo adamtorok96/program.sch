@@ -17,17 +17,3 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
-
-Artisan::command('calendar:fake', function () {
-   Calendar::create([
-        'user_id'   => 1,
-        'uuid'      => Uuid::generate()
-   ]);
-});
-
-Artisan::command('google:test', function ()
-{
-    $google = resolve('App\Services\GoogleService');
-
-    dd($google, $google->events());
-});
