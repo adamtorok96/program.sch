@@ -1,6 +1,8 @@
 @extends('layouts.layout')
+
 @section('title', 'Profil')
 @section('subtitle', $user->name)
+
 @section('content')
     @include('layouts.title')
 
@@ -70,6 +72,7 @@
         {{--</div>--}}
     </div>
 @endsection
+
 @push('scripts')
 <script type="text/javascript">
     $(document).ready(function () {
