@@ -15,7 +15,7 @@
                     <a href="{{ route('index') }}">Naptár</a>
                 </li>
                 <li>
-                    <a href="{{ route('posters.index') }}">Poszterek</a>
+                    <a href="{{ route('posters.index') }}">Plakátok</a>
                 </li>
                 @if( Auth::check() )
                     @php($circles = \App\Models\Circle::WherePRManager(Auth::user())->get())
