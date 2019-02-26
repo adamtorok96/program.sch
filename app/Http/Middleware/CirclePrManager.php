@@ -15,13 +15,9 @@ class CirclePrManager
      */
     public function handle($request, Closure $next)
     {
-        if(
-            ! $request->route()->hasParameter('circle') ||
-            ! $request->user()->isPRManagerAt($request->route()->parameter('circle'))
-        ) {
-            abort(403);
-        }
+        abort_unless($request->route()->hasParameter('circle'), 403);
 
+        abort_unless($request->user()->isPRManagerAt($request->route()->parameter('circle')), 403);
 
         return $next($request);
     }
