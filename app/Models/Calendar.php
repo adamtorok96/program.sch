@@ -4,16 +4,24 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Calendar extends Model
 {
-    protected $table    = 'calendars';
+    protected $fillable = [
+        'user_id',
+        'uuid'
+    ];
 
-    protected $fillable = ['user_id', 'uuid'];
+    protected $hidden   = [
+        'created_at',
+        'updated_at'
+    ];
 
-    protected $hidden   = ['created_at', 'updated_at'];
-
-    public function user()
+    /**
+     * @return BelongsTo
+     */
+    public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
     }
