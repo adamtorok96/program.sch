@@ -43,9 +43,13 @@ host('programsch')
     ->set('writable_mode', 'chmod')
     ->set('writable_chmod_mode', '0775')
 ;
-    
-// Tasks
 
+
+set('bin/php', function () {
+    return '/usr/bin/php7.2';
+});
+
+// Tasks
 task('build', function () {
     run('cd {{release_path}} && build');
 });

@@ -15,13 +15,9 @@ class ProgramPrManager
      */
     public function handle($request, Closure $next)
     {
-        if(
-            ! $request->route()->hasParameter('program') ||
-            ! $request->user()->isPRManagerAt($request->route()->parameter('program')->circle)
-        ) {
-            abort(403);
-        }
+        abort_unless($request->route()->hasParameter('program'), 403);
 
+        abort_unless($request->user()->isPRManagerAt($request->route()->parameter('program')->circle), 403);
 
         return $next($request);
     }
