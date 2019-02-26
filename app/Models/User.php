@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -20,12 +23,18 @@ class User extends Authenticatable
         'remember_token', 'created_at', 'updated_at'
     ];
 
-    public function accounts()
+    /**
+     * @return HasMany
+     */
+    public function accounts() : HasMany
     {
         return $this->hasMany(SocialAccount::class);
     }
 
-    public function circles()
+    /**
+     * @return BelongsToMany
+     */
+    public function circles() : BelongsToMany
     {
         return $this
             ->belongsToMany(Circle::class)
@@ -36,22 +45,35 @@ class User extends Authenticatable
             ]);
     }
 
-    public function filters()
+    /**
+     * @return BelongsToMany
+     */
+    public function filters() : BelongsToMany
     {
         return $this->belongsToMany(Circle::class, 'program_filters');
     }
 
-    public function calendar()
+    /**
+     * @return HasOne
+     */
+    public function calendar() : HasOne
     {
         return $this->hasOne(Calendar::class);
     }
 
-    public function isAdmin()
+    /**
+     * @return bool
+     */
+    public function isAdmin() : bool
     {
         return $this->hasRole('admin');
     }
 
-    public function isPRManagerAt(Circle $circle)
+    /**
+     * @param Circle $circle
+     * @return bool
+     */
+    public function isPRManagerAt(Circle $circle) : bool
     {
         return $this
             ->circles()
@@ -68,22 +90,33 @@ class User extends Authenticatable
         ;
     }
 
-    public function isInCircle(Circle $circle)
+    /**
+     * @param Circle $circle
+     * @return bool
+     */
+    public function isInCircle(Circle $circle) : bool
     {
         return $this->circles()->where('id', $circle->id)->exists();
     }
 
-    public function isInFilter(Circle $circle)
+    /**
+     * @param Circle $circle
+     * @return bool
+     */
+    public function isInFilter(Circle $circle) : bool
     {
         return $this->filters()->where('id', $circle->id)->exists();
     }
 
-    public function hasCalendar()
+    /**
+     * @return bool
+     */
+    public function hasCalendar() : bool
     {
         return $this->calendar()->exists();
     }
 
-    public function detachCircles()
+    public function detachCircles() : void
     {
         foreach ($this->circles as $circle) {
             $this->circles()->detach($circle);

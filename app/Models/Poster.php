@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Storage;
 
 class Poster extends Model
@@ -21,22 +22,35 @@ class Poster extends Model
         'created_at', 'updated_at'
     ];
 
-    public function program()
+    /**
+     * @return BelongsTo
+     */
+    public function program() : BelongsTo
     {
         return $this->belongsTo(Program::class);
     }
 
-    public function getUrl()
+    /**
+     * @return string
+     */
+    public function getUrl() : string
     {
         return Storage::disk('posters')->url($this->file);
     }
 
-    public function getUrlAttribute()
+    /**
+     * @return string
+     */
+    public function getUrlAttribute() : string
     {
         return $this->getUrl();
     }
 
-    public function delete()
+    /**
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function delete() : ?bool
     {
         $storage = Storage::disk('posters');
 

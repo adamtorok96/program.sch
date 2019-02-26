@@ -6,9 +6,7 @@ use Auth;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Response;
-use Symfony\Component\Debug\Exception\FlattenException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Sentry\State\Scope;
 
 class Handler extends ExceptionHandler
 {
@@ -27,12 +25,21 @@ class Handler extends ExceptionHandler
     ];
 
     /**
+     * A list of the inputs that are never flashed for validation exceptions.
+     *
+     * @var array
+     */
+    protected $dontFlash = [
+        'password',
+        'password_confirmation',
+    ];
+
+    /**
      * Report or log an exception.
      *
-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-     *
-     * @param  \Exception  $exception
+     * @param  \Exception $exception
      * @return void
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
@@ -42,39 +49,30 @@ class Handler extends ExceptionHandler
             } catch (Exception $e) {}
         }
 
-        if ( $this->isHttpException($exception) ) {
-            return $this->renderHttpException($exception);
-        }
-
-        if( $exception instanceof AuthenticationException ) {
-            return parent::report($exception);
-        }
-
-        if ( config('app.debug') ) {
-            return $this->renderExceptionWithWhoops($exception);
-        }
-
         parent::report($exception);
     }
 
+    /**
+     * @param Exception $exception
+     */
     private function sentry(Exception $exception)
     {
-        /**
-         * @var \Raven_Client $sentry
-         */
         $sentry = app('sentry');
 
         if( Auth::check() ) {
-            $sentry->user_context([
-                'id'    => Auth::user()->id,
-                'name'  => Auth::user()->name,
-                'email' => Auth::user()->email
-            ]);
+            \Sentry\configureScope(function (Scope $scope): void {
+                $scope->setUser([
+                    'id'    => Auth::user()->id,
+                    'name'  => Auth::user()->name,
+                    'email' => Auth::user()->email
+                ]);
+
+            });
         }
 
-        $sentry->extra_context([
-            'ip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null
-        ]);
+        \Sentry\configureScope(function (Scope $scope): void {
+            $scope->setExtra('ip', isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null);
+        });
 
         $sentry->captureException($exception);
     }
@@ -91,6 +89,20 @@ class Handler extends ExceptionHandler
         return parent::render($request, $exception);
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param AuthenticationException $exception
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return $request->expectsJson()
+            ? response()->json(['message' => $exception->getMessage()], 401)
+            : redirect()->guest($exception->redirectTo() ?? '/');
+    }
+
+
+    /*
     protected function renderJsonHttpException(HttpException $exception)
     {
         return response()->json([
@@ -98,6 +110,7 @@ class Handler extends ExceptionHandler
             'error'     => $exception->getMessage()
         ], $exception->getStatusCode(), $exception->getHeaders());
     }
+
 
     protected function prepareResponse($request, Exception $e)
     {
@@ -110,43 +123,5 @@ class Handler extends ExceptionHandler
             return $this->toIlluminateResponse($this->convertExceptionToResponse($e), $e);
         }
     }
-
-
-    /**
-     * Convert an authentication exception into an unauthenticated response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
-     * @return \Illuminate\Http\Response
-     */
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        if ($request->expectsJson()) {
-            return response()->json([
-                'error' => 'Unauthenticated.'
-            ], 401);
-        }
-
-        return redirect()->guest('/');
-    }
-
-    /**
-     * Render an exception using Whoops.
-     *
-     * @param  \Exception $exception
-     * @return \Illuminate\Http\Response
-     */
-    protected function renderExceptionWithWhoops(Exception $exception)
-    {
-        $whoops = new \Whoops\Run;
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
-
-        $fe = FlattenException::create($exception);
-
-        return new Response(
-            $whoops->handleException($exception),
-            $fe->getStatusCode(),
-            $fe->getHeaders()
-        );
-    }
+    */
 }

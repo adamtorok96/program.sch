@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webpatser\Uuid\Uuid;
 
 class Program extends Model
@@ -98,27 +100,42 @@ class Program extends Model
         });
     }
 
-    public function user()
+    /**
+     * @return BelongsTo
+     */
+    public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function circle()
+    /**
+     * @return BelongsTo
+     */
+    public function circle() : BelongsTo
     {
         return $this->belongsTo(Circle::class);
     }
 
-    public function poster()
+    /**
+     * @return HasOne
+     */
+    public function poster() : HasOne
     {
         return $this->hasOne(Poster::class);
     }
 
-    public function hasPoster()
+    /**
+     * @return bool
+     */
+    public function hasPoster() : bool
     {
         return $this->poster()->exists();
     }
 
-    public function fullDate()
+    /**
+     * @return string
+     */
+    public function fullDate() : string
     {
         $format = 'Y. m. d. H:i';
 
@@ -132,41 +149,72 @@ class Program extends Model
         return $this->from->format('Y. m. d. H:i') . ' - '. $this->to->format($format);
     }
 
-    public function scopeOnThisDay(Builder $query, Carbon $carbon) {
+    /**
+     * @param Builder $query
+     * @param Carbon $carbon
+     * @return Builder
+     */
+    public function scopeOnThisDay(Builder $query, Carbon $carbon) : Builder
+    {
         return $query
             ->whereRaw('DATE(`from`) <= DATE("' . $carbon .'")')
             ->whereRaw('DATE(`to`) >= DATE("' . $carbon .'")')
         ;
     }
 
-    public function scopeStartOnThisDay(Builder $query, Carbon $carbon)
+    /**
+     * @param Builder $query
+     * @param Carbon $carbon
+     * @return Builder
+     */
+    public function scopeStartOnThisDay(Builder $query, Carbon $carbon) : Builder
     {
         return $query->whereRaw('DATE(`from`) = DATE("' . $carbon . '")');
     }
 
-    public function scopeFiltered(Builder $query, User $user)
+    /**
+     * @param Builder $query
+     * @param User $user
+     * @return Builder
+     */
+    public function scopeFiltered(Builder $query, User $user) : Builder
     {
         return $query->whereHas('circle.filters', function(Builder $query) use($user) {
             $query->where('user_id', $user->id);
         });
     }
 
-    public function scopeInterTemporal(Builder $query)
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeInterTemporal(Builder $query) : Builder
     {
         return $query->whereRaw('date(`from`) != date(`to`)');
     }
 
-    public function scopeOneTime(Builder $query)
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeOneTime(Builder $query) : Builder
     {
         return $query->whereRaw('date(`from`) = date(`to`)');
     }
 
-    public function getPosterUrlAttribute()
+    /**
+     * @return string|null
+     */
+    public function getPosterUrlAttribute() : ?string
     {
         return $this->hasPoster() ? $this->poster->url : null;
     }
 
-    public function delete()
+    /**
+     * @return bool|null
+     * @throws Exception
+     */
+    public function delete() : ?bool
     {
         if ($this->hasPoster())
             $this->poster->delete();

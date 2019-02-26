@@ -5,6 +5,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Circle extends Model
 {
@@ -19,12 +21,18 @@ class Circle extends Model
         'created_at', 'updated_at'
     ];
 
-    public function resort()
+    /**
+     * @return BelongsTo
+     */
+    public function resort() : BelongsTo
     {
         return $this->belongsTo(Resort::class);
     }
 
-    public function users()
+    /**
+     * @return BelongsToMany
+     */
+    public function users() : BelongsToMany
     {
         return $this
             ->belongsToMany(User::class)
@@ -35,17 +43,29 @@ class Circle extends Model
             ]);
     }
 
-    public function filters()
+    /**
+     * @return BelongsToMany
+     */
+    public function filters() : BelongsToMany
     {
         return $this->belongsToMany(User::class, 'program_filters');
     }
 
-    public function scopeActive(Builder $query)
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeActive(Builder $query) : Builder
     {
         return $query->whereActive(true);
     }
 
-    public function scopeWherePRManager(Builder $query, User $user)
+    /**
+     * @param Builder $query
+     * @param User $user
+     * @return Builder
+     */
+    public function scopeWherePRManager(Builder $query, User $user) : Builder
     {
         return $query->whereHas('users', function (Builder $query) use($user) {
             $query

@@ -182,7 +182,7 @@ return [
          */
         Zizaco\Entrust\EntrustServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Sentry\SentryLaravel\SentryLaravelServiceProvider::class
+        Sentry\Laravel\ServiceProvider::class,
     ],
 
     /*
@@ -238,7 +238,7 @@ return [
         'Entrust'           => Zizaco\Entrust\EntrustFacade::class,
         'Socialite'         => Laravel\Socialite\Facades\Socialite::class,
         'Uuid'              => Webpatser\Uuid\Uuid::class,
-        'Sentry'            => Sentry\SentryLaravel\SentryFacade::class,
+        'Sentry'            => Sentry\Laravel\Facade::class,
     ],
 
 ];
