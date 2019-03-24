@@ -18,7 +18,6 @@
                     <a href="{{ route('posters.index') }}">Plakátok</a>
                 </li>
                 @if( Auth::check() )
-                    @php($circles = \App\Models\Circle::WherePRManager(Auth::user())->get())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             Új program <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -34,6 +33,31 @@
                                 <li>
                                     <a href="{{ route('programs.create', ['circle' => $circle]) }}">
                                         <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> {{ $circle->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Hírlevelek <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ route('newsletterMails.index') }}">
+                                    <i class="fa fa-inbox" aria-hidden="true"></i> Beérkezők
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('newsletterMails.archive') }}">
+                                    <i class="fa fa-archive" aria-hidden="true"></i> Archív
+                                </a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            @foreach($circles as $circle)
+                                <li>
+                                    <a href="{{ route('newsletterMails.create', ['circle' => $circle]) }}">
+                                        <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ $circle->name }}
                                     </a>
                                 </li>
                             @endforeach
