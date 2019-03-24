@@ -147,10 +147,10 @@ class Circle extends Model
     }
 
     /**
-     * @return User
+     * @return User|null
      */
-    public function getLeaderAttribute() : User
+    public function getLeaderAttribute() : ?User
     {
-        return $this->users()->wherePivot('leader', true)->firstOrFail();
+        return $this->users()->wherePivot('leader', true)->first();
     }
 }
