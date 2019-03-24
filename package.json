@@ -23,11 +23,15 @@
     "roboto-fontface": "^0.7.0",
     "sass": "^1.17.2",
     "sass-loader": "7.*",
-    "vue-template-compiler": "^2.6.7"
+    "vue-template-compiler": "^2.6.10"
   },
   "apidoc": {
     "title": "Program.sch Web Api Documentation",
     "version": "1.0.0",
     "url": "https://program.sch.bme.hu/api"
+  },
+  "dependencies": {
+    "bootstrap-markdown-editor": "^2.2.4",
+    "showdown": "^1.9.0"
   }
 }
