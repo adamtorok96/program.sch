@@ -176,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Http\View\Composers\ViewServiceProvider::class,
 
         /*
          * Custom
@@ -239,6 +240,7 @@ return [
         'Socialite'         => Laravel\Socialite\Facades\Socialite::class,
         'Uuid'              => Webpatser\Uuid\Uuid::class,
         'Sentry'            => Sentry\Laravel\Facade::class,
+        'Markdown'          => GrahamCampbell\Markdown\Facades\Markdown::class,
     ],
 
 ];
