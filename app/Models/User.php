@@ -11,6 +11,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
+/**
+ * Class User
+ * @package App\Models
+ *
+ * @method Builder whereFilter(bool $filter)
+ */
 class User extends Authenticatable
 {
     use Notifiable, EntrustUserTrait;
@@ -59,6 +65,17 @@ class User extends Authenticatable
     public function calendar() : HasOne
     {
         return $this->hasOne(Calendar::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function newsletters() : BelongsToMany
+    {
+        return $this
+            ->belongsToMany(NewsletterMail::class)
+            ->using(NewsletterRecipient::class)
+        ;
     }
 
     /**
@@ -116,6 +133,9 @@ class User extends Authenticatable
         return $this->calendar()->exists();
     }
 
+    /**
+     *
+     */
     public function detachCircles() : void
     {
         foreach ($this->circles as $circle) {

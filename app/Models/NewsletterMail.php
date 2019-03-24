@@ -4,15 +4,17 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class NewsletterMail extends Model
 {
     protected $fillable = [
         'circle_id', 'user_id',
-        'subject', 'message', 'message_html',
-        'target_audience_count',
+        'subject', 'message',
         'sent_at'
     ];
 
@@ -20,8 +22,12 @@ class NewsletterMail extends Model
         'created_at', 'updated_at', 'sent_at'
     ];
 
+    protected $dates = [
+        'sent_at'
+    ];
+
     protected $casts = [
-        'target_audience_count' => 'int'
+        'public' => 'bool'
     ];
 
     /**
@@ -38,5 +44,48 @@ class NewsletterMail extends Model
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function recipients() : BelongsToMany
+    {
+        return $this
+            ->belongsToMany(User::class)
+            ->using(NewsletterRecipient::class)
+        ;
+    }
+
+    /**
+     * @param Builder $query
+     * @param User $user
+     * @return Builder
+     */
+    public function scopeSentTo(Builder $query, User $user) : Builder
+    {
+        return $query->whereHas('deliveredUsers', function (Builder $query) use($user) {
+           $query->whereUserId($user->id);
+        });
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getParticipants() : Collection
+    {
+        $users = User::whereFilter(false)->get();
+
+        $users->merge($this->circle->filters);
+
+        return $users;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSent() : bool
+    {
+        return isset($this->sent_at);
     }
 }

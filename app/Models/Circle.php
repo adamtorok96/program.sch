@@ -7,7 +7,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * Class Circle
+ * @package App\Models
+ */
 class Circle extends Model
 {
     protected $fillable = [
@@ -19,6 +25,10 @@ class Circle extends Model
     protected $hidden   = [
         'active',
         'created_at', 'updated_at'
+    ];
+
+    protected $appends = [
+        'leader'
     ];
 
     /**
@@ -52,6 +62,34 @@ class Circle extends Model
     }
 
     /**
+     * @return HasMany
+     */
+    public function programs() : HasMany
+    {
+        return $this->hasMany(Program::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function newsletterMails() : HasMany
+    {
+        return $this->hasMany(NewsletterMail::class);
+    }
+
+    /**
+     * @return Builder
+     */
+    public function newsletterRecipients() : Builder
+    {
+        return User::whereFilter(false)
+            ->orWhereHas('filters', function (Builder $query) {
+                return $query->where('circle_id', $this->id);
+            })
+        ;
+    }
+
+    /**
      * @param Builder $query
      * @return Builder
      */
@@ -81,5 +119,38 @@ class Circle extends Model
                 })
             ;
         });
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeFiltered(Builder $query) : Builder
+    {
+        return $query->whereHas('filters');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasResort() : bool
+    {
+        return $this->resort()->exists();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasLeader() : bool
+    {
+        return $this->users()->wherePivot('leader', true)->exists();
+    }
+
+    /**
+     * @return User
+     */
+    public function getLeaderAttribute() : User
+    {
+        return $this->users()->wherePivot('leader', true)->firstOrFail();
     }
 }
