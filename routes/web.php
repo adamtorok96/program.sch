@@ -27,11 +27,42 @@ Route::group(['middleware' => 'auth'], function()
     Route::group(['prefix' => 'programs', 'as' => 'programs.'], function()
     {
         Route::get('info', 'ProgramsController@info')->name('info');
-        Route::get('create/{circle}', 'ProgramsController@create')->name('create')->middleware(['circle.pr.manager']);
-        Route::post('store/{circle}', 'ProgramsController@store')->name('store')->middleware(['circle.pr.manager']);
-        Route::get('edit/{program}', 'ProgramsController@edit')->name('edit')->middleware(['program.pr.manager']);
-        Route::post('update/{program}', 'ProgramsController@update')->name('update')->middleware(['program.pr.manager']);
-        Route::get('destroy/{program}', 'ProgramsController@destroy')->name('destroy')->middleware(['program.pr.manager']);
+
+        Route::group(['middleware' => ['circle.pr.manager']], function()
+        {
+            Route::get('create/{circle}', 'ProgramsController@create')->name('create');
+            Route::post('store/{circle}', 'ProgramsController@store')->name('store');
+        });
+
+        Route::group(['middleware' => ['program.pr.manager']], function()
+        {
+            Route::get('edit/{program}', 'ProgramsController@edit')->name('edit');
+            Route::post('update/{program}', 'ProgramsController@update')->name('update');
+            Route::get('destroy/{program}', 'ProgramsController@destroy')->name('destroy');
+        });
+    });
+
+    # Newsletter Mails
+    Route::group(['prefix' => 'newsletterMails', 'as' => 'newsletterMails.'], function()
+    {
+        Route::get('/', 'NewsletterMailsController@index')->name('index');
+        Route::get('archive', 'NewsletterMailsController@archive')->name('archive');
+
+        Route::group(['middleware' => ['circle.pr.manager']], function ()
+        {
+            Route::get('create/circle/{circle}', 'NewsletterMailsController@create')->name('create');
+            Route::post('store/circle/{circle}', 'NewsletterMailsController@store')->name('store');
+        });
+
+        Route::get('{newsletterMail}', 'NewsletterMailsController@show')->name('show');
+    });
+
+    # Circles
+    Route::group(['prefix' => 'circles', 'as' => 'circles.'], function()
+    {
+        Route::get('{circle}/programs', 'CirclesController@programs')->name('programs');
+        Route::get('{circle}/newsletterMails', 'CirclesController@newsletterMails')->name('newsletterMails');
+        Route::get('{circle}', 'CirclesController@show')->name('show');
     });
 
     # Api
