@@ -7,6 +7,9 @@
 @section('content')
     <div class="row">
         @each('filters.resort', $resorts, 'resort')
+
+        <h2>Egyéb körök</h2>
+        @each('filters.circle', $resortlessCircles, 'circle')
     </div>
 @endsection
 
@@ -16,10 +19,16 @@
             $("[data-toggle='filter-toggle']").click(function() {
                 var item    = $(this);
                 var circle  = item.data("circle");
+                var type    = item.data("type");
                 var active  = item.hasClass("list-group-item-success");
 
+                var url     = type === "program"
+                    ? "{{ route('profile.filters.toggle.program', ['circle' => null]) }}/" + circle
+                    : "{{ route('profile.filters.toggle.newsletter', ['circle' => null]) }}/" + circle
+                ;
+
                 $.ajax({
-                    url: "{{ route('profile.filters.toggle', ['circle' => null]) }}/" + circle,
+                    url: url,
                     method: "POST",
                     data: {
                         _token: "{{ csrf_token() }}"
