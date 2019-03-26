@@ -179,8 +179,12 @@ class Program extends Model
      */
     public function scopeFiltered(Builder $query, User $user) : Builder
     {
-        return $query->whereHas('circle.filters', function(Builder $query) use($user) {
-            $query->where('user_id', $user->id);
+        return $query
+            ->whereHas('circle.filters', function(Builder $query) use($user) {
+                $query
+                    ->where('program', true)
+                    ->where('user_id', $user->id)
+                ;
         });
     }
 
