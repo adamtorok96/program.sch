@@ -23,7 +23,7 @@ abstract class FeatureTestCase extends TestCase
     {
         parent::setUp();
 
-        if( FeatureTestCase::$isDbMigrated == false ) {
+        if( !FeatureTestCase::$isDbMigrated ) {
             $this->artisan('migrate:refresh');
             $this->artisan('db:seed');
 
