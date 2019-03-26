@@ -11,6 +11,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webpatser\Uuid\Uuid;
 
+/**
+ * Class Program
+ * @package App\Models
+ *
+ * @method Builder startOnThisDay(Carbon $day)
+ */
 class Program extends Model
 {
     private static $google;
