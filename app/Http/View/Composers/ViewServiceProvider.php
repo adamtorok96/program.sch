@@ -15,7 +15,10 @@ class ViewServiceProvider extends ServiceProvider
     {
         View::composer('layouts.navbar', function (\Illuminate\View\View $view) {
             if( Auth::check() ) {
-                $circles = Circle::WherePRManager(Auth::user())->get();
+                $circles = Circle::WherePRManager(Auth::user())
+                    ->orderBy('name')
+                    ->get()
+                ;
 
                 $view->with('circles', $circles);
             }
