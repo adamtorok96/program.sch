@@ -81,7 +81,8 @@ Route::group(['middleware' => 'auth'], function()
            Route::get('enable', 'FiltersController@enable')->name('enable');
            Route::get('disable', 'FiltersController@disable')->name('disable');
            Route::get('edit', 'FiltersController@edit')->name('edit');
-           Route::post('toggle/{circle}', 'FiltersController@toggle')->name('toggle');
+           Route::post('toggle/program/{circle}', 'FiltersController@toggleProgram')->name('toggle.program');
+           Route::post('toggle/newsletter/{circle}', 'FiltersController@toggleNewsletter')->name('toggle.newsletter');
        });
 
        Route::get('calendar/create', 'CalendarController@create')->name('calendar.create');
