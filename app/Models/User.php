@@ -56,7 +56,13 @@ class User extends Authenticatable
      */
     public function filters() : BelongsToMany
     {
-        return $this->belongsToMany(Circle::class, 'program_filters');
+        return $this
+            ->belongsToMany(Circle::class, 'program_filters')
+            ->withPivot([
+                'program',
+                'newsletter'
+            ])
+        ;
     }
 
     /**
@@ -113,16 +119,52 @@ class User extends Authenticatable
      */
     public function isInCircle(Circle $circle) : bool
     {
-        return $this->circles()->where('id', $circle->id)->exists();
+        return $this
+            ->circles()
+            ->where('id', $circle->id)
+            ->exists()
+        ;
     }
 
     /**
      * @param Circle $circle
      * @return bool
      */
-    public function isInFilter(Circle $circle) : bool
+    public function hasFilterAt(Circle $circle) : bool
     {
-        return $this->filters()->where('id', $circle->id)->exists();
+        return $this
+            ->filters()
+            ->where('id', $circle->id)
+            ->exists()
+        ;
+    }
+
+    /**
+     * @param Circle $circle
+     * @return bool
+     */
+    public function isProgramFilteredAt(Circle $circle) : bool
+    {
+        return $this
+            ->filters()
+            ->wherePivot('program', true)
+            ->where('id', $circle->id)
+            ->exists()
+        ;
+    }
+
+    /**
+     * @param Circle $circle
+     * @return bool
+     */
+    public function isNewsletterFilteredAt(Circle $circle) : bool
+    {
+        return $this
+            ->filters()
+            ->wherePivot('newsletter', true)
+            ->where('id', $circle->id)
+            ->exists()
+        ;
     }
 
     /**

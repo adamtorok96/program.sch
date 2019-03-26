@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * Class Circle
  * @package App\Models
+ *
+ * @method Builder active()
+ * @method Builder resortless()
+ * @method Builder hasNewsletterMail()
  */
 class Circle extends Model
 {
@@ -58,7 +62,13 @@ class Circle extends Model
      */
     public function filters() : BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'program_filters');
+        return $this
+            ->belongsToMany(User::class, 'program_filters')
+            ->withPivot([
+                'program',
+                'newsletter'
+            ])
+        ;
     }
 
     /**
@@ -96,6 +106,24 @@ class Circle extends Model
     public function scopeActive(Builder $query) : Builder
     {
         return $query->whereActive(true);
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeResortless(Builder $query) : Builder
+    {
+        return $query->whereNull('resort_id');
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeHasNewsletterMail(Builder $query) : Builder
+    {
+        return $query->whereHas('newsletterMails');
     }
 
     /**
