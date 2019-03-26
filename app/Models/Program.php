@@ -188,7 +188,7 @@ class Program extends Model
         return $query
             ->whereHas('circle.filters', function(Builder $query) use($user) {
                 $query
-                    ->where('program', true)
+                    ->where('program_filters.program', true)
                     ->where('user_id', $user->id)
                 ;
         });

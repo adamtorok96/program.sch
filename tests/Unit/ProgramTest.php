@@ -113,7 +113,9 @@ class ProgramTest extends UnitTestCase
         self::assertEquals(0, Program::Filtered($user)->count());
         self::assertEquals(0, Program::Filtered($this->user)->count());
 
-        $user->filters()->attach($this->circle);
+        $user->filters()->attach($this->circle, [
+            'program' => true
+        ]);
 
         self::assertEquals(1, Program::Filtered($user)->count());
         self::assertEquals(0, Program::Filtered($this->user)->count());

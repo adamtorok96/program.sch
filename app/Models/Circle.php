@@ -149,7 +149,7 @@ class Circle extends Model
             ->whereHas('filters', function (Builder $query) {
                 $query->where('newsletter', true);
             })
-            ;
+        ;
     }
 
     /**
