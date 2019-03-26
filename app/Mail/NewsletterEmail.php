@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Str;
 
 class NewsletterEmail extends Mailable
 {
@@ -36,6 +37,7 @@ class NewsletterEmail extends Mailable
     {
         return $this
             ->to(config('mail.from.address'))
+            ->from(Str::slug($this->newsletterMail->circle->name) . '@program.sch.bme.hu')
             ->bcc($this->newsletterMail->getParticipants())
             ->subject($this->newsletterMail->subject)
             ->view('mails.newsletter-mails.layout', [

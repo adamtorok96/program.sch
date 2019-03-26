@@ -128,6 +128,32 @@ class Circle extends Model
 
     /**
      * @param Builder $query
+     * @return Builder
+     */
+    public function scopeProgramFiltered(Builder $query) : Builder
+    {
+        return $query
+            ->whereHas('filters', function (Builder $query) {
+                $query->where('program', true);
+            })
+        ;
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeNewsletterFiltered(Builder $query) : Builder
+    {
+        return $query
+            ->whereHas('filters', function (Builder $query) {
+                $query->where('newsletter', true);
+            })
+            ;
+    }
+
+    /**
+     * @param Builder $query
      * @param User $user
      * @return Builder
      */

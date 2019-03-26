@@ -58,25 +58,13 @@ class NewsletterMail extends Model
     }
 
     /**
-     * @param Builder $query
-     * @param User $user
-     * @return Builder
-     */
-    public function scopeSentTo(Builder $query, User $user) : Builder
-    {
-        return $query->whereHas('deliveredUsers', function (Builder $query) use($user) {
-           $query->whereUserId($user->id);
-        });
-    }
-
-    /**
      * @return Collection
      */
     public function getParticipants() : Collection
     {
         $users = User::whereFilter(false)->get();
 
-        $users->merge($this->circle->filters);
+        $users->merge($this->circle->filters()->where('newsletter', true)->get());
 
         return $users;
     }
