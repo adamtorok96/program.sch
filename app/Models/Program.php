@@ -40,7 +40,7 @@ class Program extends Model
     ];
 
     protected $appends  = [
-        'poster_url'
+        'poster_url', 'full_date'
     ];
 
     protected $dates    = [
@@ -208,6 +208,14 @@ class Program extends Model
     public function getPosterUrlAttribute() : ?string
     {
         return $this->hasPoster() ? $this->poster->url : null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullDateAttribute() : string
+    {
+        return $this->fullDate();
     }
 
     /**
