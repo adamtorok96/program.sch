@@ -7,6 +7,7 @@ const styles = [
 const scripts = [
     'resources/assets/js/app.js',
     'resources/assets/js/google-analytic.js',
+    'resources/assets/js/laroute.js',
     'resources/assets/js/admin.js'
 ];
 
