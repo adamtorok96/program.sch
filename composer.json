@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.1.3",
         "adamtorok96/bootstrap-table-ajax": "^1.1",
+        "adamtorok96/laroute": "^2.4",
         "fideloper/proxy": "^4.0",
         "filp/whoops": "^2.1",
         "google/apiclient": "^2.0",

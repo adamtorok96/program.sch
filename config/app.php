@@ -184,6 +184,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Sentry\Laravel\ServiceProvider::class,
         AdamTorok96\BootstrapTableAjax\BootstrapTableAjaxServiceProvider::class,
+        Lord\Laroute\LarouteServiceProvider::class,
     ],
 
     /*
