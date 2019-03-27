@@ -26,7 +26,7 @@ class UsersController extends Controller
 
     public function circle(Request $request, Circle $circle)
     {
-        return AjaxResponse::base($circle->users(), $request)
+        return AjaxResponse::base($circle->users()->getQuery(), $request)
             ->search([
                 'name',
                 'email'
