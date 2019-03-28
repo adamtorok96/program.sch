@@ -4,8 +4,107 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd68319da82daabaac7990366a9b7d15",
+    "content-hash": "c0678b567b66440c1fdf2f30e9f661ed",
     "packages": [
+        {
+            "name": "adamtorok96/bootstrap-table-ajax",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adamtorok96/BootstrapTableAjax.git",
+                "reference": "80cbcb483b9f1847a00d32ad0d79198af671a35f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adamtorok96/BootstrapTableAjax/zipball/80cbcb483b9f1847a00d32ad0d79198af671a35f",
+                "reference": "80cbcb483b9f1847a00d32ad0d79198af671a35f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^5.4",
+                "illuminate/http": "^5.4",
+                "illuminate/support": "^5.4",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AdamTorok96\\BootstrapTableAjax\\BootstrapTableAjaxServiceProvider"
+                    ],
+                    "aliases": {
+                        "AjaxResponse": "AdamTorok96\\BootstrapTableAjax\\Facades\\AjaxResponse"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AdamTorok96\\BootstrapTableAjax\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Torok",
+                    "email": "adamtorok@sch.bme.hu"
+                }
+            ],
+            "time": "2018-03-23T14:46:35+00:00"
+        },
+        {
+            "name": "adamtorok96/laroute",
+            "version": "2.4.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adamtorok96/laroute.git",
+                "reference": "4df866bb3d9a23b66154bff6cbf92c637a7cb296"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adamtorok96/laroute/zipball/4df866bb3d9a23b66154bff6cbf92c637a7cb296",
+                "reference": "4df866bb3d9a23b66154bff6cbf92c637a7cb296",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*",
+                "illuminate/console": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*",
+                "illuminate/filesystem": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*",
+                "illuminate/routing": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*",
+                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lord\\Laroute\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Lord",
+                    "email": "hello@aaronlord.is"
+                }
+            ],
+            "description": "Access Laravels URL/Route helper functions, from JavaScript.",
+            "keywords": [
+                "javascript",
+                "laravel",
+                "routes",
+                "routing"
+            ],
+            "time": "2019-03-09T18:20:31+00:00"
+        },
         {
             "name": "clue/stream-filter",
             "version": "v1.4.0",

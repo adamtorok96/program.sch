@@ -183,6 +183,8 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Sentry\Laravel\ServiceProvider::class,
+        AdamTorok96\BootstrapTableAjax\BootstrapTableAjaxServiceProvider::class,
+        Lord\Laroute\LarouteServiceProvider::class,
     ],
 
     /*
@@ -239,6 +241,7 @@ return [
         'Socialite'         => Laravel\Socialite\Facades\Socialite::class,
         'Uuid'              => Webpatser\Uuid\Uuid::class,
         'Sentry'            => Sentry\Laravel\Facade::class,
+        'AjaxResponse'      => AdamTorok96\BootstrapTableAjax\Facades\AjaxResponse::class,
     ],
 
 ];

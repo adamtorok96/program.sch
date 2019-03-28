@@ -1,7 +1,9 @@
 @extends('admin.layouts.layout')
+
 @section('title', 'Körök')
 @section('subtitle', $circle->name)
 @section('icon', 'circle-o')
+
 @section('content')
     <div class="row">
         <div class="col-md-6">
@@ -49,28 +51,12 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Tagok</h3>
                 </div>
-                <table class="table"
-                       data-toggle="table"
-                       data-pagination="true"
-                       data-url="{{ route('admin.ajax.circles.users', ['circle' => $circle]) }}">
-                    <thead>
-                    <tr>
-                        <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Tag neve</th>
-                        </tr>
-                    </thead>
-                </table>
+                @component('components.bootstrap-table', [
+                    'url'     => route('admin.ajax.users.circle', ['circle' => $circle])
+                ])
+                    <th data-field="name" data-sortable="true" data-formatter="PSA.Users.formatName">Név</th>
+                @endcomponent
             </div>
         </div>
     </div>
 @endsection
-@push('scripts')
-<script type="text/javascript">
-    function nameFormatter(value, row, index) {
-        return [
-            '<a href="{{ route('admin.users.show', ['user' => null]) }}/' + row['id'] + '">',
-            value,
-            '</a>'
-        ].join('');
-    }
-</script>
-@endpush

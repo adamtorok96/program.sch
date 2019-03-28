@@ -74,11 +74,18 @@ Route::group(['prefix' => 'users', 'as' => 'users.'], function()
 
 Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], function()
 {
-    Route::get('programs', 'AjaxController@programs')->name('programs');
-    Route::get('resorts', 'AjaxController@resorts')->name('resorts');
-    Route::get('circles', 'AjaxController@circles')->name('circles');
-    Route::get('circles/{circle}/users', 'AjaxController@circlesUsers')->name('circles.users');
-    Route::get('users', 'AjaxController@users')->name('users');
-    Route::get('locations', 'AjaxController@locations')->name('locations');
+    Route::get('resorts', 'Ajax\ResortsController@index')->name('resorts.index');
+    Route::get('circles', 'Ajax\CirclesController@index')->name('circles.index');
+    Route::get('programs', 'Ajax\ProgramsController@index')->name('programs.index');
+    Route::get('users', 'Ajax\UsersController@index')->name('users.index');
+    Route::get('users/circle/{circle}', 'Ajax\UsersController@circle')->name('users.circle');
+    Route::get('locations', 'Ajax\LocationsController@index')->name('locations.index');
+
+//    Route::get('programs', 'AjaxController@programs')->name('programs');
+//    Route::get('resorts', 'AjaxController@resorts')->name('resorts');
+//    Route::get('circles', 'AjaxController@circles')->name('circles');
+//    Route::get('circles/{circle}/users', 'AjaxController@circlesUsers')->name('circles.users');
+//    Route::get('users', 'AjaxController@users')->name('users');
+//    Route::get('locations', 'AjaxController@locations')->name('locations');
     //Route::get('posters', 'AjaxController@posters')->name('posters');
 });

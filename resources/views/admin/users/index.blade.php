@@ -1,28 +1,14 @@
 @extends('admin.layouts.layout')
+
 @section('title', 'Felhasználók')
 @section('icon', 'users')
+
 @section('content')
-    <table  class="table"
-            data-toggle="table"
-            data-pagination="true"
-            data-search="true"
-            data-toolbar="#toolbar"
-            data-url="{{ route('admin.ajax.users') }}">
-        <thead>
-        <tr>
-            <th data-field="name" data-sortable="true" data-formatter="nameFormatter">Név</th>
-        </tr>
-        </thead>
-    </table>
+    @component('components.bootstrap-table', [
+     'search'    => true,
+     'url'   => route('admin.ajax.users.index')
+ ])
+        <th data-field="name" data-sortable="true" data-formatter="PSA.Users.formatName">Név</th>
+        <th data-field="email" data-sortable="true" data-formatter="PSA.formatEmail">E-mail cím</th>
+    @endcomponent
 @endsection
-@push('scripts')
-<script type="text/javascript">
-    function nameFormatter(value, row, index) {
-        return [
-            '<a href="{{ route('admin.users.show', ['circle' => null]) }}/' + row['id'] + '">',
-            value,
-            '</a>'
-        ].join('');
-    }
-</script>
-@endpush

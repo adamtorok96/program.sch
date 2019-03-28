@@ -24,6 +24,13 @@
         <section>@yield('body')</section>
 
         <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+        @if(app()->environment('production'))
+            <script type="text/javascript" src="{{ mix('js/google-analytic.js') }}"></script>
+        @endif
+        @if(Auth::check() && Auth::user()->isAdmin())
+            <script type="text/javascript" src="{{ mix('js/laroute.js') }}"></script>
+            <script type="text/javascript" src="{{ mix('js/admin.js') }}"></script>
+        @endif
         @stack('scripts')
     </body>
 </html>
